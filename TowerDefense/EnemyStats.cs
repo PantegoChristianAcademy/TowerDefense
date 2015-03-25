@@ -8,8 +8,18 @@ namespace TowerDefense
 {
     class EnemyStats
     {
-       public short health;
+       public short BaseHealth;
        public byte LifeLossValue;
-       public short
+       public short MoneyValue;
+       
+   
+           
+           
+           
+           
+           
+     //need a value for speed
+    //need a towerfreezing value, could be a bool
+    
     }
 }
