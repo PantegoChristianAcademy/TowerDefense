@@ -81,7 +81,11 @@
   <ItemGroup>
     <Folder Include="Media\Enemies\" />
     <Folder Include="Media\Maps\" />
-    <Folder Include="Media\Tower\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Media\Tower\Turret.bmp" />
+    <Content Include="Media\Tower\Turret2.bmp" />
+    <Content Include="Media\Tower\Turret3.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
