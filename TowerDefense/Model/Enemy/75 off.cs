@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TowerDefense.Media.Enemies
+namespace TowerDefense.Model.Enemies
 {
-    public class Plane: Enemy
+    public class _75_off: Enemy
     {
-        public Plane()
+        public _75_off()
         {
             Health = 75;
             Speed = 25;
-            Goldgiven = 15;
+            Goldgiven = 10;
         }
     }
 }

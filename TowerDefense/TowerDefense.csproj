@@ -51,14 +51,14 @@
     <Compile Include="GameWindow.Designer.cs">
       <DependentUpon>GameWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Media\Enemies\50 off.cs" />
-    <Compile Include="Media\Enemies\75 off.cs" />
-    <Compile Include="Media\Enemies\BaseEnemy.cs" />
-    <Compile Include="Media\Enemies\Gaben.cs" />
-    <Compile Include="Media\Enemies\Lord Calvin.cs" />
-    <Compile Include="Media\Enemies\Mr Krabs.cs" />
-    <Compile Include="Media\Enemies\Plane.cs" />
-    <Compile Include="Media\Enemies\Sanic.cs" />
+    <Compile Include="Model\Enemy\50 off.cs" />
+    <Compile Include="Model\Enemy\75 off.cs" />
+    <Compile Include="Model\Enemy\BaseEnemy.cs" />
+    <Compile Include="Model\Enemy\Gaben.cs" />
+    <Compile Include="Model\Enemy\Lord Calvin.cs" />
+    <Compile Include="Model\Enemy\Mr Krabs.cs" />
+    <Compile Include="Model\Enemy\Plane.cs" />
+    <Compile Include="Model\Enemy\Sanic.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="GameWindow.resx">
@@ -88,6 +88,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Media\Maps\" />
+    <Folder Include="Model\Maps\" />
+    <Folder Include="Model\Turrets\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Media\Enemies\LordCalvin.bmp" />
