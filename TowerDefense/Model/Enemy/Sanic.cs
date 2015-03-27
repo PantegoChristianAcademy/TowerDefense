@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TowerDefense.Media.Enemies
+namespace TowerDefense.Model.Enemies
 {
    public class Sanic: Enemy
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TowerDefense.Media.Enemies
+namespace TowerDefense.Model.Enemies
 {
   public  class Mr_Krabs: Enemy
     {
@@ -12,7 +12,7 @@ namespace TowerDefense.Media.Enemies
       {
           Health = 225;
           Speed = 15;
-          Goldgiven = 30;
+          Goldgiven = 25;
 
       }
     }
