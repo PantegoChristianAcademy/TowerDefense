@@ -11,7 +11,7 @@ namespace TowerDefense.Media.Enemies
        public Lord_Calvin()
        {
            Health = 1250;
-           Speed = 15;
+           Speed = 10;
            Goldgiven = 100;
        }
     }
