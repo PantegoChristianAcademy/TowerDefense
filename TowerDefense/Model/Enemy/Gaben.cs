@@ -14,5 +14,6 @@ namespace TowerDefense.Model.Enemies
             Speed = 15;
             Goldgiven = 25;
         }
+        
     }
 }
