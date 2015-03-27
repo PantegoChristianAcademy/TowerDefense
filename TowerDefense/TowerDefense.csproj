@@ -87,7 +87,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Media\Maps\" />
-    <Folder Include="Media\Tower\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Media\Tower\Turret.bmp" />
+    <Content Include="Media\Tower\Turret2.bmp" />
+    <Content Include="Media\Tower\Turret3.bmp" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Media\Enemies\50%25 off.bmp" />
