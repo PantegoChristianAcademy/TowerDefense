@@ -11,7 +11,7 @@ namespace TowerDefense.Media.Enemies
        public int Health;
        public int Speed;
        public int x;
-       public  int y;
+       public int y;
        public int Goldgiven;
     }
 }
