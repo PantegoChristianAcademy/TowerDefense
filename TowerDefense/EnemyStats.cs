@@ -9,8 +9,9 @@ namespace TowerDefense
     class EnemyStats
     {
        public short BaseHealth;
-       public byte LifeLossValue;
+       public byte LifeLossValue; //this is for when an enemy gets past your defenses and then you lose a life
        public short MoneyValue;
+       public byte EnemyAcceleration;
        
    
            
