@@ -10,6 +10,7 @@ namespace TowerDefense.Model.Enemies
     {
         public _50_off()
         {
+            Imagefile = "Media\\Enemies\\50% off.bmp";
             Health = 50;
             Speed = 25;
             Goldgiven = 5;

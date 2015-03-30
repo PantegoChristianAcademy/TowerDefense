@@ -8,6 +8,7 @@ namespace TowerDefense.Model.Enemies
 {
     public abstract class Enemy
     {
+        public string Imagefile;
         public short StrengthLevel =1;
         public short Health;
         public short Speed;
