@@ -10,6 +10,7 @@ namespace TowerDefense.Model.Enemies
     {
         public Gaben()
         {
+            Imagefile = "Media\\Enemies\\GabenIsGod.bmp";
             Health = 175;
             Speed = 15;
             Goldgiven = 25;
