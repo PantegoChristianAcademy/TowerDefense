@@ -13,14 +13,12 @@ namespace TowerDefense
        public short MoneyValue;
        public byte EnemyAcceleration;
        
-   
+  
            
            
            
            
-           
-     //need a value for speed
-    //need a towerfreezing value, could be a bool
+    
     
     }
 }
