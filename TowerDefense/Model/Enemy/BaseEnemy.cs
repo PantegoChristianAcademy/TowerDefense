@@ -8,9 +8,9 @@ namespace TowerDefense.Model.Enemies
 {
     public abstract class Enemy
     {
+
+
       
-        
-        
        public int Health;
        public int Speed;
        public int x;
