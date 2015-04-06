@@ -12,13 +12,5 @@ namespace TowerDefense
        public byte LifeLossValue; //this is for when an enemy gets past your defenses and then you lose a life
        public short MoneyValue;
        public byte EnemyAcceleration;
-       
-  
-           
-           
-           
-           
-    
-    
     }
 }
