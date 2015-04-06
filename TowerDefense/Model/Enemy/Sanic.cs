@@ -11,7 +11,7 @@ namespace TowerDefense.Model.Enemies
        public Sanic()
        {
            Imagefile = "Media\\Enemies\\sanicfortower.bmp";
-           Health = 75;
+           Health = 45;
            Speed = 30;
            Goldgiven = 15;
        }

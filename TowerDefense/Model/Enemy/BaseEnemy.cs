@@ -8,7 +8,7 @@ namespace TowerDefense.Model.Enemies
 {
     public abstract class Enemy
     {
-      
+        public string Imagefile;
         
         
        public int Health;
