@@ -11,7 +11,7 @@ namespace TowerDefense.Model.Enemies
        public Lord_Calvin()
        {
            Imagefile = "Media\\Enemies\\LordCalvin.bmp";
-           Health = 1250;
+           Health = 955;
            Speed = 10;
            Goldgiven = 100;
        }
