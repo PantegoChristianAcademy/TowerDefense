@@ -16,7 +16,22 @@ namespace TowerDefense.Model.Enemy
                     return CreateWave1();
                 case 2:
                     return CreateWave2();
-
+                case 3:
+                    return CreateWave3();
+                case 4:
+                    return CreateWave4();
+                case 5:
+                    return CreateWave5();
+                case 6:
+                    return CreateWave6();
+                case 7:
+                    return CreateWave7();
+                case 8:
+                    return CreateWave8();
+                case 9:
+                    return CreateWave9();
+                case 10:
+                    return CreateWave10();
             
             }
 
@@ -110,12 +125,70 @@ namespace TowerDefense.Model.Enemy
             for (int x = 0; x < 1; x++)
             {
                 enemies.Add(new Enemies.Gaben());
-                
+                enemies.Add(new Enemies._75_off());
+                enemies.Add(new Enemies._50_off ());
             }
                 return enemies;
         }
+        public static List<Enemies.Enemy> CreateWave8()
+        {
+            List<Enemies.Enemy> enemies = new List<Enemies.Enemy>();
+            for (int x = 0; x < 27; x++)
+            {
+                enemies.Add(new Enemies.Sanic());
+            }
+            for (int x = 0; x < 17; x++)
+            {
+                enemies.Add(new Enemies.Mr_Krabs());
+            }
+            for (int x = 0; x < 3; x++)
+            {
+                enemies.Add(new Enemies.Gaben());
+                enemies.Add(new Enemies._75_off());
+                enemies.Add(new Enemies._50_off());
+            }
+            return enemies;
+        }
 
-
+        public static List<Enemies.Enemy> CreateWave9()
+        {
+            List<Enemies.Enemy> enemies = new List<Enemies.Enemy>();
+            for (int x = 0; x < 30; x++)
+            {
+                enemies.Add(new Enemies.Sanic());
+            }
+            for (int x = 0; x < 20; x++)
+            {
+                enemies.Add(new Enemies.Mr_Krabs());
+            }
+            for (int x = 0; x < 6; x++)
+            {
+                enemies.Add(new Enemies.Gaben());
+                enemies.Add(new Enemies._75_off());
+                enemies.Add(new Enemies._50_off());
+            }
+            return enemies;
+        }
+        public static List<Enemies.Enemy> CreateWave10()
+        {
+            List<Enemies.Enemy> enemies = new List<Enemies.Enemy>();
+            for (int x = 0; x < 34; x++)
+            {
+                enemies.Add(new Enemies.Sanic());
+            }
+            for (int x = 0; x < 22; x++)
+            {
+                enemies.Add(new Enemies.Mr_Krabs());
+            }
+            for (int x = 0; x < 7; x++)
+            {
+                enemies.Add(new Enemies.Gaben());
+                enemies.Add(new Enemies._75_off());
+                enemies.Add(new Enemies._50_off());
+            }
+            enemies.Add(new Enemies.Plane());
+            return enemies;
+        }
 
     }
 }
