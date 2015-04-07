@@ -14,6 +14,7 @@ namespace TowerDefense.Model.Enemies
             Health = 110;
             Speed = 15;
             Goldgiven = 25;
+
         }
         
     }
