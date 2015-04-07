@@ -54,6 +54,7 @@
     <Compile Include="Model\Enemy\50 off.cs" />
     <Compile Include="Model\Enemy\75 off.cs" />
     <Compile Include="Model\Enemy\BaseEnemy.cs" />
+    <Compile Include="Model\Enemy\EnemyFactory.cs" />
     <Compile Include="Model\Enemy\Gaben.cs" />
     <Compile Include="Model\Enemy\Lord Calvin.cs" />
     <Compile Include="Model\Enemy\Mr Krabs.cs" />
