@@ -114,9 +114,22 @@ namespace TowerDefense
             return identityGrid;
         }
 
-        public static List<Tile> ReadMapPathFile(string filePath)
+        public static List<Tile> ReadMapPathFile(Map loadedMap, string filePath)
         {
+            List<Tile> Path = new List<Tile>();
 
+            string[] listOfPathLocations = File.ReadAllLines(filePath);
+
+            foreach(string pathLoc in listOfPathLocations)
+            {
+                foreach(Tile tempTile in loadedMap.MapGrid)
+                {
+                    string tempTileLoc = string.Format("{0}{1}", tempTile.location.X, tempTile.location.Y);
+                    if (pathLoc == tempTileLoc) Path.Add(tempTile);
+                }
+            }
+
+            return Path;
         }
     }
 }

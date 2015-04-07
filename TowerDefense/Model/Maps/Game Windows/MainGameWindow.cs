@@ -48,7 +48,9 @@ namespace TowerDefense
             loadedMap.GenerateLoadedMap(ClientSize.Width, ClientSize.Height, loadedMapGrid);
 
             string mapPathLocation = mapLocation.Remove(mapLocation.Length - 4) + "Path.txt";
-            loadedMap.Path = FileCommands.ReadMapPathFile(mapPathLocation);
+            loadedMap.Path = FileCommands.ReadMapPathFile(loadedMap, mapPathLocation);
+
+            MessageBox.Show(string.Format("{0}{1}", loadedMap.Path[0].location.X, loadedMap.Path[0].location.Y));
         }
     }
 }
