@@ -57,7 +57,8 @@ namespace TowerDefense
             {
                 string[] fileParts = fileName.Split('\\');
                 string tempMapName = fileParts.Last();
-                ListOfMaps.Items.Add(tempMapName.Remove(tempMapName.Length - 4));
+                tempMapName = tempMapName.Remove(tempMapName.Length - 4);
+                if(!tempMapName.ToLower().Contains("path")) ListOfMaps.Items.Add(tempMapName);
             }
         }
 

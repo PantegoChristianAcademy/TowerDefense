@@ -78,9 +78,31 @@ namespace TowerDefense
         }
         #endregion
 
-        public static bool IsClickedTileAdjacent()
+        public static bool IsClickedTileAdjacent(double tileSize, List<Tile> Path, Tile selectedTile)
         {
+            Tile lastTile = Path.Last();
+            if (Math.Abs(lastTile.location.X - selectedTile.location.X) == tileSize && Math.Abs(lastTile.location.Y - selectedTile.location.Y) == 0) return true;
+            else if (Math.Abs(lastTile.location.X - selectedTile.location.X) == 0 && Math.Abs(lastTile.location.Y - selectedTile.location.Y) == tileSize) return true;
+            else return false;
+        }
 
+        public static List<Tile> CreatePathToBeRemoved(Tile clickedTile, List<Tile> Path)
+        {
+            int TilePosition = 0;
+            List<Tile> listOfTilesToBeRemoved = new List<Tile>();
+
+            foreach(Tile tempTile in Path)
+            {
+                if (clickedTile == tempTile) break;
+                else TilePosition++;
+            }
+
+            for(int i = TilePosition; i < Path.Count; i++)
+            {
+                listOfTilesToBeRemoved.Add(Path[i]);
+            }
+
+            return listOfTilesToBeRemoved;
         }
 
         public void ChangeTileIdentity(TileIdentity chosenIdentity)
