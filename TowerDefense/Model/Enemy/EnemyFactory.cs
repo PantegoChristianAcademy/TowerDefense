@@ -8,7 +8,46 @@ namespace TowerDefense.Model.Enemy
 {
     public static class EnemyFactory
     {
-        public static List<Enemies.Enemy> GenerateWaveE(byte WaveNumb)
+        public static List<Enemies.Enemy> GenerateWave(short WaveNumb, Difficulty DiffChoice)
+        {
+            int baseWave = WaveNumb % 10 + 1;
+            List<Enemies.Enemy> enemies = GenerateNormWave(baseWave);
+            int iterationNumber = WaveNumb / 10;
+
+            for (int x = 0; x < iterationNumber; x++)
+            {
+                foreach (Enemies.Enemy temp in enemies)
+                {
+                    temp.Health = (int)(temp.Health *1.1);
+                    temp.Goldgiven = (int)(temp.Goldgiven * 1.1);
+                }
+            }
+
+                foreach (Enemies.Enemy temp in enemies)
+                {
+                    if (DiffChoice == Difficulty.Easy)
+                    {
+                        temp.Health = (int)(temp.Health * 0.9);
+                        temp.Speed = (int)(temp.Health * 0.9);
+
+                    }
+                    if (DiffChoice == Difficulty.Hard)
+                    {
+                        temp.Health = (int)(temp.Health * 1.1);
+                        temp.Speed = (int)(temp.Speed * 1.1);
+                    }
+                }
+
+
+            if (DiffChoice == Difficulty.Hard) return enemies.Concat(new List<Enemies.Enemy>(enemies)).ToList();
+            return enemies;
+        }
+
+     
+        
+        
+        
+        public static List<Enemies.Enemy> GenerateNormWave(int WaveNumb)
         {
             switch (WaveNumb)
             {
@@ -186,7 +225,7 @@ namespace TowerDefense.Model.Enemy
                 enemies.Add(new Enemies._75_off());
                 enemies.Add(new Enemies._50_off());
             }
-            enemies.Add(new Enemies.Plane());
+            
             return enemies;
         }
 
