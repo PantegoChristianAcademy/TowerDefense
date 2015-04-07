@@ -59,6 +59,11 @@
     <Compile Include="Model\Enemy\Mr Krabs.cs" />
     <Compile Include="Model\Enemy\Plane.cs" />
     <Compile Include="Model\Enemy\Sanic.cs" />
+    <Compile Include="Model\Turrets\Base Tower.cs" />
+    <Compile Include="Model\Turrets\Basic Tower.cs" />
+    <Compile Include="Model\Turrets\DoT Tower.cs" />
+    <Compile Include="Model\Turrets\Slow Tower.cs" />
+    <Compile Include="Model\Turrets\Splash Tower.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="GameWindow.resx">
@@ -89,13 +94,15 @@
   <ItemGroup>
     <Folder Include="Media\Maps\" />
     <Folder Include="Model\Maps\" />
-    <Folder Include="Model\Turrets\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Media\Enemies\LordCalvin.bmp" />
-    <Content Include="Media\Tower\Turret.bmp" />
-    <Content Include="Media\Tower\Turret2.bmp" />
-    <Content Include="Media\Tower\Turret3.bmp" />
+    <Content Include="Media\Tower\Basic Towers\Turret.bmp" />
+    <Content Include="Media\Tower\Basic Towers\Turret2.bmp" />
+    <Content Include="Media\Tower\Basic Towers\Turret3.bmp" />
+    <Content Include="Media\Tower\Slow Towers\slow.bmp" />
+    <Content Include="Media\Tower\Slow Towers\slow2.bmp" />
+    <Content Include="Media\Tower\Slow Towers\slow3.bmp" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Media\Enemies\50%25 off.bmp" />
