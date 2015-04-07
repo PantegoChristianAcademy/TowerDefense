@@ -54,20 +54,34 @@
     <Compile Include="Model\Enemy\50 off.cs" />
     <Compile Include="Model\Enemy\75 off.cs" />
     <Compile Include="Model\Enemy\BaseEnemy.cs" />
+    <Compile Include="Model\Enemy\EnemyFactory.cs" />
     <Compile Include="Model\Enemy\Gaben.cs" />
     <Compile Include="Model\Enemy\Lord Calvin.cs" />
     <Compile Include="Model\Enemy\Mr Krabs.cs" />
     <Compile Include="Model\Enemy\Plane.cs" />
     <Compile Include="Model\Enemy\Sanic.cs" />
-    <Compile Include="Model\Turrets\Base Tower.cs" />
-    <Compile Include="Model\Turrets\Basic Tower.cs" />
-    <Compile Include="Model\Turrets\DoT Tower.cs" />
-    <Compile Include="Model\Turrets\Slow Tower.cs" />
-    <Compile Include="Model\Turrets\Splash Tower.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="GameWindow.resx">
       <DependentUpon>GameWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model\Maps\Game Windows\CreateMapWindow.resx">
+      <DependentUpon>CreateMapWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model\Maps\Game Windows\LaunchWindow.resx">
+      <DependentUpon>LaunchWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model\Maps\Game Windows\MainGameWindow.resx">
+      <DependentUpon>MainGameWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model\Maps\Game Windows\MapSelectorWindow.resx">
+      <DependentUpon>MapSelectorWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model\Maps\Game Windows\SaveMapWindow.resx">
+      <DependentUpon>SaveMapWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model\Maps\Game Windows\SelectTileSizeWindow.resx">
+      <DependentUpon>SelectTileSizeWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -94,6 +108,7 @@
   <ItemGroup>
     <Folder Include="Media\Maps\" />
     <Folder Include="Model\Maps\" />
+    <Folder Include="Model\Turrets\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Media\Enemies\LordCalvin.bmp" />
