@@ -63,7 +63,12 @@ namespace TowerDefense
 
                     else if(clickedTile.identity == TileIdentity.Path)
                     {
-                        //Map.deleteFromPath
+                        foreach(Tile tempTile in Tile.CreatePathToBeRemoved(clickedTile, mapBeingCreated.Path))
+                        {
+                            mapBeingCreated.Path.Remove(tempTile);
+                            tempTile.identity = TileIdentity.Unoccupied;
+                            tempTile.UpdateTileContent();
+                        }
                     }
                 }
 
@@ -85,10 +90,18 @@ namespace TowerDefense
 
                 if (e.Button == MouseButtons.Left && clickedTile.identity == TileIdentity.Unoccupied)
                 {
-                    if(mapBeingCreated.Path.Count == 0) clickedTile.ChangeTileIdentity(TileIdentity.Path);
+                    if (mapBeingCreated.Path.Count == 0)
+                    {
+                        clickedTile.ChangeTileIdentity(TileIdentity.Path);
+                        mapBeingCreated.Path.Add(clickedTile);
+                    }
                     else
                     {
-                        if()
+                        if (Tile.IsClickedTileAdjacent(mapBeingCreated.tileSize, mapBeingCreated.Path, clickedTile) == true)
+                        {
+                            clickedTile.ChangeTileIdentity(TileIdentity.Path);
+                            mapBeingCreated.Path.Add(clickedTile);
+                        }
                     }
                 }
 
