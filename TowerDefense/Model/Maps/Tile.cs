@@ -78,6 +78,11 @@ namespace TowerDefense
         }
         #endregion
 
+        public static bool IsClickedTileAdjacent()
+        {
+
+        }
+
         public void ChangeTileIdentity(TileIdentity chosenIdentity)
         {
             identity = chosenIdentity;

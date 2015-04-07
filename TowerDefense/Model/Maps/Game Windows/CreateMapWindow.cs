@@ -54,11 +54,16 @@ namespace TowerDefense
             {
                 Tile clickedTile = Tile.DetermineClickedTile(xClick, yClick, mapBeingCreated);
 
-                if (clickedTile.identity == TileIdentity.Unoccupied)
+                if(e.Button == MouseButtons.Left)
                 {
-                    if (e.Button == MouseButtons.Left)
+                    if(clickedTile.identity != TileIdentity.Path)
                     {
-                        clickedTile.ChangeTileIdentity(TileIdentity.Path);
+                        clickedTile.ChangeTileIdentity(TileIdentity.Unoccupied);
+                    }
+
+                    else if(clickedTile.identity == TileIdentity.Path)
+                    {
+                        //Map.deleteFromPath
                     }
                 }
 
@@ -78,9 +83,13 @@ namespace TowerDefense
             {
                 Tile clickedTile = Tile.DetermineClickedTile(xClick, yClick, mapBeingCreated);
 
-                if (e.Button == MouseButtons.Left)
+                if (e.Button == MouseButtons.Left && clickedTile.identity == TileIdentity.Unoccupied)
                 {
-                    clickedTile.ChangeTileIdentity(TileIdentity.Unoccupied);
+                    if(mapBeingCreated.Path.Count == 0) clickedTile.ChangeTileIdentity(TileIdentity.Path);
+                    else
+                    {
+                        if()
+                    }
                 }
 
                 if (e.Button == MouseButtons.Right && clickedTile.identity != TileIdentity.Path)
