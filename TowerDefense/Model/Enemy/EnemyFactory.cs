@@ -8,7 +8,7 @@ namespace TowerDefense.Model.Enemy
 {
     public static class EnemyFactory
     {
-        public static List<Enemies.Enemy> GenerateWave(byte WaveNumb)
+        public static List<Enemies.Enemy> GenerateWaveE(byte WaveNumb)
         {
             switch (WaveNumb)
             {
