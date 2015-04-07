@@ -40,11 +40,17 @@ namespace TowerDefense
         private void MainGameWindow_Load(object sender, EventArgs e)
         {
             string mapLocation = File.ReadAllText(FileCommands.TempMapLocation);
-            loadedMapGrid = FileCommands.ReadMapFile(mapLocation);
             File.Delete(FileCommands.TempMapLocation);
+
+            loadedMapGrid = FileCommands.ReadMapFile(mapLocation);
 
             loadedMap = new Map();
             loadedMap.GenerateLoadedMap(ClientSize.Width, ClientSize.Height, loadedMapGrid);
+
+            string mapPathLocation = mapLocation.Remove(mapLocation.Length - 4) + "Path.txt";
+            loadedMap.Path = FileCommands.ReadMapPathFile(loadedMap, mapPathLocation);
+
+            MessageBox.Show(string.Format("{0}{1}", loadedMap.Path[0].location.X, loadedMap.Path[0].location.Y));
         }
     }
 }
