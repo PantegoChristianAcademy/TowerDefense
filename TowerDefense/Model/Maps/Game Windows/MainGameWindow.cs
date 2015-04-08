@@ -15,26 +15,11 @@ namespace TowerDefense
     {
         Map loadedMap;
         TileIdentity[,] loadedMapGrid;
+        Model.Enemies.Gaben gaben = new Model.Enemies.Gaben();
 
         public MainGameWindow()
         {
             InitializeComponent();
-        }
-
-        private void Refresh_Tick(object sender, EventArgs e)
-        {
-            this.Invalidate();
-        }
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            var screen = e.Graphics;
-
-            foreach (Tile tempTile in loadedMap.MapGrid)
-            {
-                screen.DrawRectangle(Tile.TileOutlineColor, tempTile.location.X, tempTile.location.Y, (int)loadedMap.tileSize, (int)loadedMap.tileSize);
-                screen.FillRectangle(tempTile.color, tempTile.location.X + 1, tempTile.location.Y + 1, (int)loadedMap.tileSize - 1, (int)loadedMap.tileSize - 1);
-            }
         }
 
         private void MainGameWindow_Load(object sender, EventArgs e)
@@ -50,7 +35,25 @@ namespace TowerDefense
             string mapPathLocation = mapLocation.Remove(mapLocation.Length - 4) + "Path.txt";
 
             loadedMap.Path = FileCommands.ReadMapPathFile(loadedMap, mapPathLocation);
-            MessageBox.Show(loadedMap.Path.Count.ToString());
+        }
+
+
+        private void Refresh_Tick(object sender, EventArgs e)
+        {
+            this.Invalidate();
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            var screen = e.Graphics;
+
+            foreach (Tile tempTile in loadedMap.MapGrid)
+            {
+                screen.DrawRectangle(Tile.TileOutlineColor, tempTile.location.X, tempTile.location.Y, (int)loadedMap.tileSize, (int)loadedMap.tileSize);
+                screen.FillRectangle(tempTile.color, tempTile.location.X + 1, tempTile.location.Y + 1, (int)loadedMap.tileSize - 1, (int)loadedMap.tileSize - 1);
+            }
+
+            gaben.Move(loadedMap.Path, loadedMap.tileSize);
         }
     }
 }

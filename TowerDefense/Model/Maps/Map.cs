@@ -17,7 +17,7 @@ namespace TowerDefense
         Hard
     }
 
-    class Map
+    public class Map
     {
         #region Variables
         public double tileSize;

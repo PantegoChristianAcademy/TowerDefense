@@ -11,7 +11,7 @@ using System.IO;
 
 namespace TowerDefense
 {
-    class FileCommands
+    public class FileCommands
     {
         #region Variables
         public static string TempMapLocation = "TempData\\Map Name.txt";
@@ -67,7 +67,7 @@ namespace TowerDefense
             {
                 foreach(Tile tempTile in mapBeingSaved.Path)
                 {
-                    writer.WriteLine(tempTile.GridLoc);
+                    writer.WriteLine(string.Format("{0}~{1}", tempTile.GridXLoc, tempTile.GridYLoc));
                 }
             }
         }
@@ -122,9 +122,12 @@ namespace TowerDefense
 
             foreach(string gridLoc in listOfGridLoc)
             {
+                string[] gridLocData = gridLoc.Split('~');
+                int gridXLoc = int.Parse(gridLocData[0]);
+                int gridYLoc = int.Parse(gridLocData[1]);
                 foreach(Tile tempTile in loadedMap.MapGrid)
                 {
-                    if (gridLoc == tempTile.GridLoc)
+                    if (gridXLoc == tempTile.GridXLoc && gridYLoc == tempTile.GridYLoc)
                     {
                         Path.Add(tempTile); 
                         MessageBox.Show("Match");
