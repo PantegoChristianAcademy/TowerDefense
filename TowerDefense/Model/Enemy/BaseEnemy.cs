@@ -23,7 +23,7 @@ namespace TowerDefense.Model.Enemies
            x = path[0].location.X;
            y = path[0].location.Y;
        }
-       public void Move(List<Tile> path, double tileSize)
+       public void Move(List<Tile> path)
        {
            Tile currentlyOccupiedTile = path[placeInPath];
            Tile nextTileInPath = path[placeInPath + 1];

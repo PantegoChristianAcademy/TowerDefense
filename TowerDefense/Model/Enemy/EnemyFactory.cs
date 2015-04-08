@@ -163,7 +163,7 @@ namespace TowerDefense.Model.Enemy
             }
             for (int x = 0; x < 1; x++)
             {
-                enemies.Add(new Enemies.Gaben());
+                //enemies.Add(new Enemies.Gaben());
                 enemies.Add(new Enemies._75_off());
                 enemies.Add(new Enemies._50_off ());
             }
@@ -182,7 +182,7 @@ namespace TowerDefense.Model.Enemy
             }
             for (int x = 0; x < 3; x++)
             {
-                enemies.Add(new Enemies.Gaben());
+                //enemies.Add(new Enemies.Gaben());
                 enemies.Add(new Enemies._75_off());
                 enemies.Add(new Enemies._50_off());
             }
@@ -202,7 +202,7 @@ namespace TowerDefense.Model.Enemy
             }
             for (int x = 0; x < 6; x++)
             {
-                enemies.Add(new Enemies.Gaben());
+                //enemies.Add(new Enemies.Gaben());
                 enemies.Add(new Enemies._75_off());
                 enemies.Add(new Enemies._50_off());
             }
@@ -221,7 +221,7 @@ namespace TowerDefense.Model.Enemy
             }
             for (int x = 0; x < 7; x++)
             {
-                enemies.Add(new Enemies.Gaben());
+                //enemies.Add(new Enemies.Gaben());
                 enemies.Add(new Enemies._75_off());
                 enemies.Add(new Enemies._50_off());
             }
