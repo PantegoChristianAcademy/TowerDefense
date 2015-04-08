@@ -100,6 +100,11 @@
     </Compile>
     <Compile Include="Model\Maps\Map.cs" />
     <Compile Include="Model\Maps\Tile.cs" />
+    <Compile Include="Model\Turrets\Base Tower.cs" />
+    <Compile Include="Model\Turrets\Basic Tower.cs" />
+    <Compile Include="Model\Turrets\DoT Tower.cs" />
+    <Compile Include="Model\Turrets\Slow Tower.cs" />
+    <Compile Include="Model\Turrets\Splash Tower.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="GameWindow.resx">
@@ -147,7 +152,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Media\Maps\" />
-    <Folder Include="Model\Turrets\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Media\Enemies\LordCalvin.bmp">
