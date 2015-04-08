@@ -87,7 +87,7 @@ namespace TowerDefense.Model.Enemies
                }
            }
        }
-        
+
        public void CheckIfCompletedPathAndExecuteCode(List<Tile> path)
        {
            if (placeInPath == path.Count - 1)

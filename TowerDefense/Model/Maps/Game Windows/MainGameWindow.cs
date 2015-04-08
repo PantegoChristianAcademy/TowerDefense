@@ -38,7 +38,7 @@ namespace TowerDefense
 
         private void Refresh_Tick(object sender, EventArgs e)
         {
-            if (listOfGabens.Count <= 25)
+            if (listOfGabens.Count <= 3)
             {
                 Model.Enemies.Gaben freshGaben = new Model.Enemies.Gaben();
                 freshGaben.SetInitialSpawnLoc(loadedMap.Path);
