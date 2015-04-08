@@ -17,6 +17,7 @@ namespace TowerDefense
         TileIdentity[,] loadedMapGrid;
         Model.Enemies.Gaben gaben = new Model.Enemies.Gaben();
 
+
         public MainGameWindow()
         {
             InitializeComponent();
@@ -32,9 +33,13 @@ namespace TowerDefense
             loadedMap = new Map();
             loadedMap.GenerateLoadedMap(ClientSize.Width, ClientSize.Height, loadedMapGrid);
 
-            string mapPathLocation = mapLocation.Remove(mapLocation.Length - 4) + "Path.txt";
+            string mapPathLocation = mapLocation.Remove(mapLocation.Length - 4) + "$$$###$$$.txt";
 
             loadedMap.Path = FileCommands.ReadMapPathFile(loadedMap, mapPathLocation);
+            
+            //this would be in loop; foreach enemy in listofenemies 
+            //this would also not be in load but in begin round code
+            gaben.SetInitialSpawnLoc(loadedMap.Path);
         }
 
 
@@ -53,7 +58,9 @@ namespace TowerDefense
                 screen.FillRectangle(tempTile.color, tempTile.location.X + 1, tempTile.location.Y + 1, (int)loadedMap.tileSize - 1, (int)loadedMap.tileSize - 1);
             }
 
+            //this would be in loop; foreach enemy in listofenemies 
             gaben.Move(loadedMap.Path, loadedMap.tileSize);
+            screen.FillEllipse(Brushes.Red, gaben.x, gaben.y, (int)loadedMap.tileSize, (int)loadedMap.tileSize);
         }
     }
 }

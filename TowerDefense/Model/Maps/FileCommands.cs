@@ -63,7 +63,7 @@ namespace TowerDefense
                 }
             }
 
-            using (StreamWriter writer = new StreamWriter(string.Format("Maps\\{0}\\{1}Path.txt", difficulty, name)))
+            using (StreamWriter writer = new StreamWriter(string.Format("Maps\\{0}\\{1}$$$###$$$.txt", difficulty, name)))
             {
                 foreach(Tile tempTile in mapBeingSaved.Path)
                 {
@@ -130,7 +130,6 @@ namespace TowerDefense
                     if (gridXLoc == tempTile.GridXLoc && gridYLoc == tempTile.GridYLoc)
                     {
                         Path.Add(tempTile); 
-                        MessageBox.Show("Match");
                     }
                 }
             }
