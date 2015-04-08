@@ -28,12 +28,14 @@ namespace TowerDefense
         public Brush color;
         public TileIdentity identity;
         public char shortIdentity;
+        public string GridLoc;
         #endregion
 
-        public Tile(int xLoc, int yLoc, TileIdentity desiredIdentity)
+        public Tile(int xLoc, int yLoc, TileIdentity desiredIdentity, int xGrid, int yGrid)
         {
             location = new Point(xLoc, yLoc);
             identity = desiredIdentity;
+            GridLoc = string.Format("{0}~{1}", xGrid, yGrid);
             UpdateTileContent();
         }
 

@@ -67,7 +67,7 @@ namespace TowerDefense
             {
                 foreach(Tile tempTile in mapBeingSaved.Path)
                 {
-                    writer.WriteLine(string.Format("{0}{1}", tempTile.location.X, tempTile.location.Y));
+                    writer.WriteLine(tempTile.GridLoc);
                 }
             }
         }
@@ -118,14 +118,17 @@ namespace TowerDefense
         {
             List<Tile> Path = new List<Tile>();
 
-            string[] listOfPathLocations = File.ReadAllLines(filePath);
+            string[] listOfGridLoc = File.ReadAllLines(filePath);
 
-            foreach(string pathLoc in listOfPathLocations)
+            foreach(string gridLoc in listOfGridLoc)
             {
                 foreach(Tile tempTile in loadedMap.MapGrid)
                 {
-                    string tempTileLoc = string.Format("{0}{1}", tempTile.location.X, tempTile.location.Y);
-                    if (pathLoc == tempTileLoc) Path.Add(tempTile);
+                    if (gridLoc == tempTile.GridLoc)
+                    {
+                        Path.Add(tempTile); 
+                        MessageBox.Show("Match");
+                    }
                 }
             }
 

@@ -48,7 +48,7 @@ namespace TowerDefense
             {
                 for (int ii = 0; ii < numOfVerticalTiles; ii++)
                 {
-                    MapGrid[i, ii] = new Tile((int)(i * tileSize + horizontalGap), (int)(ii * tileSize + verticalGap), TileIdentity.Unoccupied);
+                    MapGrid[i, ii] = new Tile((int)(i * tileSize + horizontalGap), (int)(ii * tileSize + verticalGap), TileIdentity.Unoccupied, i, ii);
                 }
             }
         }
@@ -73,7 +73,7 @@ namespace TowerDefense
             {
                 for (int ii = 0; ii < numOfVerticalTiles; ii++)
                 {
-                    MapGrid[i, ii] = new Tile((int)(i * tileSize + horizontalGap), (int)(ii * tileSize + verticalGap), desiredMapGrid[i,ii]);
+                    MapGrid[i, ii] = new Tile((int)(i * tileSize + horizontalGap), (int)(ii * tileSize + verticalGap), desiredMapGrid[i,ii], i, ii);
                 }
             }
         }
