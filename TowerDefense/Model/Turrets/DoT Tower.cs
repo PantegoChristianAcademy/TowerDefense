@@ -12,7 +12,7 @@ namespace TowerDefense.Model.Turrets
         {
             Damage = 10;
             Firerate = 2;
-            Range = 100;
+            Range = 6;
             Cost = 100;
             ResellPercentage = 60;
             TotalCost = Cost;
@@ -26,14 +26,14 @@ namespace TowerDefense.Model.Turrets
                     case 2:
                         Damage=15;
                         Firerate=2.5f;
-                        Range=125;
+                        Range=9;
                         Cost=125;
                         ResellPercentage=65;
                         break;
                     case 3:
                         Damage=20;
                         Firerate=3;
-                        Range=150;
+                        Range=12;
                         Cost=150;
                         ResellPercentage=70;
                         break;
