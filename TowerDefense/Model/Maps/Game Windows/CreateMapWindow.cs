@@ -56,12 +56,12 @@ namespace TowerDefense
 
                 if(e.Button == MouseButtons.Left)
                 {
-                    if(clickedTile.identity != TileIdentity.Path)
+                    if (clickedTile.identity != TileIdentity.Path || clickedTile.identity != TileIdentity.PathStart || clickedTile.identity != TileIdentity.PathEnd)
                     {
                         clickedTile.ChangeTileIdentity(TileIdentity.Unoccupied);
                     }
 
-                    else if(clickedTile.identity == TileIdentity.Path)
+                    else if (clickedTile.identity != TileIdentity.Path || clickedTile.identity != TileIdentity.PathStart || clickedTile.identity != TileIdentity.PathEnd)
                     {
                         foreach(Tile tempTile in Tile.CreatePathToBeRemoved(clickedTile, mapBeingCreated.Path))
                         {
@@ -105,7 +105,7 @@ namespace TowerDefense
                     }
                 }
 
-                if (e.Button == MouseButtons.Right && clickedTile.identity != TileIdentity.Path)
+                if (e.Button == MouseButtons.Right && clickedTile.identity != TileIdentity.Path && clickedTile.identity != TileIdentity.PathStart && clickedTile.identity != TileIdentity.PathEnd)
                 {
                     clickedTile.ChangeTileIdentity(TileIdentity.Blockade);
                 }

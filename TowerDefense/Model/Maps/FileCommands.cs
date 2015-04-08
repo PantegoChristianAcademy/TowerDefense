@@ -31,18 +31,6 @@ namespace TowerDefense
                 }
             }
 
-            if(!Directory.Exists("Images"))
-            {
-                Directory.CreateDirectory("Images");
-
-                foreach(TileIdentity terrain in Enum.GetValues(typeof(TileIdentity)))
-                {
-                    Directory.CreateDirectory(string.Format("Images\\{0}", terrain));
-                }
-
-                Directory.CreateDirectory("Images\\Enemies");
-            }
-
             if(!Directory.Exists("TempData"))
             {
                 Directory.CreateDirectory("TempData");
