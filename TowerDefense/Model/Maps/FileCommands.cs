@@ -11,7 +11,7 @@ using System.IO;
 
 namespace TowerDefense
 {
-    class FileCommands
+    public class FileCommands
     {
         #region Variables
         public static string TempMapLocation = "TempData\\Map Name.txt";
@@ -29,18 +29,6 @@ namespace TowerDefense
                 {
                     Directory.CreateDirectory(string.Format("Maps\\{0}", difficulty));
                 }
-            }
-
-            if(!Directory.Exists("Images"))
-            {
-                Directory.CreateDirectory("Images");
-
-                foreach(TileIdentity terrain in Enum.GetValues(typeof(TileIdentity)))
-                {
-                    Directory.CreateDirectory(string.Format("Images\\{0}", terrain));
-                }
-
-                Directory.CreateDirectory("Images\\Enemies");
             }
 
             if(!Directory.Exists("TempData"))
@@ -63,11 +51,11 @@ namespace TowerDefense
                 }
             }
 
-            using (StreamWriter writer = new StreamWriter(string.Format("Maps\\{0}\\{1}Path.txt", difficulty, name)))
+            using (StreamWriter writer = new StreamWriter(string.Format("Maps\\{0}\\{1}$$$###$$$.txt", difficulty, name)))
             {
                 foreach(Tile tempTile in mapBeingSaved.Path)
                 {
-                    writer.WriteLine(string.Format("{0}{1}", tempTile.location.X, tempTile.location.Y));
+                    writer.WriteLine(string.Format("{0}~{1}", tempTile.GridXLoc, tempTile.GridYLoc));
                 }
             }
         }
@@ -89,6 +77,8 @@ namespace TowerDefense
                 {
                     case ' ':
                     case 'P':
+                    case '!':
+                    case '*':
                     case 'W':
                     case 'B':
                     case 'T':
@@ -118,14 +108,19 @@ namespace TowerDefense
         {
             List<Tile> Path = new List<Tile>();
 
-            string[] listOfPathLocations = File.ReadAllLines(filePath);
+            string[] listOfGridLoc = File.ReadAllLines(filePath);
 
-            foreach(string pathLoc in listOfPathLocations)
+            foreach(string gridLoc in listOfGridLoc)
             {
+                string[] gridLocData = gridLoc.Split('~');
+                int gridXLoc = int.Parse(gridLocData[0]);
+                int gridYLoc = int.Parse(gridLocData[1]);
                 foreach(Tile tempTile in loadedMap.MapGrid)
                 {
-                    string tempTileLoc = string.Format("{0}{1}", tempTile.location.X, tempTile.location.Y);
-                    if (pathLoc == tempTileLoc) Path.Add(tempTile);
+                    if (gridXLoc == tempTile.GridXLoc && gridYLoc == tempTile.GridYLoc)
+                    {
+                        Path.Add(tempTile); 
+                    }
                 }
             }
 

@@ -154,7 +154,9 @@
     <Folder Include="Media\Maps\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Media\Enemies\LordCalvin.bmp" />
+    <Content Include="Media\Enemies\LordCalvin.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Media\Tower\Basic Towers\Turret.bmp" />
     <Content Include="Media\Tower\Basic Towers\Turret2.bmp" />
     <Content Include="Media\Tower\Basic Towers\Turret3.bmp" />
@@ -163,13 +165,27 @@
     <Content Include="Media\Tower\Slow Towers\slow3.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Media\Enemies\50%25 off.bmp" />
-    <Content Include="Media\Enemies\75%25 off.bmp" />
-    <Content Include="Media\Enemies\airplane.bmp" />
-    <Content Include="Media\Enemies\Explosions.bmp" />
-    <Content Include="Media\Enemies\GabenIsGod.bmp" />
-    <Content Include="Media\Enemies\oh yeah mr krabs.bmp" />
-    <Content Include="Media\Enemies\sanicfortower.bmp" />
+    <Content Include="Media\Enemies\50%25 off.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\Enemies\75%25 off.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\Enemies\airplane.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\Enemies\Explosions.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\Enemies\GabenIsGod.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\Enemies\oh yeah mr krabs.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\Enemies\sanicfortower.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

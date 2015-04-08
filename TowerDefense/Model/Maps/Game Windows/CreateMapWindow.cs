@@ -56,12 +56,12 @@ namespace TowerDefense
 
                 if(e.Button == MouseButtons.Left)
                 {
-                    if(clickedTile.identity != TileIdentity.Path)
+                    if (clickedTile.identity != TileIdentity.Path && clickedTile.identity != TileIdentity.PathStart)
                     {
                         clickedTile.ChangeTileIdentity(TileIdentity.Unoccupied);
                     }
 
-                    else if(clickedTile.identity == TileIdentity.Path)
+                    else if (clickedTile.identity == TileIdentity.Path || clickedTile.identity == TileIdentity.PathStart)
                     {
                         foreach(Tile tempTile in Tile.CreatePathToBeRemoved(clickedTile, mapBeingCreated.Path))
                         {
@@ -92,7 +92,7 @@ namespace TowerDefense
                 {
                     if (mapBeingCreated.Path.Count == 0)
                     {
-                        clickedTile.ChangeTileIdentity(TileIdentity.Path);
+                        clickedTile.ChangeTileIdentity(TileIdentity.PathStart);
                         mapBeingCreated.Path.Add(clickedTile);
                     }
                     else
@@ -105,7 +105,7 @@ namespace TowerDefense
                     }
                 }
 
-                if (e.Button == MouseButtons.Right && clickedTile.identity != TileIdentity.Path)
+                if (e.Button == MouseButtons.Right && clickedTile.identity != TileIdentity.Path && clickedTile.identity != TileIdentity.PathStart)
                 {
                     clickedTile.ChangeTileIdentity(TileIdentity.Blockade);
                 }
@@ -117,6 +117,10 @@ namespace TowerDefense
         {
             if(e.KeyCode == Keys.Enter)
             {
+                Tile PathEnd = mapBeingCreated.Path.Last();
+                mapBeingCreated.MapGrid[PathEnd.GridXLoc, PathEnd.GridYLoc].identity = TileIdentity.PathEnd;
+                mapBeingCreated.MapGrid[PathEnd.GridXLoc, PathEnd.GridYLoc].UpdateTileContent();
+
                 SaveMapWindow mapSaver = new SaveMapWindow();
                 mapSaver.ShowDialog();
                 if (File.Exists(FileCommands.TempMapLocation))
