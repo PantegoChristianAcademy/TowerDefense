@@ -38,7 +38,7 @@ namespace TowerDefense
 
         private void Refresh_Tick(object sender, EventArgs e)
         {
-            if (listOfGabens.Count <= 3)
+            if (listOfGabens.Count <= 1)
             {
                 Model.Enemies.Gaben freshGaben = new Model.Enemies.Gaben();
                 freshGaben.SetInitialSpawnLoc(loadedMap.Path);
@@ -60,7 +60,7 @@ namespace TowerDefense
                 screen.FillRectangle(tempTile.color, tempTile.location.X + 1, tempTile.location.Y + 1, (int)loadedMap.tileSize - 1, (int)loadedMap.tileSize - 1);
             }
 
-            foreach (Model.Enemies.Gaben tempGaben in listOfGabens) screen.FillEllipse(Brushes.Red, tempGaben.x, tempGaben.y, (int)loadedMap.tileSize, (int)loadedMap.tileSize);
+            foreach (Model.Enemies.Gaben tempGaben in listOfGabens) screen.DrawImage(tempGaben.enemyImage, tempGaben.x, tempGaben.y, (int)loadedMap.tileSize, (int)loadedMap.tileSize);
         }
     }
 }

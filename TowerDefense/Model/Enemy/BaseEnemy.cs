@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace TowerDefense.Model.Enemies
 {
     public abstract class Enemy
     {
-        public string Imagefile;
-        
-        
+       public string Imagefile;
+       public Image enemyImage;
+       
        public int Health;
        public int Speed;
        public int x;
