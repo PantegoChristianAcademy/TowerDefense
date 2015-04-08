@@ -14,6 +14,8 @@ namespace TowerDefense
         {
             Unoccupied,
             Path,
+            PathStart,
+            PathEnd,
             Water,
             Blockade,
             Tower
@@ -127,6 +129,14 @@ namespace TowerDefense
                     this.color = Brushes.Yellow;
                     break;
 
+                case TileIdentity.PathStart:
+                    this.color = Brushes.Purple;
+                    break;
+
+                case TileIdentity.PathEnd:
+                    this.color = Brushes.Pink;
+                    break;
+
                 case TileIdentity.Water:
                     this.color = Brushes.Blue;
                     break;
@@ -159,6 +169,14 @@ namespace TowerDefense
                     this.shortIdentity = 'P';
                     break;
 
+                case TileIdentity.PathStart:
+                    this.shortIdentity = '!';
+                    break;
+
+                case TileIdentity.PathEnd:
+                    this.shortIdentity = '*';
+                    break;
+
                 case TileIdentity.Water:
                     this.shortIdentity = 'W';
                     break;
@@ -185,6 +203,12 @@ namespace TowerDefense
 
                 case 'P':
                     return TileIdentity.Path;
+
+                case '!':
+                    return TileIdentity.PathStart;
+
+                case '*':
+                    return TileIdentity.PathEnd;
 
                 case 'W':
                     return TileIdentity.Water;

@@ -89,6 +89,8 @@ namespace TowerDefense
                 {
                     case ' ':
                     case 'P':
+                    case '!':
+                    case '*':
                     case 'W':
                     case 'B':
                     case 'T':

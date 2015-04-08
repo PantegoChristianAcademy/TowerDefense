@@ -92,7 +92,7 @@ namespace TowerDefense
                 {
                     if (mapBeingCreated.Path.Count == 0)
                     {
-                        clickedTile.ChangeTileIdentity(TileIdentity.Path);
+                        clickedTile.ChangeTileIdentity(TileIdentity.PathStart);
                         mapBeingCreated.Path.Add(clickedTile);
                     }
                     else
@@ -117,6 +117,10 @@ namespace TowerDefense
         {
             if(e.KeyCode == Keys.Enter)
             {
+                Tile PathEnd = mapBeingCreated.Path.Last();
+                mapBeingCreated.MapGrid[PathEnd.GridXLoc, PathEnd.GridYLoc].identity = TileIdentity.PathEnd;
+                mapBeingCreated.MapGrid[PathEnd.GridXLoc, PathEnd.GridYLoc].UpdateTileContent();
+
                 SaveMapWindow mapSaver = new SaveMapWindow();
                 mapSaver.ShowDialog();
                 if (File.Exists(FileCommands.TempMapLocation))
