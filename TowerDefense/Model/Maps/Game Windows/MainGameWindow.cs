@@ -15,7 +15,7 @@ namespace TowerDefense
     {
         Map loadedMap;
         TileIdentity[,] loadedMapGrid;
-        List<Model.Enemies.Gaben> listOfGabens = new List<Model.Enemies.Gaben>();
+        List<Model.Enemies.Plane> listOfGabens = new List<Model.Enemies.Plane>();
 
         public MainGameWindow()
         {
@@ -40,12 +40,12 @@ namespace TowerDefense
         {
             if (listOfGabens.Count <= 1)
             {
-                Model.Enemies.Gaben freshGaben = new Model.Enemies.Gaben();
+                Model.Enemies.Plane freshGaben = new Model.Enemies.Plane();
                 freshGaben.SetInitialSpawnLoc(loadedMap.Path);
                 listOfGabens.Add(freshGaben);
             }
 
-            foreach (Model.Enemies.Gaben tempGaben in listOfGabens) tempGaben.Move(loadedMap.Path);
+            foreach (Model.Enemies.Plane tempGaben in listOfGabens) tempGaben.Move(loadedMap.Path);
 
             this.Invalidate();
         }
@@ -60,7 +60,7 @@ namespace TowerDefense
                 screen.FillRectangle(tempTile.color, tempTile.location.X + 1, tempTile.location.Y + 1, (int)loadedMap.tileSize - 1, (int)loadedMap.tileSize - 1);
             }
 
-            foreach (Model.Enemies.Gaben tempGaben in listOfGabens) screen.DrawImage(tempGaben.enemyImage, tempGaben.x, tempGaben.y, (int)loadedMap.tileSize, (int)loadedMap.tileSize);
+            foreach (Model.Enemies.Plane tempGaben in listOfGabens) screen.DrawImage(tempGaben.enemyImage, tempGaben.x, tempGaben.y, (int)loadedMap.tileSize, (int)loadedMap.tileSize);
         }
     }
 }

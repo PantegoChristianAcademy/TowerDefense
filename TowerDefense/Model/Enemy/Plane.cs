@@ -12,6 +12,7 @@ namespace TowerDefense.Model.Enemies
         public Plane()
         {
             Imagefile = "Media\\Enemies\\airplane.bmp";
+            LoadImage();
             Health = 55;
             Speed = 25;
             Goldgiven = 15;

@@ -10,7 +10,7 @@ namespace TowerDefense.Model.Enemies
     public abstract class Enemy
     {
        public string Imagefile;
-       public Image enemyImage;
+       public Bitmap enemyImage;
        
        public int Health;
        public int Speed;
@@ -96,6 +96,12 @@ namespace TowerDefense.Model.Enemies
                this.SetInitialSpawnLoc(path);
                placeInPath = 0;
            }
+       }
+
+       public void LoadImage()
+       {
+           enemyImage = (Bitmap)Image.FromFile(Imagefile);
+           enemyImage.MakeTransparent(Color.FromArgb(253, 36, 215));
        }
     }
 }
