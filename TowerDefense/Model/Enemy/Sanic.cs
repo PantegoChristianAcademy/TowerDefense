@@ -16,6 +16,7 @@ namespace TowerDefense.Model.Enemies
            Health = 45;
            Speed = 30;
            Goldgiven = 15;
+           LifeValue = 1;
        }
     }
 }

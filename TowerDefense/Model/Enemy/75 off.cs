@@ -16,6 +16,7 @@ namespace TowerDefense.Model.Enemies
             Health = 45;
             Speed = 25;
             Goldgiven = 10;
+            //enemy not in use right now
         }
     }
 }
