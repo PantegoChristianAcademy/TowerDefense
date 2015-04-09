@@ -56,14 +56,19 @@ namespace TowerDefense
 
                 if(e.Button == MouseButtons.Left)
                 {
-                    if(clickedTile.identity != TileIdentity.Path)
+                    if (clickedTile.identity != TileIdentity.Path && clickedTile.identity != TileIdentity.PathStart)
                     {
                         clickedTile.ChangeTileIdentity(TileIdentity.Unoccupied);
                     }
 
-                    else if(clickedTile.identity == TileIdentity.Path)
+                    else if (clickedTile.identity == TileIdentity.Path || clickedTile.identity == TileIdentity.PathStart)
                     {
-                        //Map.deleteFromPath
+                        foreach(Tile tempTile in Tile.CreatePathToBeRemoved(clickedTile, mapBeingCreated.Path))
+                        {
+                            mapBeingCreated.Path.Remove(tempTile);
+                            tempTile.identity = TileIdentity.Unoccupied;
+                            tempTile.UpdateTileContent();
+                        }
                     }
                 }
 
@@ -85,14 +90,22 @@ namespace TowerDefense
 
                 if (e.Button == MouseButtons.Left && clickedTile.identity == TileIdentity.Unoccupied)
                 {
-                    if(mapBeingCreated.Path.Count == 0) clickedTile.ChangeTileIdentity(TileIdentity.Path);
+                    if (mapBeingCreated.Path.Count == 0)
+                    {
+                        clickedTile.ChangeTileIdentity(TileIdentity.PathStart);
+                        mapBeingCreated.Path.Add(clickedTile);
+                    }
                     else
                     {
-                        if()
+                        if (Tile.IsClickedTileAdjacent(mapBeingCreated.tileSize, mapBeingCreated.Path, clickedTile) == true)
+                        {
+                            clickedTile.ChangeTileIdentity(TileIdentity.Path);
+                            mapBeingCreated.Path.Add(clickedTile);
+                        }
                     }
                 }
 
-                if (e.Button == MouseButtons.Right && clickedTile.identity != TileIdentity.Path)
+                if (e.Button == MouseButtons.Right && clickedTile.identity != TileIdentity.Path && clickedTile.identity != TileIdentity.PathStart)
                 {
                     clickedTile.ChangeTileIdentity(TileIdentity.Blockade);
                 }
@@ -104,6 +117,10 @@ namespace TowerDefense
         {
             if(e.KeyCode == Keys.Enter)
             {
+                Tile PathEnd = mapBeingCreated.Path.Last();
+                mapBeingCreated.MapGrid[PathEnd.GridXLoc, PathEnd.GridYLoc].identity = TileIdentity.PathEnd;
+                mapBeingCreated.MapGrid[PathEnd.GridXLoc, PathEnd.GridYLoc].UpdateTileContent();
+
                 SaveMapWindow mapSaver = new SaveMapWindow();
                 mapSaver.ShowDialog();
                 if (File.Exists(FileCommands.TempMapLocation))

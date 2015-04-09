@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace TowerDefense.Model.Enemies
 {
@@ -11,6 +12,7 @@ namespace TowerDefense.Model.Enemies
         public Mr_Krabs()
       {
           Imagefile = "Media\\Enemies\\oh yeah mr krabs.bmp";
+          LoadImage();
           Health = 155;
           Speed = 15;
           Goldgiven = 25;

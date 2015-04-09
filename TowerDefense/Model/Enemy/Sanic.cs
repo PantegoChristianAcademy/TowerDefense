@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace TowerDefense.Model.Enemies
 {
@@ -11,6 +12,7 @@ namespace TowerDefense.Model.Enemies
        public Sanic()
        {
            Imagefile = "Media\\Enemies\\sanicfortower.bmp";
+           LoadImage();
            Health = 45;
            Speed = 30;
            Goldgiven = 15;

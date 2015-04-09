@@ -35,7 +35,7 @@
             // Refresh
             // 
             this.Refresh.Enabled = true;
-            this.Refresh.Interval = 10;
+            this.Refresh.Interval = 20;
             this.Refresh.Tick += new System.EventHandler(this.Refresh_Tick);
             // 
             // MainGameWindow

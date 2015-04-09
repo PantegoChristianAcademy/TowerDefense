@@ -10,16 +10,18 @@ using System.Windows.Forms;
 
 namespace TowerDefense
 {
-    enum TileIdentity 
+    public enum TileIdentity 
         {
             Unoccupied,
             Path,
+            PathStart,
+            PathEnd,
             Water,
             Blockade,
             Tower
         }
         
-    class Tile
+    public class Tile
     {
         #region Variables
         public static Pen TileOutlineColor = Pens.Black;
@@ -28,12 +30,16 @@ namespace TowerDefense
         public Brush color;
         public TileIdentity identity;
         public char shortIdentity;
+        public int GridXLoc;
+        public int GridYLoc;
         #endregion
 
-        public Tile(int xLoc, int yLoc, TileIdentity desiredIdentity)
+        public Tile(int xLoc, int yLoc, TileIdentity desiredIdentity, int xGrid, int yGrid)
         {
             location = new Point(xLoc, yLoc);
             identity = desiredIdentity;
+            GridXLoc = xGrid;
+            GridYLoc = yGrid;
             UpdateTileContent();
         }
 
@@ -78,9 +84,31 @@ namespace TowerDefense
         }
         #endregion
 
-        public static bool IsClickedTileAdjacent()
+        public static bool IsClickedTileAdjacent(double tileSize, List<Tile> Path, Tile selectedTile)
         {
+            Tile lastTile = Path.Last();
+            if (Math.Abs(lastTile.location.X - selectedTile.location.X) == tileSize && Math.Abs(lastTile.location.Y - selectedTile.location.Y) == 0) return true;
+            else if (Math.Abs(lastTile.location.X - selectedTile.location.X) == 0 && Math.Abs(lastTile.location.Y - selectedTile.location.Y) == tileSize) return true;
+            else return false;
+        }
 
+        public static List<Tile> CreatePathToBeRemoved(Tile clickedTile, List<Tile> Path)
+        {
+            int TilePosition = 0;
+            List<Tile> listOfTilesToBeRemoved = new List<Tile>();
+
+            foreach(Tile tempTile in Path)
+            {
+                if (clickedTile == tempTile) break;
+                else TilePosition++;
+            }
+
+            for(int i = TilePosition; i < Path.Count; i++)
+            {
+                listOfTilesToBeRemoved.Add(Path[i]);
+            }
+
+            return listOfTilesToBeRemoved;
         }
 
         public void ChangeTileIdentity(TileIdentity chosenIdentity)
@@ -99,6 +127,14 @@ namespace TowerDefense
 
                 case TileIdentity.Path:
                     this.color = Brushes.Yellow;
+                    break;
+
+                case TileIdentity.PathStart:
+                    this.color = Brushes.Purple;
+                    break;
+
+                case TileIdentity.PathEnd:
+                    this.color = Brushes.Pink;
                     break;
 
                 case TileIdentity.Water:
@@ -133,6 +169,14 @@ namespace TowerDefense
                     this.shortIdentity = 'P';
                     break;
 
+                case TileIdentity.PathStart:
+                    this.shortIdentity = '!';
+                    break;
+
+                case TileIdentity.PathEnd:
+                    this.shortIdentity = '*';
+                    break;
+
                 case TileIdentity.Water:
                     this.shortIdentity = 'W';
                     break;
@@ -159,6 +203,12 @@ namespace TowerDefense
 
                 case 'P':
                     return TileIdentity.Path;
+
+                case '!':
+                    return TileIdentity.PathStart;
+
+                case '*':
+                    return TileIdentity.PathEnd;
 
                 case 'W':
                     return TileIdentity.Water;

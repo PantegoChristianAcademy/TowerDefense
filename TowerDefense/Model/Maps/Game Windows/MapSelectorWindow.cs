@@ -20,6 +20,7 @@ namespace TowerDefense
     public partial class MapSelectorWindow : Form
     {
         string mapName;
+        string mapPathName;
         string action;
 
         public MapSelectorWindow()
@@ -57,19 +58,24 @@ namespace TowerDefense
             {
                 string[] fileParts = fileName.Split('\\');
                 string tempMapName = fileParts.Last();
-                ListOfMaps.Items.Add(tempMapName.Remove(tempMapName.Length - 4));
+                tempMapName = tempMapName.Remove(tempMapName.Length - 4);
+                if (!tempMapName.ToLower().Contains("$$$###$$$")) ListOfMaps.Items.Add(tempMapName);
             }
         }
 
         private void ChooseMapBtn_MouseClick(object sender, MouseEventArgs e)
         {
             mapName = ListOfMaps.SelectedItem.ToString() + ".txt";
+            mapPathName = ListOfMaps.SelectedItem.ToString() + "$$$###$$$.txt";
             string mapLocation = string.Format("Maps\\{0}\\{1}", ListOfDifficulties.SelectedItem, mapName);
+            string mapPathLocation = string.Format("Maps\\{0}\\{1}", ListOfDifficulties.SelectedItem, mapPathName);
+
 
             switch (action)
             { 
                 case "delete":
                     File.Delete(mapLocation);
+                    File.Delete(mapPathLocation);
                     this.Close();
                     break;
 

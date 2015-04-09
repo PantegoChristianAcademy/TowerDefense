@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace TowerDefense.Model.Enemies
 {
@@ -11,11 +12,10 @@ namespace TowerDefense.Model.Enemies
         public Gaben()
         {
             Imagefile = "Media\\Enemies\\GabenIsGod.bmp";
+            LoadImage();
             Health = 110;
-            Speed = 15;
+            Speed = 1;
             Goldgiven = 25;
-
         }
-        
     }
 }
