@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TowerDefense.Model.Turrets
 {
-    class Slowing_tower : Base_Tower
+    public class Slowing_tower : Base_Tower
     {
         public Slowing_tower()
         {
@@ -18,7 +18,7 @@ namespace TowerDefense.Model.Turrets
             TotalCost = Cost;
 
         }
-        public override void upgrade()
+        public override void Upgrade()
         {
             upgradelevel++;
             switch (upgradelevel)

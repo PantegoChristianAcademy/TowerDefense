@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TowerDefense.Model.Turrets
 {
-    class Basic_Tower : Base_Tower
+    public class Basic_Tower : Base_Tower
     {
         public Basic_Tower()
         {

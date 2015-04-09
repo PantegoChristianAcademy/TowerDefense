@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TowerDefense.Model.Turrets
 {
-    class Splash_Tower : Base_Tower
+    public class Splash_Tower : Base_Tower
     {
         public Splash_Tower()
         {
@@ -18,7 +18,7 @@ namespace TowerDefense.Model.Turrets
             additionaleffect = null;
             BlastRadius = 40;
         }
-        public override void upgrade()
+        public override void Upgrade()
         {
             upgradelevel++;
             switch(upgradelevel)

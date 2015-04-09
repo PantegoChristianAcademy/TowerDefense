@@ -31,10 +31,14 @@ namespace TowerDefense.Model.Turrets
                     }
                 }
             }
-           foreach (Tile temp in map.Path.Reverse())
+
+            var ls = new List<Tile>(map.Path);
+            ls.Reverse();
+           foreach (Tile temp in ls)
            {
                if (points.Contains(temp.location)) return Dict[temp.location];
            }
+           return null;
         }
 
 
