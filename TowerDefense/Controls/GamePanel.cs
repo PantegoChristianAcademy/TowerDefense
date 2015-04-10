@@ -16,8 +16,12 @@ namespace TowerDefense.Controls
         Timer timer;
         List<Model.Enemies.Plane> listOfGabens = new List<Model.Enemies.Plane>();
 
+        public delegate void TileClickHandler(int x, int y);
+        public event TileClickHandler TileClick;
+
         public GamePanel(int Mwidth, int Mheight)
         {
+            MouseDown += GamePanel_MouseDown;
             DoubleBuffered = true;
             timer = new Timer();
             timer.Interval = 10;
@@ -33,6 +37,15 @@ namespace TowerDefense.Controls
 
             string mapPathLocation = mapLocation.Remove(mapLocation.Length - 4) + "$$$###$$$.txt";
             loadedMap.Path = FileCommands.ReadMapPathFile(loadedMap, mapPathLocation);
+        }
+
+        void GamePanel_MouseDown(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                TileClick((int)(e.X / loadedMap.tileSize), (int)(e.Y / loadedMap.tileSize));
+            }
+            catch { }
         }
 
         void timer_Tick(object sender, EventArgs e)
