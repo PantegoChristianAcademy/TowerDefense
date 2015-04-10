@@ -1,42 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 using System.Windows.Forms;
-using System.IO;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
-namespace TowerDefense
+namespace TowerDefense.Controls
 {
-    public partial class MainGameWindow : Form
+    public class GamePanel : Panel
     {
         Map loadedMap;
         TileIdentity[,] loadedMapGrid;
+        Timer timer;
         List<Model.Enemies.Plane> listOfGabens = new List<Model.Enemies.Plane>();
 
-        public MainGameWindow()
+        public GamePanel(int Mwidth, int Mheight)
         {
-            InitializeComponent();
-        }
+            DoubleBuffered = true;
+            timer = new Timer();
+            timer.Interval = 10;
+            timer.Tick += timer_Tick;
+            timer.Start();
 
-        private void MainGameWindow_Load(object sender, EventArgs e)
-        {
             string mapLocation = File.ReadAllText(FileCommands.TempMapLocation);
             File.Delete(FileCommands.TempMapLocation);
 
             loadedMapGrid = FileCommands.ReadMapFile(mapLocation);
             loadedMap = new Map();
-            loadedMap.GenerateLoadedMap(ClientSize.Width, ClientSize.Height, loadedMapGrid);
+            loadedMap.GenerateLoadedMap(Mwidth, Mheight, loadedMapGrid);
 
             string mapPathLocation = mapLocation.Remove(mapLocation.Length - 4) + "$$$###$$$.txt";
             loadedMap.Path = FileCommands.ReadMapPathFile(loadedMap, mapPathLocation);
         }
 
-
-        private void Refresh_Tick(object sender, EventArgs e)
+        void timer_Tick(object sender, EventArgs e)
         {
             if (listOfGabens.Count <= 1)
             {
@@ -48,6 +47,11 @@ namespace TowerDefense
             foreach (Model.Enemies.Plane tempGaben in listOfGabens) tempGaben.Move(loadedMap.Path);
 
             this.Invalidate();
+        }
+
+        public new void Resize(int width, int height)
+        {
+            loadedMap.Resize(width, height);
         }
 
         protected override void OnPaint(PaintEventArgs e)

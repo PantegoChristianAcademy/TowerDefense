@@ -81,7 +81,7 @@ namespace TowerDefense
 
                 case "load":
                     File.WriteAllText(FileCommands.TempMapLocation, mapLocation);
-                    MainGameWindow mainMap = new MainGameWindow();
+                    GameWindow mainMap = new GameWindow();
                     mainMap.ShowDialog();
                     this.Close();
                     break;

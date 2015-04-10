@@ -32,8 +32,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MahApps.Metro">
+      <HintPath>..\packages\MahApps.Metro.1.1.2.0\lib\net45\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Interactivity">
+      <HintPath>..\packages\MahApps.Metro.1.1.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,14 +51,16 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EnemyStats.cs" />
-    <Compile Include="GameWindow.cs">
-      <SubType>Form</SubType>
+    <Compile Include="Controls\GamePanel.cs">
+      <SubType>Component</SubType>
     </Compile>
-    <Compile Include="GameWindow.Designer.cs">
-      <DependentUpon>GameWindow.cs</DependentUpon>
+    <Compile Include="EnemyStats.cs" />
+    <Compile Include="GameWindow.xaml.cs">
+      <DependentUpon>GameWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Enemy\50 off.cs" />
     <Compile Include="Model\Enemy\75 off.cs" />
@@ -73,12 +84,6 @@
     </Compile>
     <Compile Include="Model\Maps\Game Windows\LaunchWindow.designer.cs">
       <DependentUpon>LaunchWindow.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Maps\Game Windows\MainGameWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Model\Maps\Game Windows\MainGameWindow.designer.cs">
-      <DependentUpon>MainGameWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Maps\Game Windows\MapSelectorWindow.cs">
       <SubType>Form</SubType>
@@ -107,17 +112,11 @@
     <Compile Include="Model\Turrets\Splash Tower.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="GameWindow.resx">
-      <DependentUpon>GameWindow.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Model\Maps\Game Windows\CreateMapWindow.resx">
       <DependentUpon>CreateMapWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Model\Maps\Game Windows\LaunchWindow.resx">
       <DependentUpon>LaunchWindow.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Model\Maps\Game Windows\MainGameWindow.resx">
-      <DependentUpon>MainGameWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Model\Maps\Game Windows\MapSelectorWindow.resx">
       <DependentUpon>MapSelectorWindow.cs</DependentUpon>
@@ -136,7 +135,9 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -163,6 +164,11 @@
     <Content Include="Media\Tower\Slow Towers\slow.bmp" />
     <Content Include="Media\Tower\Slow Towers\slow2.bmp" />
     <Content Include="Media\Tower\Slow Towers\slow3.bmp" />
+    <None Include="Resources\DoT1.bmp" />
+    <None Include="Resources\DoT.bmp" />
+    <None Include="Resources\Splash1.bmp" />
+    <None Include="Resources\slow.bmp" />
+    <None Include="Resources\Turret.bmp" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Media\Enemies\50%25 off.bmp">
@@ -186,6 +192,12 @@
     <Content Include="Media\Enemies\sanicfortower.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="GameWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
