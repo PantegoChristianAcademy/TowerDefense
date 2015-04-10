@@ -17,6 +17,7 @@ namespace TowerDefense
         public static string TempMapLocation = "TempData\\Map Name.txt";
         public static string TempMapSelectorActionLocation = "TempData\\Map Selection Action.txt";
         public static string TempTileSizeLocation = "TempData\\Tile Size.txt";
+        public static string TempMapDifficulty = "TempData\\Map Difficulty.txt";
         #endregion
 
         public static void ValidateFiles()
@@ -67,6 +68,10 @@ namespace TowerDefense
             int numOfHorizontalTiles;
             string allTiles = "";
             string[] arrayOfHorizontalLines = File.ReadAllLines(filePath);
+
+            string[] filePathComponents = filePath.Split('\\');
+            string difficulty = filePathComponents[1];
+            File.WriteAllText(TempMapDifficulty, difficulty);
 
             numOfVerticalTiles = arrayOfHorizontalLines.Length;
             numOfHorizontalTiles = arrayOfHorizontalLines[0].Length;

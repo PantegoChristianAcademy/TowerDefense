@@ -28,6 +28,7 @@ namespace TowerDefense
         public double verticalGap;
         public double numOfHorizontalTiles;
         public double numOfVerticalTiles;
+        public string difficulty;
         #endregion
 
         public Map ()
@@ -82,6 +83,8 @@ namespace TowerDefense
             tileSize = 1;
             numOfHorizontalTiles = desiredMapGrid.GetLength(0);
             numOfVerticalTiles = desiredMapGrid.GetLength(1);
+            difficulty = System.IO.File.ReadAllText(FileCommands.TempMapDifficulty);
+            System.IO.File.Delete(FileCommands.TempMapDifficulty);
 
             MapGrid = new Tile[(int)numOfHorizontalTiles, (int)numOfVerticalTiles];
 

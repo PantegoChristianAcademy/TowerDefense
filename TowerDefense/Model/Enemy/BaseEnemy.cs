@@ -19,6 +19,7 @@ namespace TowerDefense.Model.Enemies
        public int Goldgiven;
        public int placeInPath = 0;
        public byte LifeValue;
+       public bool needToDelete = false;
 
        public void SetInitialSpawnLoc(List<Tile> path)
        {
@@ -28,6 +29,12 @@ namespace TowerDefense.Model.Enemies
        public void Move(List<Tile> path)
        {
            Tile currentlyOccupiedTile = path[placeInPath];
+
+           if (placeInPath + 1 == path.Count)
+           {
+               needToDelete = true;
+               return;
+           }
            Tile nextTileInPath = path[placeInPath + 1];
 
            int xVel = nextTileInPath.GridXLoc - currentlyOccupiedTile.GridXLoc;
@@ -42,9 +49,7 @@ namespace TowerDefense.Model.Enemies
                        else
                        {
                            x = nextTileInPath.location.X;
-                           int leftover = x - nextTileInPath.location.X;
                            placeInPath++;
-                           this.CheckIfCompletedPathAndExecuteCode(path);
                        }
                        break;
 
@@ -53,9 +58,7 @@ namespace TowerDefense.Model.Enemies
                        else
                        {
                            x = nextTileInPath.location.X;
-                           int leftover = nextTileInPath.location.X - x;
                            placeInPath++;
-                           this.CheckIfCompletedPathAndExecuteCode(path);
                        }
                        break;
                }
@@ -70,9 +73,7 @@ namespace TowerDefense.Model.Enemies
                        else
                        {
                            y = nextTileInPath.location.Y;
-                           int leftover = y - nextTileInPath.location.Y;
                            placeInPath++;
-                           this.CheckIfCompletedPathAndExecuteCode(path);
                        }
                        break;
 
@@ -81,12 +82,12 @@ namespace TowerDefense.Model.Enemies
                        else
                        {
                            y = nextTileInPath.location.Y;
-                           int leftover = nextTileInPath.location.Y - y;
                            placeInPath++;
-                           this.CheckIfCompletedPathAndExecuteCode(path);
                        }
                        break;
                }
+
+               this.CheckIfCompletedPathAndExecuteCode(path);
            }
        }
 
@@ -94,8 +95,8 @@ namespace TowerDefense.Model.Enemies
        {
            if (placeInPath == path.Count - 1)
            {
-               this.SetInitialSpawnLoc(path);
-               placeInPath = 0;
+               //deal Damage to Player Health
+               needToDelete = true;
            }
        }
 
