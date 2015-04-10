@@ -14,9 +14,9 @@ namespace TowerDefense.Model.Enemies
             Imagefile = "Media\\Enemies\\75% off.bmp";
             LoadImage();
             Health = 45;
-            Speed = 25;
+            Speed = 20;
             Goldgiven = 10;
-            //enemy not in use right now
+            //enemy not in use right now because there is no split function
         }
     }
 }

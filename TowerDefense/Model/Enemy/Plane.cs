@@ -16,7 +16,7 @@ namespace TowerDefense.Model.Enemies
             Health = 55;
             Speed = 25;
             Goldgiven = 15;
-            //enemy not in use right now
+            //enemy not in use right now because we cant use the freeze function anymore,can still be used as a normal enemy though
         }
     }
 }
