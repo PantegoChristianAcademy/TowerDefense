@@ -21,8 +21,12 @@ namespace TowerDefense.Controls
         int spawnIntervalinMS = 400;
         int roundNum = 0;
 
+        public delegate void TileClickHandler(int x, int y);
+        public event TileClickHandler TileClick;
+
         public GamePanel(int Mwidth, int Mheight)
         {
+            MouseDown += GamePanel_MouseDown;
             DoubleBuffered = true;
             timer = new Timer();
             timer.Interval = 10;
@@ -41,6 +45,15 @@ namespace TowerDefense.Controls
 
             //supposed to go at beginning of each round
             enemyQueue = new Queue<Model.Enemies.Enemy>(TowerDefense.Model.Enemy.EnemyFactory.GenerateWave(0, loadedMap.difficulty));        }
+
+        void GamePanel_MouseDown(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                TileClick((int)(e.X / loadedMap.tileSize), (int)(e.Y / loadedMap.tileSize));
+            }
+            catch { }
+        }
 
         void timer_Tick(object sender, EventArgs e)
         {
