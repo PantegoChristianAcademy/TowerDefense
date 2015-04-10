@@ -9,6 +9,7 @@
   <metro:MetroWindow.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
+        
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
@@ -21,10 +22,100 @@
   
   
     <Grid>
+      <Grid.Resources>
+        <Style TargetType="Image">
+          <Setter Property="Cursor" Value="Hand"/>
+        </Style> 
+        
+      </Grid.Resources>
       <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="200" x:Name="uiPanelColumn" />
-        <ColumnDefinition />
+        <ColumnDefinition Width="1*" x:Name="uiPanelColumn" MinWidth ="215"/>
+        <ColumnDefinition Width="5*"/>
       </Grid.ColumnDefinitions>
-      <WindowsFormsHost Background="Black" Grid.Column="1" SizeChanged="Window_Resized" Name="winFormHost" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+    
+      <Grid Grid.Column="0" Margin="10">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="1*"/>
+          <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row ="0">
+          <TextBlock FontSize="16">
+            Round Number:
+            <Run Name="roundTxt" />
+          </TextBlock>
+          <TextBlock FontSize="16" Margin="0,5,0,5">
+            Round Countdown:
+            <Run Name="countdownTxt"/>
+          </TextBlock>
+          <TextBlock FontSize="16">
+            Lives Remaining:
+            <Run Name="livesTxt"/>
+          </TextBlock>
+          
+        </StackPanel>
+        <Grid Grid.Row ="1">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+          </Grid.RowDefinitions>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+          </Grid.ColumnDefinitions>
+          <TextBlock FontSize="24" Grid.ColumnSpan="2" Margin="0, 0, 0, 10">
+            Shop:
+          </TextBlock>
+          
+          <Image Width="64" Height="64" Grid.Row="1" Source="pack://application:,,,/Media/Tower/BasicTowers/Turret.bmp"/>
+          <TextBlock Margin="5, 0, 0, 0" Grid.Row="1" Grid.Column="1">
+            <Run FontWeight="Bold" FontSize="18">
+              Basic Tower:
+            </Run>
+            <LineBreak />
+            <Run FontSize="14">
+              Do later
+            </Run>
+          </TextBlock>
+
+          <Image Margin="0, 5, 0, 5" Width="64" Height="64" Grid.Row="2" Source="pack://application:,,,/Media/Tower/SlowTowers/Slow.bmp"/>
+          <TextBlock Margin="5, 0, 0, 0" Grid.Row="2" Grid.Column="1">
+            <Run FontWeight="Bold" FontSize="18">
+              Freeze Tower:
+            </Run>
+            <LineBreak />
+            <Run FontSize="14">
+              Do later
+            </Run>
+          </TextBlock>
+
+          <Image Margin="0, 0, 0, 5" Width="64" Height="64" Grid.Row="3" Source="pack://application:,,,/Media/Tower/DoTTowers/DoT.bmp"/>
+          <TextBlock Margin="5, 0, 0, 0" Grid.Row="3" Grid.Column="1">
+            <Run FontWeight="Bold" FontSize="18">
+              Flame Tower:
+            </Run>
+            <LineBreak />
+            <Run FontSize="14">
+              Do later
+            </Run>
+          </TextBlock>
+          
+          <Image Width="64" Height="64" Grid.Row="4" Source="pack://application:,,,/Media/Tower/SplashTowers/Splash1.bmp"/>
+          <TextBlock Margin="5, 0, 0, 0" Grid.Row="4" Grid.Column="1">
+            <Run FontWeight="Bold" FontSize="18">
+              Missile Tower:
+            </Run>
+            <LineBreak />
+            <Run FontSize="14">
+              Do later
+            </Run>
+          </TextBlock>
+        </Grid>
+      </Grid> 
+      
+      
+      <WindowsFormsHost PreviewMouseDown ="Tile_Click" Background="Black" Grid.Column="1" SizeChanged="Window_Resized" Name="winFormHost" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
     </Grid>
 </metro:MetroWindow>

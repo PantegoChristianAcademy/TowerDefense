@@ -51,5 +51,10 @@ namespace TowerDefense
             
             
         }
+        private void Tile_Click(object sender, MouseEventArgs e)
+        {
+            MessageBox.Show("Click");
+        }
+            
     }
 }
