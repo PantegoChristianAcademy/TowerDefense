@@ -152,6 +152,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Maps\Easy\" />
+    <Folder Include="Maps\Hard\" />
+    <Folder Include="Maps\Normal\" />
     <Folder Include="Media\Maps\" />
   </ItemGroup>
   <ItemGroup>
