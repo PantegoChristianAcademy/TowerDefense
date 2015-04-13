@@ -3,7 +3,7 @@
              xmlns:metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" Closing="Window_Exit"
              mc:Ignorable="d" Loaded="Window_Loaded"  Width="800" Height="600"
              d:DesignHeight="300" d:DesignWidth="300" WindowState="Maximized">
   <metro:MetroWindow.Resources>
