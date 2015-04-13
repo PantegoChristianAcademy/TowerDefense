@@ -14,10 +14,19 @@ namespace TowerDefense.Controls
         Map loadedMap;
         TileIdentity[,] loadedMapGrid;
         Timer timer;
-        List<Model.Enemies.Plane> listOfGabens = new List<Model.Enemies.Plane>();
+        List<Model.Enemies.Enemy> listOfEnemies = new List<Model.Enemies.Enemy>();
+         Queue<Model.Enemies.Enemy> enemyQueue = new Queue<Model.Enemies.Enemy>();
+        List<Model.Turrets.Base_Tower> listOfTowers = new List<Model.Turrets.Base_Tower>();
+        int timeElapsedSinceRoundStart = 0;
+        int spawnIntervalinMS = 400;
+        int roundNum = 0;
+
+        public delegate void TileClickHandler(int x, int y);
+        public event TileClickHandler TileClick;
 
         public GamePanel(int Mwidth, int Mheight)
         {
+            MouseDown += GamePanel_MouseDown;
             DoubleBuffered = true;
             timer = new Timer();
             timer.Interval = 10;
@@ -33,19 +42,40 @@ namespace TowerDefense.Controls
 
             string mapPathLocation = mapLocation.Remove(mapLocation.Length - 4) + "$$$###$$$.txt";
             loadedMap.Path = FileCommands.ReadMapPathFile(loadedMap, mapPathLocation);
+
+            //supposed to go at beginning of each round
+            enemyQueue = new Queue<Model.Enemies.Enemy>(TowerDefense.Model.Enemy.EnemyFactory.GenerateWave(0, loadedMap.difficulty));        }
+
+        void GamePanel_MouseDown(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                TileClick((int)(e.X / loadedMap.tileSize), (int)(e.Y / loadedMap.tileSize));
+            }
+            catch { }
         }
 
         void timer_Tick(object sender, EventArgs e)
         {
-            if (listOfGabens.Count <= 1)
+            if (timeElapsedSinceRoundStart >= spawnIntervalinMS && enemyQueue.Count >= 1)
             {
-                Model.Enemies.Plane freshGaben = new Model.Enemies.Plane();
-                freshGaben.SetInitialSpawnLoc(loadedMap.Path);
-                listOfGabens.Add(freshGaben);
+                timeElapsedSinceRoundStart = 0;
+                Model.Enemies.Enemy newEnemy = enemyQueue.Dequeue();
+                listOfEnemies.Add(newEnemy);
+                newEnemy.SetInitialSpawnLoc(loadedMap.Path);
             }
 
-            foreach (Model.Enemies.Plane tempGaben in listOfGabens) tempGaben.Move(loadedMap.Path);
+            foreach (Model.Enemies.Enemy tempEnemy in listOfEnemies) tempEnemy.Move(loadedMap.Path);
+            for (int i = 0; i < listOfEnemies.Count; i++ )
+            {
+                if(listOfEnemies[i].needToDelete == true)
+                {
+                    listOfEnemies.RemoveAt(i);
+                    i--;
+                }
+            }
 
+                timeElapsedSinceRoundStart += timer.Interval;
             this.Invalidate();
         }
 
@@ -64,7 +94,7 @@ namespace TowerDefense.Controls
                 screen.FillRectangle(tempTile.color, tempTile.location.X + 1, tempTile.location.Y + 1, (int)loadedMap.tileSize - 1, (int)loadedMap.tileSize - 1);
             }
 
-            foreach (Model.Enemies.Plane tempGaben in listOfGabens) screen.DrawImage(tempGaben.enemyImage, tempGaben.x, tempGaben.y, (int)loadedMap.tileSize, (int)loadedMap.tileSize);
+            foreach (Model.Enemies.Enemy tempEnemy in listOfEnemies) screen.DrawImage(tempEnemy.enemyImage, tempEnemy.x, tempEnemy.y, (int)loadedMap.tileSize, (int)loadedMap.tileSize);
         }
     }
 }

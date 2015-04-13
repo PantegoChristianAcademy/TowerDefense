@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace TowerDefense.Model.Enemy
 {
     public static class EnemyFactory
     {
-        public static List<Enemies.Enemy> GenerateWave(short WaveNumb, Difficulty DiffChoice)
+        public static List<Enemies.Enemy> GenerateWave(short WaveNumb, string difficulty)
         {
             int baseWave = WaveNumb % 10 + 1;
             List<Enemies.Enemy> enemies = GenerateNormWave(baseWave);
@@ -25,13 +26,13 @@ namespace TowerDefense.Model.Enemy
 
                 foreach (Enemies.Enemy temp in enemies)
                 {
-                    if (DiffChoice == Difficulty.Easy)
+                    if (difficulty == "Easy")
                     {
                         temp.Health = (int)(temp.Health * 0.9);
                         temp.Speed = (int)(temp.Health * 0.9);
 
                     }
-                    if (DiffChoice == Difficulty.Hard)
+                    if (difficulty == "Hard")
                     {
                         temp.Health = (int)(temp.Health * 1.1);
                         temp.Speed = (int)(temp.Speed * 1.1);
@@ -39,7 +40,15 @@ namespace TowerDefense.Model.Enemy
                 }
 
 
-            if (DiffChoice == Difficulty.Hard) return enemies.Concat(new List<Enemies.Enemy>(enemies)).ToList();
+            if (difficulty == "Hard")
+            {
+                List<Enemies.Enemy> secondHalf = new List<Enemies.Enemy>();
+                foreach (var enemy in enemies)
+                {
+                    secondHalf.Add((Enemies.Enemy)Activator.CreateInstance(enemy.GetType()));
+                }
+                enemies = enemies.Concat(secondHalf).ToList();
+            }
             return enemies;
         }
 

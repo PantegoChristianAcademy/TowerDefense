@@ -109,7 +109,7 @@ namespace TowerDefense
                   MessageBox.Show("You pressed enter.");  //confirm highlighted object w/ enter
                     break;
 
-            }
+        }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -119,11 +119,17 @@ namespace TowerDefense
             int width = (int)(this.ActualWidth - uiPanelColumn.ActualWidth);
             int height = (int)(this.ActualHeight);
             winFormHost.Child = new Controls.GamePanel(width, height);
+            Game.TileClick += Game_TileClick;
         }
 
         private void Window_Exit (object sender, System.ComponentModel.CancelEventArgs e)
         {
             UnHook();
+        }
+
+        void Game_TileClick(int x, int y)
+        {
+
         }
 
         private void Window_Resized(object sender, SizeChangedEventArgs e)
@@ -136,10 +142,30 @@ namespace TowerDefense
             
             
         }
-        private void Tile_Click(object sender, MouseEventArgs e)
+       
+        private void Buy_Turret(object sender, MouseEventArgs e)
         {
-            MessageBox.Show("Click");
+            Image ci = sender as Image;
+            if (ci == null)
+            {
+                return;
+            }
+            string tag = ci.Tag.ToString();
+            switch(tag)
+        {
+                case "basic":
+                    ShopTower = new Model.Turrets.Basic_Tower();
+                    break;
+                case "slow":
+                    ShopTower = new Model.Turrets.Slowing_tower();
+                    break;
+                case "dot":
+                    ShopTower = new Model.Turrets.DoT_Tower();
+                    break;
+                case "splash":
+                    ShopTower = new Model.Turrets.Splash_Tower();
+                    break;
+            }
         }
-            
     }
 }
