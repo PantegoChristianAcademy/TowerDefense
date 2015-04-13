@@ -33,7 +33,7 @@
         <ColumnDefinition Width="5*"/>
       </Grid.ColumnDefinitions>
     
-      <Grid Grid.Column="0" Margin="10">
+      <Grid Grid.Column="0" Margin="10" MouseDown="cancel">
         <Grid.RowDefinitions>
           <RowDefinition Height="1*"/>
           <RowDefinition Height="2*"/>
