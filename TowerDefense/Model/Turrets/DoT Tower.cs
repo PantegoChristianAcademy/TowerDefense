@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace TowerDefense.Model.Turrets
 {
     public class DoT_Tower : Base_Tower
-    {    
+    {
         public DoT_Tower()
         {
+            towerImage = Image.FromFile("Media\\Tower\\DoTTowers\\DoT.bmp");
             Damage = 10;
             Firerate = 2;
             Range = 6;

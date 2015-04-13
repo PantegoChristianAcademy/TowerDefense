@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace TowerDefense.Model.Turrets
 {
@@ -10,6 +11,7 @@ namespace TowerDefense.Model.Turrets
     {
         public Splash_Tower()
         {
+            towerImage = Image.FromFile("Media\\Tower\\SplashTowers\\Splash1.bmp");
             Damage = 25;
             Firerate = 1;
             Range = 15;

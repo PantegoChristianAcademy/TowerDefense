@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
+
 
 namespace TowerDefense.Model.Turrets
 {
@@ -10,6 +12,7 @@ namespace TowerDefense.Model.Turrets
     {
         public Slowing_tower()
         {
+            towerImage = Image.FromFile("Media\\Tower\\SlowTowers\\Slow.bmp");
             Damage = 0;
             Firerate = 0.5f;
             Range = 9;

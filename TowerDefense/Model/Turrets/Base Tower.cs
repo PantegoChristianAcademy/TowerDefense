@@ -9,6 +9,8 @@ namespace TowerDefense.Model.Turrets
 {
     public abstract class Base_Tower
     {
+        public Image towerImage;
+
         public Enemies.Enemy selectTarget(List<Enemies.Enemy> LS, Map map)
         {
             Dictionary<Point, Enemies.Enemy> Dict = new Dictionary<Point, Enemies.Enemy>();

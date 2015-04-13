@@ -21,6 +21,7 @@ namespace TowerDefense
     public partial class GameWindow : MahApps.Metro.Controls.MetroWindow
     {
         public Model.Turrets.Base_Tower ShopTower = null;
+
         public Controls.GamePanel Game
         {
             get
@@ -45,7 +46,10 @@ namespace TowerDefense
 
         void Game_TileClick(int x, int y)
         {
-
+            Tile clickedTile = Game.loadedMap.MapGrid[x, y];
+            ShopTower.PosX = clickedTile.location.X;
+            ShopTower.PosY = clickedTile.location.Y;
+            Game.AddTowerToListOfTowers(ShopTower);
         }
 
         private void Window_Resized(object sender, SizeChangedEventArgs e)
@@ -59,7 +63,7 @@ namespace TowerDefense
 
         }
        
-        private void Buy_Turret(object sender, MouseEventArgs e)
+        private void Buy_Tower(object sender, MouseEventArgs e)
         {
             Image ci = sender as Image;
             if (ci == null)
