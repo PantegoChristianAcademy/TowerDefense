@@ -155,10 +155,13 @@
     <Folder Include="Media\Maps\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Maps\Easy\supah%24%24%24###%24%24%24.txt">
+    <Content Include="Maps\Easy\Easy 1%24%24%24###%24%24%24.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Maps\Easy\supah.txt">
+    <Content Include="Maps\Hard\supah%24%24%24###%24%24%24.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\Hard\supah.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Maps\Hard\PCA%24%24%24###%24%24%24.txt">
@@ -179,10 +182,7 @@
     <Content Include="Maps\Normal\normal 1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Maps\Normal\normal 2%24%24%24###%24%24%24.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Maps\Normal\normal 2.txt">
+    <Content Include="Maps\Easy\Easy 1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Maps\Normal\normal 3%24%24%24###%24%24%24.txt">
