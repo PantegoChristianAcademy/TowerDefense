@@ -55,7 +55,7 @@
             this.ResumeLayout(false);
 
         }
-
+        //typed new things 
         #endregion
 
         private System.Windows.Forms.Timer Refresh;
