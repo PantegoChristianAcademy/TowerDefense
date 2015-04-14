@@ -69,6 +69,7 @@ namespace TowerDefense
                 return CallNextHookEx(hhook, code, (int)wParam, lParam);
         }
 
+        public Model.Turrets.Base_Tower ShopTower = null;
         public Controls.GamePanel Game
         {
             get
@@ -143,7 +144,7 @@ namespace TowerDefense
             
         }
        
-        private void Buy_Turret(object sender, MouseEventArgs e)
+        private void Buy_Tower(object sender, MouseEventArgs e)
         {
             Image ci = sender as Image;
             if (ci == null)
