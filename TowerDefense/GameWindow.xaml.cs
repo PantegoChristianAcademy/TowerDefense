@@ -63,7 +63,6 @@ namespace TowerDefense
             if (code >= 0 && wParam == (IntPtr)WM_KEYDOWN)
             {
                 int vkCode = Marshal.ReadInt32(lParam);
-                //////ОБРАБОТКА НАЖАТИЯ
                 _window.KeyPress(vkCode);
                 return (IntPtr)1;
             }
@@ -71,7 +70,6 @@ namespace TowerDefense
                 return CallNextHookEx(hhook, code, (int)wParam, lParam);
         }
 
-        public Model.Turrets.Base_Tower ShopTower = null;
         public Controls.GamePanel Game
         {
             get
@@ -97,21 +95,40 @@ namespace TowerDefense
                   MessageBox.Show("You pressed pause with esc");  //Pause Game w/esc
                     break;
                 case 38:
-                  MessageBox.Show("You pressed up arrow.");  //highlight object w/ up arrow
-                    break;
+                    //highlight object w/ up arrow
+                  Game.selectedY--;
+                  break;
                 case 37:
-                   MessageBox.Show("You pressed left arrow."); //highlight object w/ left arrow
-                    break;
+                   //highlight object w/ left arrow
+                   Game.selectedX--; 
+                   break;
                 case 39:
-                 MessageBox.Show("You pressed right arrow.");   //highlight object w/ right arrow
-                    break;
+                  //highlight object w/ right arrow
+                 Game.selectedX++;   
+                 break;
                 case 40:
-                  MessageBox.Show("You pressed down arrow.");  //highlight object w/ down arrow
-                    break;
+               //highlight object w/ down arrow
+                  Game.selectedY++;
+                  break;
                 case 13:
                   MessageBox.Show("You pressed enter.");  //confirm highlighted object w/ enter
                     break;
-
+                case 49:
+                    ShopTower = new Model.Turrets.Basic_Tower();
+                    Game_TileClick(Game.selectedX, Game.selectedY);
+                    break;
+                case 50:
+                  ShopTower = new Model.Turrets.Slowing_tower();  //tower hotkey with 2
+                  Game_TileClick(Game.selectedX, Game.selectedY);
+                    break;
+                case 51:
+               ShopTower = new Model.Turrets.DoT_Tower();  //tower hotkey with 3
+               Game_TileClick(Game.selectedX, Game.selectedY);
+                    break;
+                case 52:
+                ShopTower = new Model.Turrets.Splash_Tower();   //tower hotkey with 4
+                Game_TileClick(Game.selectedX, Game.selectedY);
+                    break;
         }
         }
 

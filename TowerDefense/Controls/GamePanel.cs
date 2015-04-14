@@ -21,6 +21,9 @@ namespace TowerDefense.Controls
         int spawnIntervalinMS = 400;
         int roundNum = 0;
 
+        public int selectedX = -1;
+        public int selectedY = -1;
+
         public delegate void TileClickHandler(int x, int y);
         public event TileClickHandler TileClick;
 
@@ -91,7 +94,16 @@ namespace TowerDefense.Controls
             foreach (Tile tempTile in loadedMap.MapGrid)
             {
                 screen.DrawRectangle(Tile.TileOutlineColor, tempTile.location.X, tempTile.location.Y, (int)loadedMap.tileSize, (int)loadedMap.tileSize);
-                screen.FillRectangle(tempTile.color, tempTile.location.X + 1, tempTile.location.Y + 1, (int)loadedMap.tileSize - 1, (int)loadedMap.tileSize - 1);
+
+                if (tempTile.GridXLoc == selectedX && tempTile.GridYLoc == selectedY)
+                {
+                    var originalColor = (tempTile.color as SolidBrush).Color;
+                    screen.FillRectangle(new SolidBrush(Color.FromArgb(255,255,255)), tempTile.location.X + 1, tempTile.location.Y + 1, (int)loadedMap.tileSize - 1, (int)loadedMap.tileSize - 1);
+                }
+                else
+                {
+                    screen.FillRectangle(tempTile.color, tempTile.location.X + 1, tempTile.location.Y + 1, (int)loadedMap.tileSize - 1, (int)loadedMap.tileSize - 1);
+                }
             }
 
 
