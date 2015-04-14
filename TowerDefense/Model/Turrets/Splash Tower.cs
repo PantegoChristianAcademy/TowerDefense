@@ -11,7 +11,7 @@ namespace TowerDefense.Model.Turrets
     {
         public Splash_Tower()
         {
-            towerImage = Image.FromFile("Media\\Tower\\SplashTowers\\Splash1.bmp");
+            towerImage = (Bitmap)Image.FromFile("Media\\Tower\\SplashTowers\\Splash1.bmp");
             Damage = 25;
             Firerate = 1;
             Range = 15;

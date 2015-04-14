@@ -12,7 +12,7 @@ namespace TowerDefense.Model.Turrets
     {
         public Slowing_tower()
         {
-            towerImage = Image.FromFile("Media\\Tower\\SlowTowers\\Slow.bmp");
+            towerImage = (Bitmap)Image.FromFile("Media\\Tower\\SlowTowers\\Slow.bmp");
             Damage = 0;
             Firerate = 0.5f;
             Range = 9;

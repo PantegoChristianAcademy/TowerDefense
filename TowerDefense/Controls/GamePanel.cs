@@ -110,6 +110,7 @@ namespace TowerDefense.Controls
 
         public void AddTowerToListOfTowers(Model.Turrets.Base_Tower tower)
         {
+            tower.LoadImage();
             listOfTowers.Add(tower);
         }
     }

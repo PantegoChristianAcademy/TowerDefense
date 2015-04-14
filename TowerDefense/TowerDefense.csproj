@@ -105,6 +105,7 @@
     </Compile>
     <Compile Include="Model\Maps\Map.cs" />
     <Compile Include="Model\Maps\Tile.cs" />
+    <Compile Include="Model\Particles\BaseParticle.cs" />
     <Compile Include="Model\Turrets\Base Tower.cs" />
     <Compile Include="Model\Turrets\Basic Tower.cs" />
     <Compile Include="Model\Turrets\DoT Tower.cs" />
@@ -152,12 +153,45 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Maps\Easy\" />
-    <Folder Include="Maps\Hard\" />
-    <Folder Include="Maps\Normal\" />
     <Folder Include="Media\Maps\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Maps\Easy\Easy 1%24%24%24###%24%24%24.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\Hard\supah%24%24%24###%24%24%24.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\Hard\supah.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\Hard\PCA%24%24%24###%24%24%24.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\Hard\PCA.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\Normal\illuminati%24%24%24###%24%24%24.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\Normal\illuminati.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\Normal\normal 1%24%24%24###%24%24%24.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\Normal\normal 1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\Easy\Easy 1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\Normal\normal 3%24%24%24###%24%24%24.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\Normal\normal 3.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Media\Enemies\LordCalvin.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

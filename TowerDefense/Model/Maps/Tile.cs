@@ -32,6 +32,7 @@ namespace TowerDefense
         public char shortIdentity;
         public int GridXLoc;
         public int GridYLoc;
+        public Model.Turrets.Base_Tower occupiedTower = null; 
         #endregion
 
         public Tile(int xLoc, int yLoc, TileIdentity desiredIdentity, int xGrid, int yGrid)

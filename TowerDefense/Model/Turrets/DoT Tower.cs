@@ -11,7 +11,7 @@ namespace TowerDefense.Model.Turrets
     {
         public DoT_Tower()
         {
-            towerImage = Image.FromFile("Media\\Tower\\DoTTowers\\DoT.bmp");
+            towerImage = (Bitmap)Image.FromFile("Media\\Tower\\DoTTowers\\DoT.bmp");
             Damage = 10;
             Firerate = 2;
             Range = 6;
