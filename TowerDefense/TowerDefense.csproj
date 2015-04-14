@@ -195,24 +195,42 @@
     <Content Include="Media\Enemies\LordCalvin.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Resource Include="Media\Tower\SplashTowers\Splash1.bmp" />
-    <Content Include="Media\Particles\Explosion.png" />
-    <Content Include="Media\Particles\Fire effect.png" />
-    <Content Include="Media\Particles\Fire.png" />
-    <Content Include="Media\Particles\Freeze projectile.png" />
-    <Content Include="Media\Particles\Missle Projectile.png" />
-    <Content Include="Media\Particles\New bullet.png" />
-    <Content Include="Media\Tower\SplashTowers\Splash2.bmp" />
-    <Content Include="Media\Tower\SplashTowers\Splash3.bmp" />
-    <Resource Include="Media\Tower\BasicTowers\Turret.bmp" />
-    <Content Include="Media\Tower\BasicTowers\Turret2.bmp" />
-    <Content Include="Media\Tower\BasicTowers\Turret3.bmp" />
-    <Resource Include="Media\Tower\SlowTowers\Slow.bmp" />
-    <Resource Include="Media\Tower\DoTTowers\DoT.bmp" />
-    <Content Include="Media\Tower\DoTTowers\DoT2.bmp" />
-    <Content Include="Media\Tower\DoTTowers\DoT3.bmp" />
-    <Content Include="Media\Tower\SlowTowers\slow2.bmp" />
-    <Content Include="Media\Tower\SlowTowers\slow3.bmp" />
+    <Content Include="Media\Tower\SplashTowers\Splash1.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\Tower\SplashTowers\Splash2.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\Tower\SplashTowers\Splash3.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\Tower\BasicTowers\Turret.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\Tower\BasicTowers\Turret2.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\Tower\BasicTowers\Turret3.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\Tower\SlowTowers\Slow.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\Tower\DoTTowers\DoT.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\Tower\DoTTowers\DoT2.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\Tower\DoTTowers\DoT3.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\Tower\SlowTowers\slow2.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\Tower\SlowTowers\slow3.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\DoT1.bmp" />
     <None Include="Resources\DoT.bmp" />
     <None Include="Resources\Splash1.bmp" />

@@ -9,6 +9,8 @@ namespace TowerDefense.Model.Turrets
 {
     public abstract class Base_Tower
     {
+        public Bitmap towerImage;
+
         public Enemies.Enemy selectTarget(List<Enemies.Enemy> LS, Map map)
         {
             Dictionary<Point, Enemies.Enemy> Dict = new Dictionary<Point, Enemies.Enemy>();
@@ -41,6 +43,10 @@ namespace TowerDefense.Model.Turrets
            return null;
         }
 
+        public void LoadImage()
+        {
+            towerImage.MakeTransparent(Color.FromArgb(255, 174, 201));
+        }
 
         public int Damage;
         // How much damage the turret does

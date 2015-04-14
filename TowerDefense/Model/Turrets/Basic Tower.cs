@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace TowerDefense.Model.Turrets
 {
@@ -10,6 +11,7 @@ namespace TowerDefense.Model.Turrets
     {
         public Basic_Tower()
         {
+            towerImage = (Bitmap)Image.FromFile("Media\\Tower\\BasicTowers\\Turret.bmp");
            Damage = 10;
            Firerate = 2;
            Range = 6;

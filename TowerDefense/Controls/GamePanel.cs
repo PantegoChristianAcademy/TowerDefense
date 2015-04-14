@@ -11,11 +11,11 @@ namespace TowerDefense.Controls
 {
     public class GamePanel : Panel
     {
-        Map loadedMap;
+        public Map loadedMap;
         TileIdentity[,] loadedMapGrid;
         Timer timer;
         List<Model.Enemies.Enemy> listOfEnemies = new List<Model.Enemies.Enemy>();
-         Queue<Model.Enemies.Enemy> enemyQueue = new Queue<Model.Enemies.Enemy>();
+        Queue<Model.Enemies.Enemy> enemyQueue = new Queue<Model.Enemies.Enemy>();
         List<Model.Turrets.Base_Tower> listOfTowers = new List<Model.Turrets.Base_Tower>();
         int timeElapsedSinceRoundStart = 0;
         int spawnIntervalinMS = 400;
@@ -50,7 +50,7 @@ namespace TowerDefense.Controls
         {
             try
             {
-                TileClick((int)(e.X / loadedMap.tileSize), (int)(e.Y / loadedMap.tileSize));
+                TileClick((int)(e.X / loadedMap.tileSize), (int)(e.Y / loadedMap.tileSize)-1);
             }
             catch { }
         }
@@ -94,7 +94,24 @@ namespace TowerDefense.Controls
                 screen.FillRectangle(tempTile.color, tempTile.location.X + 1, tempTile.location.Y + 1, (int)loadedMap.tileSize - 1, (int)loadedMap.tileSize - 1);
             }
 
-            foreach (Model.Enemies.Enemy tempEnemy in listOfEnemies) screen.DrawImage(tempEnemy.enemyImage, tempEnemy.x, tempEnemy.y, (int)loadedMap.tileSize, (int)loadedMap.tileSize);
+
+            foreach (Model.Enemies.Enemy tempEnemy in listOfEnemies)
+            {
+                screen.DrawImage(tempEnemy.enemyImage, tempEnemy.x, tempEnemy.y, (int)loadedMap.tileSize, (int)loadedMap.tileSize);
+            }
+
+            foreach (Model.Turrets.Base_Tower tempTower in listOfTowers) screen.DrawImage(tempTower.towerImage, tempTower.PosX, tempTower.PosY, (int)loadedMap.tileSize, (int)loadedMap.tileSize);
+        }
+
+        public Tile GetClickedTile(int x, int y)
+        {
+            return Tile.DetermineClickedTile(x, y, loadedMap);
+        }
+
+        public void AddTowerToListOfTowers(Model.Turrets.Base_Tower tower)
+        {
+            tower.LoadImage();
+            listOfTowers.Add(tower);
         }
     }
 }

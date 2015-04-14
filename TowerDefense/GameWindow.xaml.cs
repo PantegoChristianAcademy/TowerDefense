@@ -22,6 +22,8 @@ namespace TowerDefense
     /// </summary>
     public partial class GameWindow : MahApps.Metro.Controls.MetroWindow
     {
+        public Model.Turrets.Base_Tower ShopTower = null;
+
         // ... { GLOBAL HOOK }
         [DllImport("user32.dll")]
         static extern IntPtr SetWindowsHookEx(int idHook, LowLevelKeyboardProc callback, IntPtr hInstance, uint threadId);
@@ -130,7 +132,20 @@ namespace TowerDefense
 
         void Game_TileClick(int x, int y)
         {
+            if (ShopTower != null)
+            {
+                Tile clickedTile = Game.loadedMap.MapGrid[x, y];
+                if(clickedTile.identity == TileIdentity.Unoccupied)
+                {
+                    ShopTower.PosX = clickedTile.location.X;
+                    ShopTower.PosY = clickedTile.location.Y;
+                    Game.AddTowerToListOfTowers(ShopTower);
 
+                    clickedTile.identity = TileIdentity.Tower;
+                    clickedTile.occupiedTower = ShopTower;
+                    ShopTower = null;
+                }
+            }
         }
 
         private void Window_Resized(object sender, SizeChangedEventArgs e)
