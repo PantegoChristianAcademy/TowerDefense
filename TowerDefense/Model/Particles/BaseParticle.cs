@@ -46,6 +46,8 @@ namespace TowerDefense.Model.Particles
             particle.angle = Math.Atan2(ty - particle.posY, tx - particle.posX) * -1;
             particle.vX = particle.speed * Math.Cos(particle.angle);
             particle.vY = particle.speed * Math.Sign(particle.angle);
+
+            return particle;
         }
     }
 }
