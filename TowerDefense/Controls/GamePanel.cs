@@ -108,7 +108,7 @@ namespace TowerDefense.Controls
                             if (selectedEnemy.Health <= 0)
                             {
                                 listOfEnemies.Remove(selectedEnemy);
-                                GameWindow.balance += 100;
+                                GameWindow.balance += selectedEnemy.Goldgiven;
                             }
 
                             tower.timeSinceLastShot += (int)tower.Firerate * 1000;
