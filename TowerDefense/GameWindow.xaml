@@ -35,8 +35,8 @@
     
       <Grid Grid.Column="0" Margin="10">
         <Grid.RowDefinitions>
-          <RowDefinition Height="1*"/>
-          <RowDefinition Height="2*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row ="0">
           <TextBlock FontSize="16">
@@ -116,9 +116,8 @@
       </Grid>
 
       <Grid Grid.Column="1" IsHitTestVisible="True" >
-        <WindowsFormsHost Opacity="0" IsHitTestVisible="False" Background="Black" SizeChanged="Window_Resized" Name="winFormHost" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-      
-      </Grid>
+            <WindowsFormsHost Opacity="0" IsHitTestVisible="False" Background="Black" SizeChanged="Window_Resized" Name="winFormHost" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        </Grid>
       
     </Grid>
 </metro:MetroWindow>
