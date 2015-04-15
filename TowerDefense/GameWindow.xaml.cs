@@ -23,6 +23,7 @@ namespace TowerDefense
     public partial class GameWindow : MahApps.Metro.Controls.MetroWindow
     {
         public Model.Turrets.Base_Tower ShopTower = null;
+        public static int balance = 1000;
 
         // ... { GLOBAL HOOK }
         [DllImport("user32.dll")]
@@ -131,7 +132,7 @@ namespace TowerDefense
 
         void Game_TileClick(int x, int y)
         {
-            if (ShopTower != null)
+            if (ShopTower != null && balance - ShopTower.Cost > 0)
             {
                 Tile clickedTile = Game.loadedMap.MapGrid[x, y];
                 if(clickedTile.identity == TileIdentity.Unoccupied)
@@ -142,6 +143,7 @@ namespace TowerDefense
 
                     clickedTile.identity = TileIdentity.Tower;
                     clickedTile.occupiedTower = ShopTower;
+                    balance -= ShopTower.Cost;
                     ShopTower = null;
                 }
             }

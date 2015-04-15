@@ -52,11 +52,12 @@ namespace TowerDefense.Model.Turrets
         // How much damage the turret does
         public float Firerate;
         // how many shots per second
+        public int timeSinceLastShot = 0;
         public int Range;
         // radius from turret in 
         public int Cost;
-        // How much gold/money/whatever a turret costs
         public int TotalCost;
+        // How much gold/money/whatever a turret costs
         public int SlowPercent;
         // How much each shot slows an enemy up to a cap
         public int DoT;

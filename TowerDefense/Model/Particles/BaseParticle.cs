@@ -3,11 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace TowerDefense.Model.Particles
 {
     public  class BaseParticle
     {
+        private System.Drawing.Bitmap img;
+        public System.Drawing.Bitmap Img
+        {
+            get
+            {
+                if (img == null) img = (Bitmap)Image.FromFile(file);
+                return img;
+            }
+        }
         public int posX;
         public int posY;
         public double vX;

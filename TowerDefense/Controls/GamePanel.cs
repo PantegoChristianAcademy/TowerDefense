@@ -15,6 +15,7 @@ namespace TowerDefense.Controls
         TileIdentity[,] loadedMapGrid;
         Timer timer;
         List<Model.Enemies.Enemy> listOfEnemies = new List<Model.Enemies.Enemy>();
+        List<Model.Particles.BaseParticle> particles = new List<Model.Particles.BaseParticle>();
         Queue<Model.Enemies.Enemy> enemyQueue = new Queue<Model.Enemies.Enemy>();
         List<Model.Turrets.Base_Tower> listOfTowers = new List<Model.Turrets.Base_Tower>();
         int timeElapsedSinceRoundStart = 0;
@@ -57,6 +58,7 @@ namespace TowerDefense.Controls
 
         void timer_Tick(object sender, EventArgs e)
         {
+#region SpawnEnemy
             if (timeElapsedSinceRoundStart >= spawnIntervalinMS && enemyQueue.Count >= 1)
             {
                 timeElapsedSinceRoundStart = 0;
@@ -64,7 +66,9 @@ namespace TowerDefense.Controls
                 listOfEnemies.Add(newEnemy);
                 newEnemy.SetInitialSpawnLoc(loadedMap.Path);
             }
+#endregion
 
+#region MoveEnemies
             foreach (Model.Enemies.Enemy tempEnemy in listOfEnemies) tempEnemy.Move(loadedMap.Path);
             for (int i = 0; i < listOfEnemies.Count; i++ )
             {
@@ -74,8 +78,42 @@ namespace TowerDefense.Controls
                     i--;
                 }
             }
+#endregion
 
-                timeElapsedSinceRoundStart += timer.Interval;
+            foreach (TowerDefense.Model.Turrets.Base_Tower tower in listOfTowers)
+            {
+                if (tower.timeSinceLastShot > 0) tower.timeSinceLastShot -= 20;
+
+                else if (tower.timeSinceLastShot <= 0)
+                {
+                    tower.timeSinceLastShot = 0;
+
+
+                    //Model.Enemies.Enemy selectedEnemy = tower.selectTarget(listOfEnemies, loadedMap);
+                    try
+                    {
+                        Model.Enemies.Enemy selectedEnemy = listOfEnemies[0];
+
+                        if (selectedEnemy != null)
+                        {
+                            Model.Particles.BaseParticle particle = Model.Particles.BaseParticle.CreateParticle(tower, selectedEnemy, loadedMap);
+                            particles.Add(particle);
+                            //doParticle
+                            selectedEnemy.Health -= tower.Damage;
+                            if (selectedEnemy.Health <= 0)
+                            {
+                                listOfEnemies.Remove(selectedEnemy);
+                                GameWindow.balance += 100;
+                            }
+
+                            tower.timeSinceLastShot += (int)tower.Firerate * 1000;
+                        }
+                    }
+
+                    catch { }
+                }
+            }
+            timeElapsedSinceRoundStart += timer.Interval;
             this.Invalidate();
         }
 
@@ -101,6 +139,8 @@ namespace TowerDefense.Controls
             }
 
             foreach (Model.Turrets.Base_Tower tempTower in listOfTowers) screen.DrawImage(tempTower.towerImage, tempTower.PosX, tempTower.PosY, (int)loadedMap.tileSize, (int)loadedMap.tileSize);
+
+            foreach (Model.Particles.BaseParticle particle in particles) screen.DrawImage(particle.Img, new Point(particle.posX, particle.posY));
         }
 
         public Tile GetClickedTile(int x, int y)
