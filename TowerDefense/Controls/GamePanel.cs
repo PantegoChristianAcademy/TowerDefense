@@ -7,6 +7,8 @@ using System.Windows.Forms;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
+using System.Runtime.InteropServices;
+
 namespace TowerDefense.Controls
 {
     public class GamePanel : Panel
@@ -164,6 +166,20 @@ namespace TowerDefense.Controls
         {
             tower.LoadImage();
             listOfTowers.Add(tower);
+        }
+
+        public bool ManagePauseState()
+        {
+            if (timer.Enabled == true)
+            {
+                timer.Enabled = false;
+                return true;
+            }
+            else
+            {
+                timer.Enabled = true;
+                return false;
+            }
         }
     }
 }
