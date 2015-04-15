@@ -83,6 +83,7 @@ namespace TowerDefense
         {
             InitializeComponent();
             _window = this;
+            Visibility
         }
 
         public void KeyPress(int code)

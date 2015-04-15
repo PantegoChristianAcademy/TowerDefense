@@ -85,12 +85,15 @@ namespace TowerDefense.Controls
 
             foreach (TowerDefense.Model.Turrets.Base_Tower tower in listOfTowers)
             {
-                if (tower.timeSinceLastShot > 0) tower.timeSinceLastShot -= 20;
+                if (tower.timeSinceLastShot > 0)
+                {
+                    tower.timeSinceLastShot -= 20;
+                    tower.LoadImage();
+                }
 
                 else if (tower.timeSinceLastShot <= 0)
                 {
                     tower.timeSinceLastShot = 0;
-
 
                     //Model.Enemies.Enemy selectedEnemy = tower.selectTarget(listOfEnemies, loadedMap);
                     try
@@ -101,7 +104,6 @@ namespace TowerDefense.Controls
                         {
                             //Model.Particles.BaseParticle particle = Model.Particles.BaseParticle.CreateParticle(tower, selectedEnemy, loadedMap);
                             //particles.Add(particle);
-                            //doParticle
                             selectedEnemy.Health -= tower.Damage;
                             if (selectedEnemy.Health <= 0)
                             {
@@ -164,6 +166,7 @@ namespace TowerDefense.Controls
         {
             tower.LoadImage();
             listOfTowers.Add(tower);
+            GameWindow.balance -= tower.Cost;
         }
     }
 }
