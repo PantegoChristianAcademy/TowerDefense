@@ -38,21 +38,6 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row ="0">
-                <TextBlock FontSize="16">
-            Round Number:
-            <Run Name="roundTxt" />
-                </TextBlock>
-                <TextBlock FontSize="16" Margin="0,5,0,5">
-            Round Countdown:
-            <Run Name="countdownTxt"/>
-                </TextBlock>
-                <TextBlock FontSize="16">
-            Lives Remaining:
-            <Run Name="livesTxt"/>
-                </TextBlock>
-
-            </StackPanel>
             <Grid Grid.Row ="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -113,10 +98,12 @@
             </Run>
                 </TextBlock>
             </Grid>
+            <TextBox x:Name="RoundTB" HorizontalAlignment="Right" Height="36" Margin="0,0,43,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72"/>
         </Grid>
 
         <Grid Grid.Column="1" IsHitTestVisible="True" >
             <WindowsFormsHost Opacity="0" IsHitTestVisible="False" Background="Black" SizeChanged="Window_Resized" Name="winFormHost" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <Label x:Name="roundLabel" Content="Round #" HorizontalAlignment="Left" Margin="-203,14,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.513,0.551" Height="28" Width="61" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}"/>
         </Grid>
         <TextBox x:Name="PauseAlert" HorizontalAlignment="Left" Height="44" Margin="26,152,0,0" TextWrapping="Wrap" Text="Game Paused" VerticalAlignment="Top" Width="161" FontSize="24"/>
 

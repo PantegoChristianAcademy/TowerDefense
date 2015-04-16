@@ -13,6 +13,8 @@ namespace TowerDefense.Controls
 {
     public class GamePanel : Panel
     {
+        static short roundNum = 0;
+
         public Map loadedMap;
         TileIdentity[,] loadedMapGrid;
         Timer timer;
@@ -22,7 +24,6 @@ namespace TowerDefense.Controls
         List<Model.Turrets.Base_Tower> listOfTowers = new List<Model.Turrets.Base_Tower>();
         int timeElapsedSinceRoundStart = 0;
         int spawnIntervalinMS = 400;
-        short roundNum = 0;
 
         public int selectedX = 0;
         public int selectedY = 0;

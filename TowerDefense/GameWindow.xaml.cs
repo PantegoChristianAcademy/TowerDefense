@@ -85,6 +85,10 @@ namespace TowerDefense
             InitializeComponent();
             _window = this;
             PauseAlert.Visibility = Visibility.Hidden;
+
+            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 20);
+            dispatcherTimer.Start();
         }
 
         public void KeyPress(int code)
@@ -215,6 +219,12 @@ namespace TowerDefense
                     ShopTower = new Model.Turrets.Splash_Tower();
                     break;
             }
+        }
+
+        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer(); 
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            
         }
     }
 }
