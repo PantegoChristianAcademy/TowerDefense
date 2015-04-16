@@ -154,7 +154,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Media\Maps\" />
-    <Folder Include="Media\Particle\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Maps\Easy\Easy 1%24%24%24###%24%24%24.txt">
@@ -195,6 +194,21 @@
     </Content>
     <Content Include="Media\Enemies\LordCalvin.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\Icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\Particle\Bullet.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\Particle\Fire.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\Particle\Freeze.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Media\Particle\Missile.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Media\Tower\SplashTowers\Splash1.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

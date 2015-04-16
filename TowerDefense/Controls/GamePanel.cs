@@ -24,8 +24,8 @@ namespace TowerDefense.Controls
         int spawnIntervalinMS = 400;
         int roundNum = 0;
 
-        public int selectedX = -1;
-        public int selectedY = -1;
+        public int selectedX = 0;
+        public int selectedY = 0;
 
         public delegate void TileClickHandler(int x, int y);
         public event TileClickHandler TileClick;
@@ -87,6 +87,24 @@ namespace TowerDefense.Controls
 
             foreach (TowerDefense.Model.Turrets.Base_Tower tower in listOfTowers)
             {
+                    for (int i = 0; i < particles.Count; i++)
+                    {
+                        particles[i].MoveParticle(loadedMap);
+
+                        if (Math.Abs(particles[i].posX - particles[i].Target.x) <= loadedMap.tileSize / 2 && Math.Abs(particles[i].posY - particles[i].Target.y) <= loadedMap.tileSize / 2)
+                        {
+                            particles[i].Target.Health -= particles[i].damage;
+                            particles.RemoveAt(i);
+                            i--;
+                        }
+
+                        else if (!listOfEnemies.Contains(particles[i].Target))
+                        {
+                            particles.Remove(particles[i]);
+                            i--;
+                        }
+                    }
+
                 if (tower.timeSinceLastShot > 0)
                 {
                     tower.timeSinceLastShot -= 20;
@@ -104,16 +122,15 @@ namespace TowerDefense.Controls
 
                         if (selectedEnemy != null)
                         {
-                            //Model.Particles.BaseParticle particle = Model.Particles.BaseParticle.CreateParticle(tower, selectedEnemy, loadedMap);
-                            //particles.Add(particle);
-                            selectedEnemy.Health -= tower.Damage;
+                            Model.Particles.BaseParticle particle = new Model.Particles.BaseParticle(tower, selectedEnemy, loadedMap);
+                            particles.Add(particle);
                             if (selectedEnemy.Health <= 0)
                             {
                                 listOfEnemies.Remove(selectedEnemy);
                                 GameWindow.balance += selectedEnemy.Goldgiven;
                             }
 
-                            tower.timeSinceLastShot += (int)tower.Firerate * 1000;
+                            tower.timeSinceLastShot += tower.Firerate * 1000;
                         }
                     }
 
@@ -156,7 +173,7 @@ namespace TowerDefense.Controls
 
             foreach (Model.Turrets.Base_Tower tempTower in listOfTowers) screen.DrawImage(tempTower.towerImage, tempTower.PosX, tempTower.PosY, (int)loadedMap.tileSize, (int)loadedMap.tileSize);
 
-            //foreach (Model.Particles.BaseParticle particle in particles) screen.DrawImage(particle.Img, new Point(particle.posX, particle.posY));
+            foreach (Model.Particles.BaseParticle particle in particles) screen.DrawImage(particle.Img, new Point(particle.posX, particle.posY));
         }
 
         public Tile GetClickedTile(int x, int y)
