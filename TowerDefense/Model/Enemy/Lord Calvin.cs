@@ -13,9 +13,9 @@ namespace TowerDefense.Model.Enemies
        {
            Imagefile = "Media\\Enemies\\LordCalvin.bmp";
            LoadImage();
-           Health = 955;
-           Speed = 5;
-           Goldgiven = 100;
+           Health = 650;
+           Speed = 1;
+           Goldgiven = 250;
            LifeValue = 15;
            //enemy not in use right now because this is the boss and the wave has not been set yet
        }

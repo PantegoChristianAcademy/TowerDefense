@@ -13,9 +13,9 @@ namespace TowerDefense.Model.Enemies
       {
           Imagefile = "Media\\Enemies\\oh yeah mr krabs.bmp";
           LoadImage();
-          Health = 155;
-          Speed = 14;
-          Goldgiven = 25;
+          Health = 90;
+          Speed = 2;
+          Goldgiven = 45;
           LifeValue = 3;
       }
     }
