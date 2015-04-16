@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -12,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Drawing;
 
 using System.Runtime.InteropServices;
 
@@ -77,12 +77,14 @@ namespace TowerDefense
             {
                 return winFormHost.Child as Controls.GamePanel;
             }
+
         }
 
         public GameWindow()
         {
             InitializeComponent();
             _window = this;
+            PauseAlert.Visibility = Visibility.Hidden;
         }
 
         public void KeyPress(int code)
@@ -90,11 +92,23 @@ namespace TowerDefense
             switch (code)
             {
                 case 80:
-                    MessageBox.Show("You pressed pause");//pause w/ p button
+                    //pause w/ p button
+                    
+                    bool shouldBeVisible= Game.ManagePauseState();
+                    if (shouldBeVisible == true)
+                    {
+                        PauseAlert.Visibility = Visibility.Visible;
+                        this.IsEnabled = false;
+                    }
+                    else
+                    {
+                        PauseAlert.Visibility = Visibility.Hidden;
+                        this.IsEnabled = true;
+                    }
                     break;
-                case 27:
-                  MessageBox.Show("You pressed pause with esc");  //Pause Game w/esc
-                    break;
+             //   case 27:
+                 //Pause Game w/esc
+               //     break;
                 case 38:
                     //highlight object w/ up arrow
                   Game.selectedY--;
@@ -112,7 +126,7 @@ namespace TowerDefense
                   Game.selectedY++;
                     break;
                 case 13:
-                  MessageBox.Show("You pressed enter.");  //confirm highlighted object w/ enter
+                    //confirm highlighted object w/ enter
                     break;
                 case 49:
                     ShopTower = new Model.Turrets.Basic_Tower();

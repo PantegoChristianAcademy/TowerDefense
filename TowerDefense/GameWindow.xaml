@@ -6,71 +6,71 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" Closing="Window_Exit"
              mc:Ignorable="d" Loaded="Window_Loaded"  Width="800" Height="600"
              d:DesignHeight="300" d:DesignWidth="300" WindowState="Maximized">
-  <metro:MetroWindow.Resources>
-    <ResourceDictionary>
-      <ResourceDictionary.MergedDictionaries>
-        
-        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Emerald.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDark.xaml" />
-      </ResourceDictionary.MergedDictionaries>
-    </ResourceDictionary>
-  </metro:MetroWindow.Resources>
-  
-  
-  
+    <metro:MetroWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Emerald.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDark.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </metro:MetroWindow.Resources>
+
+
+
     <Grid>
-      <Grid.Resources>
-        <Style TargetType="Image">
-          <Setter Property="Cursor" Value="Hand"/>
-        </Style> 
-        
-      </Grid.Resources>
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="1*" x:Name="uiPanelColumn" MinWidth ="215"/>
-        <ColumnDefinition Width="5*"/>
-      </Grid.ColumnDefinitions>
-    
-      <Grid Grid.Column="0" Margin="10">
-        <Grid.RowDefinitions>
+        <Grid.Resources>
+            <Style TargetType="Image">
+                <Setter Property="Cursor" Value="Hand"/>
+            </Style>
+
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" x:Name="uiPanelColumn" MinWidth ="215"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" Margin="10">
+            <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="2*"/>
-        </Grid.RowDefinitions>
-        <StackPanel Grid.Row ="0">
-          <TextBlock FontSize="16">
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row ="0">
+                <TextBlock FontSize="16">
             Round Number:
             <Run Name="roundTxt" />
-          </TextBlock>
-          <TextBlock FontSize="16" Margin="0,5,0,5">
+                </TextBlock>
+                <TextBlock FontSize="16" Margin="0,5,0,5">
             Round Countdown:
             <Run Name="countdownTxt"/>
-          </TextBlock>
-          <TextBlock FontSize="16">
+                </TextBlock>
+                <TextBlock FontSize="16">
             Lives Remaining:
             <Run Name="livesTxt"/>
-          </TextBlock>
-          
-        </StackPanel>
-        <Grid Grid.Row ="1">
-          <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-          </Grid.RowDefinitions>
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition/>
-          </Grid.ColumnDefinitions>
-          <TextBlock FontSize="24" Grid.ColumnSpan="2" Margin="0, 0, 0, 10">
+                </TextBlock>
+
+            </StackPanel>
+            <Grid Grid.Row ="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock FontSize="24" Grid.ColumnSpan="2" Margin="0, 0, 0, 10">
             Shop:
-          </TextBlock>
-          
-          <Image x:Name="BasicTowerImage" MouseDown="Buy_Tower" Tag="basic" Width="64" Height="64" Grid.Row="1" Source="pack://application:,,,/Media/Tower/BasicTowers/Turret.bmp"/>
-          <TextBlock Margin="5, 0, 0, 0" Grid.Row="1" Grid.Column="1">
+                </TextBlock>
+
+                <Image x:Name="BasicTowerImage" MouseDown="Buy_Tower" Tag="basic" Width="64" Height="64" Grid.Row="1" Source="pack://application:,,,/Media/Tower/BasicTowers/Turret.bmp"/>
+                <TextBlock Margin="5, 0, 0, 0" Grid.Row="1" Grid.Column="1">
             <Run FontWeight="Bold" FontSize="18">
               Basic Tower:
             </Run>
@@ -78,10 +78,10 @@
             <Run FontSize="14">
               Do later
             </Run>
-          </TextBlock>
+                </TextBlock>
 
-          <Image x:Name="FreezeTowerImage" MouseDown="Buy_Tower" Tag="slow" Margin="0, 5, 0, 5" Width="64" Height="64" Grid.Row="2" Source="pack://application:,,,/Media/Tower/SlowTowers/Slow.bmp"/>
-          <TextBlock Margin="5, 0, 0, 0" Grid.Row="2" Grid.Column="1">
+                <Image x:Name="FreezeTowerImage" MouseDown="Buy_Tower" Tag="slow" Margin="0, 5, 0, 5" Width="64" Height="64" Grid.Row="2" Source="pack://application:,,,/Media/Tower/SlowTowers/Slow.bmp"/>
+                <TextBlock Margin="5, 0, 0, 0" Grid.Row="2" Grid.Column="1">
             <Run FontWeight="Bold" FontSize="18">
               Freeze Tower:
             </Run>
@@ -89,10 +89,10 @@
             <Run FontSize="14">
               Do later
             </Run>
-          </TextBlock>
+                </TextBlock>
 
-          <Image x:Name="FlameTowerImage" MouseDown="Buy_Tower" Tag="dot" Margin="0, 0, 0, 5" Width="64" Height="64" Grid.Row="3" Source="pack://application:,,,/Media/Tower/DoTTowers/DoT.bmp"/>
-          <TextBlock Margin="5, 0, 0, 0" Grid.Row="3" Grid.Column="1">
+                <Image x:Name="FlameTowerImage" MouseDown="Buy_Tower" Tag="dot" Margin="0, 0, 0, 5" Width="64" Height="64" Grid.Row="3" Source="pack://application:,,,/Media/Tower/DoTTowers/DoT.bmp"/>
+                <TextBlock Margin="5, 0, 0, 0" Grid.Row="3" Grid.Column="1">
             <Run FontWeight="Bold" FontSize="18">
               Flame Tower:
             </Run>
@@ -100,10 +100,10 @@
             <Run FontSize="14">
               Do later
             </Run>
-          </TextBlock>
-          
-          <Image x:Name="MissileTowerImage" MouseDown="Buy_Tower" Tag="splash" Width="64" Height="64" Grid.Row="4" Source="pack://application:,,,/Media/Tower/SplashTowers/Splash1.bmp"/>
-          <TextBlock Margin="5, 0, 0, 0" Grid.Row="4" Grid.Column="1">
+                </TextBlock>
+
+                <Image x:Name="MissileTowerImage" MouseDown="Buy_Tower" Tag="splash" Width="64" Height="64" Grid.Row="4" Source="pack://application:,,,/Media/Tower/SplashTowers/Splash1.bmp"/>
+                <TextBlock Margin="5, 0, 0, 0" Grid.Row="4" Grid.Column="1">
             <Run FontWeight="Bold" FontSize="18">
               Missile Tower:
             </Run>
@@ -111,13 +111,14 @@
             <Run FontSize="14">
               Do later
             </Run>
-          </TextBlock>
+                </TextBlock>
+            </Grid>
         </Grid>
-      </Grid>
 
-      <Grid Grid.Column="1" IsHitTestVisible="True" >
+        <Grid Grid.Column="1" IsHitTestVisible="True" >
             <WindowsFormsHost Opacity="0" IsHitTestVisible="False" Background="Black" SizeChanged="Window_Resized" Name="winFormHost" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </Grid>
-      
+        <TextBox x:Name="PauseAlert" HorizontalAlignment="Left" Height="44" Margin="26,152,0,0" TextWrapping="Wrap" Text="Game Paused" VerticalAlignment="Top" Width="161" FontSize="24"/>
+
     </Grid>
 </metro:MetroWindow>

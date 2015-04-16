@@ -12,8 +12,8 @@ namespace TowerDefense.Model.Turrets
         public Basic_Tower()
         {
             towerImage = (Bitmap)Image.FromFile("Media\\Tower\\BasicTowers\\Turret.bmp");
-           Damage = 10;
-           Firerate = 2;
+           Damage = 50;
+           Firerate = .5F;
            Range = 6;
            Cost = 100;
            ResellPercentage = 60;

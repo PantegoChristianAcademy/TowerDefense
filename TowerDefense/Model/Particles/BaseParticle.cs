@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using TowerDefense.Model.Turrets;
 
 namespace TowerDefense.Model.Particles
 {
@@ -14,7 +15,11 @@ namespace TowerDefense.Model.Particles
         {
             get
             {
-                if (img == null) img = (Bitmap)Image.FromFile(file);
+                if (img == null)
+                {
+                    img = (Bitmap)Image.FromFile(file);
+                    img.MakeTransparent(Color.FromArgb(255, 255, 255));
+                }
                 return img;
             }
         }
@@ -25,39 +30,55 @@ namespace TowerDefense.Model.Particles
         public double angle;
         public string file;
         public int speed;
-        public static BaseParticle CreateParticle(Model.Turrets.Base_Tower Tower, Model.Enemies.Enemy Target, Map Tile)
+        public int damage;
+        public Model.Enemies.Enemy Target;
+
+        public BaseParticle (Model.Turrets.Base_Tower Tower, Model.Enemies.Enemy target, Map Tile)
         {
-            var particle = new BaseParticle();
-            if (Tower is Model.Turrets.Basic_Tower)
+            Target = target;
+            if (Tower is Basic_Tower)
             {
-                particle.speed = 2;
-                particle.file = "Media\\Particles\\New bullet.png";
+                speed = 10;
+                file = "Media\\Particle\\Bullet.png";
+                damage = new Basic_Tower().Damage;
             }
-            else if (Tower is Model.Turrets.DoT_Tower)
+            else if (Tower is DoT_Tower)
             {
-                particle.speed = 2;
-                particle.file = "Media\\Particles\\Fire.png";
+                speed = 8;
+                file = "Media\\Particle\\Fire.png";
+                damage = new DoT_Tower().Damage;
             }
-            else if (Tower is Model.Turrets.Slowing_tower)
+            else if (Tower is Slowing_tower)
             {
-                particle.speed = 2;
-                particle.file = "Media\\Particles\\Freeze projectile.png";
+                speed = 8;
+                file = "Media\\Particle\\Freeze.png";
+                damage = new Slowing_tower().Damage;
             }
-            else if (Tower is Model.Turrets.Splash_Tower)
+            else if (Tower is Splash_Tower)
             {
-                particle.speed = 2; 
-                particle.file = "Media\\Particles\\Missle Porjectile.png";
+                speed = 5; 
+                file = "Media\\Particle\\Missile.png";
+                damage = new Splash_Tower().Damage;
             }
 
-            particle.posX = (int)(Tower.PosX + Tile.tileSize / 2);
-            particle.posY = (int)(Tower.PosY + Tile.tileSize / 2);
+            posX = (int)(Tower.PosX + Tile.tileSize / 2);
+            posY = (int)(Tower.PosY + Tile.tileSize / 2);
             int ty = (int)(Target.y + Tile.tileSize / 2);
             int tx = (int)(Target.x + Tile.tileSize / 2);
-            particle.angle = Math.Atan2(ty - particle.posY, tx - particle.posX) * -1;
-            particle.vX = particle.speed * Math.Cos(particle.angle);
-            particle.vY = particle.speed * Math.Sign(particle.angle);
+            angle = Math.Atan2(ty - posY, tx - posX);
+            vX = speed * Math.Cos(angle);
+            vY = speed * Math.Sign(angle);
+        }
 
-            return particle;
+        public void MoveParticle(Map Tile)
+        {
+            int ty = (int)(Target.y + Tile.tileSize / 2);
+            int tx = (int)(Target.x + Tile.tileSize / 2);
+            angle = Math.Atan2(ty - posY, tx - posX);
+            vX = speed * Math.Cos(angle);
+            vY = speed * Math.Sign(angle);
+            posX += (int)vX;
+            posY += (int)vY;
         }
     }
 }
