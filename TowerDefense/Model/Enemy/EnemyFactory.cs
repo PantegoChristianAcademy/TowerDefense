@@ -88,12 +88,13 @@ namespace TowerDefense.Model.Enemy
 
         public static List<Enemies.Enemy> CreateWave1()
         {
-            List<Enemies.Enemy> enemies = new List<Enemies.Enemy>();
+          List<Enemies.Enemy> enemies = new List<Enemies.Enemy>();
             for (int x = 0; x <8; x++)
             {
                 enemies.Add(new Enemies.Sanic());
             }
-            return enemies;
+           
+                return enemies;
         }
 
         public static List<Enemies.Enemy> CreateWave2()
