@@ -159,6 +159,12 @@
     <Content Include="Maps\Easy\Easy 1%24%24%24###%24%24%24.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Maps\Easy\Fuf Fly%24%24%24###%24%24%24.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Maps\Easy\Fuf Fly.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Maps\Hard\supah%24%24%24###%24%24%24.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
