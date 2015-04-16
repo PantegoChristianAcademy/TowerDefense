@@ -118,7 +118,7 @@
         <Grid Grid.Column="1" IsHitTestVisible="True" >
             <WindowsFormsHost Opacity="0" IsHitTestVisible="False" Background="Black" SizeChanged="Window_Resized" Name="winFormHost" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </Grid>
-        <TextBox x:Name="PauseAlert" HorizontalAlignment="Left" Height="44" Margin="10,152,0,0" TextWrapping="Wrap" Text="Game Paused" VerticalAlignment="Top" Width="161" FontSize="24"/>
+        <TextBox x:Name="PauseAlert" HorizontalAlignment="Left" Height="44" Margin="26,152,0,0" TextWrapping="Wrap" Text="Game Paused" VerticalAlignment="Top" Width="161" FontSize="24"/>
 
     </Grid>
 </metro:MetroWindow>

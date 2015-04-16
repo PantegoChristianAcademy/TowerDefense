@@ -22,7 +22,7 @@ namespace TowerDefense.Controls
         List<Model.Turrets.Base_Tower> listOfTowers = new List<Model.Turrets.Base_Tower>();
         int timeElapsedSinceRoundStart = 0;
         int spawnIntervalinMS = 400;
-        int roundNum = 0;
+        short roundNum = 0;
 
         public int selectedX = 0;
         public int selectedY = 0;
@@ -48,9 +48,7 @@ namespace TowerDefense.Controls
 
             string mapPathLocation = mapLocation.Remove(mapLocation.Length - 4) + "$$$###$$$.txt";
             loadedMap.Path = FileCommands.ReadMapPathFile(loadedMap, mapPathLocation);
-
-            //supposed to go at beginning of each round
-            enemyQueue = new Queue<Model.Enemies.Enemy>(TowerDefense.Model.Enemy.EnemyFactory.GenerateWave(0, loadedMap.difficulty));        }
+        }
 
         void GamePanel_MouseDown(object sender, MouseEventArgs e)
         {
@@ -85,6 +83,7 @@ namespace TowerDefense.Controls
             }
 #endregion
 
+#region ManageTowers
             foreach (TowerDefense.Model.Turrets.Base_Tower tower in listOfTowers)
             {
                     for (int i = 0; i < particles.Count; i++)
@@ -137,6 +136,16 @@ namespace TowerDefense.Controls
                     catch { }
                 }
             }
+            #endregion
+
+            #region ManageRounds
+            if(enemyQueue.Count == 0)
+            {
+                roundNum++;
+                enemyQueue = new Queue<Model.Enemies.Enemy>(TowerDefense.Model.Enemy.EnemyFactory.GenerateWave(roundNum, loadedMap.difficulty));
+            }
+            #endregion
+
             timeElapsedSinceRoundStart += timer.Interval;
             this.Invalidate();
         }
