@@ -80,7 +80,16 @@ namespace TowerDefense.Model.Enemy
                     return CreateWave9();
                 case 10:
                     return CreateWave10();
-            
+                case 11:
+                    return CreateWave11();
+                case 12:
+                    return CreateWave12();
+                case 13:
+                    return CreateWave13();
+                case 14:
+                    return CreateWave14();
+                case 15:
+                    return CreateWave15();
             }
 
             return new List<Enemies.Enemy>();
@@ -89,17 +98,19 @@ namespace TowerDefense.Model.Enemy
         public static List<Enemies.Enemy> CreateWave1()
         {
           List<Enemies.Enemy> enemies = new List<Enemies.Enemy>();
+         
             for (int x = 0; x <8; x++)
             {
                 enemies.Add(new Enemies.Sanic());
             }
-           
+     
                 return enemies;
         }
 
         public static List<Enemies.Enemy> CreateWave2()
         {
             List<Enemies.Enemy> enemies = new List<Enemies.Enemy>();
+          
             for (int x = 0; x < 12; x++)
             {
                 enemies.Add(new Enemies.Sanic());       
@@ -110,18 +121,20 @@ namespace TowerDefense.Model.Enemy
         public static List<Enemies.Enemy> CreateWave3()
         {
             List<Enemies.Enemy> enemies = new List<Enemies.Enemy>();
+         
             for (int x = 0; x < 11; x++)
             {
                 enemies.Add(new Enemies.Sanic());
             }
             enemies.Add(new Enemies.Mr_Krabs());
-            enemies.Add(new Enemies.Mr_Krabs());
+           enemies.Add(new Enemies.Mr_Krabs());
             return enemies;
         }
 
         public static List<Enemies.Enemy> CreateWave4()
         {
             List<Enemies.Enemy> enemies = new List<Enemies.Enemy>();
+            
             for (int x = 0; x < 15; x++)
             {
                 enemies.Add(new Enemies.Sanic());
@@ -135,6 +148,7 @@ namespace TowerDefense.Model.Enemy
         public static List<Enemies.Enemy> CreateWave5()
         {
             List<Enemies.Enemy> enemies = new List<Enemies.Enemy>();
+       
             for (int x = 0; x < 18; x++)
             {
                 enemies.Add(new Enemies.Sanic());
@@ -149,6 +163,7 @@ namespace TowerDefense.Model.Enemy
         public static List<Enemies.Enemy> CreateWave6()
         {
             List<Enemies.Enemy> enemies = new List<Enemies.Enemy>();
+        
             for (int x = 0; x < 20; x++)
             {
                 enemies.Add(new Enemies.Sanic());
@@ -163,6 +178,7 @@ namespace TowerDefense.Model.Enemy
         public static List<Enemies.Enemy> CreateWave7()
         {
             List<Enemies.Enemy> enemies = new List<Enemies.Enemy>();
+           
             for (int x = 0; x < 24; x++)
             {
                 enemies.Add(new Enemies.Sanic());
@@ -181,6 +197,7 @@ namespace TowerDefense.Model.Enemy
         public static List<Enemies.Enemy> CreateWave8()
         {
             List<Enemies.Enemy> enemies = new List<Enemies.Enemy>();
+           
             for (int x = 0; x < 27; x++)
             {
                 enemies.Add(new Enemies.Sanic());
@@ -200,6 +217,7 @@ namespace TowerDefense.Model.Enemy
         public static List<Enemies.Enemy> CreateWave9()
         {
             List<Enemies.Enemy> enemies = new List<Enemies.Enemy>();
+       
             for (int x = 0; x < 30; x++)
             {
                 enemies.Add(new Enemies.Sanic());
@@ -218,6 +236,7 @@ namespace TowerDefense.Model.Enemy
         public static List<Enemies.Enemy> CreateWave10()
         {
             List<Enemies.Enemy> enemies = new List<Enemies.Enemy>();
+            
             for (int x = 0; x < 34; x++)
             {
                 enemies.Add(new Enemies.Sanic());
@@ -234,9 +253,116 @@ namespace TowerDefense.Model.Enemy
             
             return enemies;
         }
-       
+        public static List<Enemies.Enemy> CreateWave11()
+        {
+            List<Enemies.Enemy> enemies = new List<Enemies.Enemy>();
+
+            for (int x = 0; x < 36; x++)
+            {
+                enemies.Add(new Enemies.Sanic());
+            }
+            for (int x = 0; x < 25; x++)
+            {
+                enemies.Add(new Enemies.Mr_Krabs());
+            }
+            for (int x = 0; x < 6; x++)
+            {
+                enemies.Add(new Enemies.Gaben());
+
+            }
+
+            return enemies;
+        }
        
         
+        public static List<Enemies.Enemy> CreateWave12()
+        {
+            List<Enemies.Enemy> enemies = new List<Enemies.Enemy>();
+
+            for (int x = 0; x < 50; x++)
+            {
+                enemies.Add(new Enemies.Sanic());
+            }
+            for (int x = 0; x < 2; x++)
+            {
+                enemies.Add(new Enemies.Mr_Krabs());
+            }
+            for (int x = 0; x < 2; x++)
+            {
+                enemies.Add(new Enemies.Gaben());
+
+            }
+
+            return enemies;
+        }
+
+
+        public static List<Enemies.Enemy> CreateWave13()
+        {
+            List<Enemies.Enemy> enemies = new List<Enemies.Enemy>();
+
+            for (int x = 0; x < 40; x++)
+            {
+                enemies.Add(new Enemies.Sanic());
+            }
+            for (int x = 0; x < 28; x++)
+            {
+                enemies.Add(new Enemies.Mr_Krabs());
+            }
+            for (int x = 0; x < 8; x++)
+            {
+                enemies.Add(new Enemies.Gaben());
+
+            }
+
+            return enemies;
+        }
+
+        public static List<Enemies.Enemy> CreateWave14()
+        {
+            List<Enemies.Enemy> enemies = new List<Enemies.Enemy>();
+
+            for (int x = 0; x < 40; x++)
+            {
+                enemies.Add(new Enemies.Sanic());
+            }
+            for (int x = 0; x < 30; x++)
+            {
+                enemies.Add(new Enemies.Mr_Krabs());
+            }
+            for (int x = 0; x < 9; x++)
+            {
+                enemies.Add(new Enemies.Gaben());
+
+            }
+
+            return enemies;
+        }
+
+
+        public static List<Enemies.Enemy> CreateWave15()
+        {
+            List<Enemies.Enemy> enemies = new List<Enemies.Enemy>();
+
+            for (int x = 0; x < 10; x++)
+            {
+                enemies.Add(new Enemies.Sanic());
+            }
+            for (int x = 0; x < 10; x++)
+            {
+                enemies.Add(new Enemies.Mr_Krabs());
+            }
+            for (int x = 0; x < 1; x++)
+            {
+                enemies.Add(new Enemies.Lord_Calvin());
+
+            }
+
+            return enemies;
+        }
+
+
+
 
     }
 }

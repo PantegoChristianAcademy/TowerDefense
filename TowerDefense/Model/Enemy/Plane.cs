@@ -13,8 +13,8 @@ namespace TowerDefense.Model.Enemies
         {
             Imagefile = "Media\\Enemies\\airplane.bmp";
             LoadImage();
-            Health = 55;
-            Speed = 18;
+            Health = 35;
+            Speed = 3;
             Goldgiven = 15;
              //enemy not in use right now because we cant use the freeze function anymore,can still be used as a normal enemy though
       
