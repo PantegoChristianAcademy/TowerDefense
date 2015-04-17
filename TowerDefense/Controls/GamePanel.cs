@@ -16,7 +16,7 @@ namespace TowerDefense.Controls
         public static short roundNum = 0;
         public static int timeUntilNextRoundMS = 0;
 
-        public Map loadedMap;
+        public static Map loadedMap;
         TileIdentity[,] loadedMapGrid;
         Timer timer;
         List<Model.Enemies.Enemy> listOfEnemies = new List<Model.Enemies.Enemy>();

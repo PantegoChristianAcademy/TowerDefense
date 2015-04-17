@@ -72,8 +72,8 @@ namespace TowerDefense.Model.Particles
 
         public void MoveParticle(Map Tile)
         {
-            int ty = (int)(Target.y + Tile.tileSize / 2);
-            int tx = (int)(Target.x + Tile.tileSize / 2);
+            int ty = (int)(Target.y);
+            int tx = (int)(Target.x);
             angle = Math.Atan2(ty - posY, tx - posX);
             vX = speed * Math.Cos(angle);
             vY = speed * Math.Sign(angle);

@@ -111,19 +111,19 @@ namespace TowerDefense
                //     break;
                 case 38:
                     //highlight object w/ up arrow
-                  Game.selectedY--;
+                    if(Game.selectedY - 1 >- 0) Game.selectedY--;
                     break;
                 case 37:
                    //highlight object w/ left arrow
-                   Game.selectedX--; 
+                   if(Game.selectedX - 1 >= 0) Game.selectedX--; 
                     break;
                 case 39:
                   //highlight object w/ right arrow
-                 Game.selectedX++;   
+                 if(Game.selectedX + 1 <= TowerDefense.Controls.GamePanel.loadedMap.numOfHorizontalTiles - 1) Game.selectedX++;   
                     break;
                 case 40:
                //highlight object w/ down arrow
-                  Game.selectedY++;
+                    if (Game.selectedY + 1 <= TowerDefense.Controls.GamePanel.loadedMap.numOfVerticalTiles - 1) Game.selectedY++;
                     break;
                 case 13:
                     //confirm highlighted object w/ enter
@@ -173,7 +173,7 @@ namespace TowerDefense
         {
             if (ShopTower != null && balance - ShopTower.Cost >= 0)
             {
-                Tile clickedTile = Game.loadedMap.MapGrid[x, y];
+                Tile clickedTile = TowerDefense.Controls.GamePanel.loadedMap.MapGrid[x, y];
                 if(clickedTile.identity == TileIdentity.Unoccupied)
                 {
                     ShopTower.PosX = clickedTile.location.X;
