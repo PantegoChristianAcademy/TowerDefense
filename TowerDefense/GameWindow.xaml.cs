@@ -228,7 +228,7 @@ namespace TowerDefense
             RoundNumLbl.Content = string.Format("Round: {0}", TowerDefense.Controls.GamePanel.roundNum);
             CoinsLbl.Content = string.Format("Coins: {0}", balance);
             LifeLbl.Content = string.Format("Life Force: {0}", health);
-            RoundTime.Content = string.Format("Next Round In: {0}", TowerDefense.Controls.GamePanel.timeUntilNextRoundMS);
+            RoundTime.Content = string.Format("Round Starts in: {0}", TowerDefense.Controls.GamePanel.timeUntilNextRoundMS);
         }
     }
 }

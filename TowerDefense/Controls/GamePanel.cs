@@ -21,6 +21,7 @@ namespace TowerDefense.Controls
         Timer timer;
         List<Model.Enemies.Enemy> listOfEnemies = new List<Model.Enemies.Enemy>();
         List<Model.Particles.BaseParticle> particles = new List<Model.Particles.BaseParticle>();
+        List<Model.Particles.BaseParticle> tempParticles = new List<Model.Particles.BaseParticle>();
         Queue<Model.Enemies.Enemy> enemyQueue = new Queue<Model.Enemies.Enemy>();
         List<Model.Turrets.Base_Tower> listOfTowers = new List<Model.Turrets.Base_Tower>();
         int timeElapsedSinceRoundStart = 0;
@@ -65,6 +66,8 @@ namespace TowerDefense.Controls
         {
             if (timeUntilNextRoundMS == 0)
             {
+                GameWindow._window.RoundTime.Visibility = System.Windows.Visibility.Hidden;
+
                 #region SpawnEnemy
                 if (timeElapsedSinceRoundStart >= spawnIntervalinMS && enemyQueue.Count >= 1)
                 {
@@ -75,82 +78,96 @@ namespace TowerDefense.Controls
                 }
                 #endregion
 
-                #region MoveEnemies
-                foreach (Model.Enemies.Enemy tempEnemy in listOfEnemies) tempEnemy.Move(loadedMap.Path);
-                for (int i = 0; i < listOfEnemies.Count; i++)
+                if (listOfEnemies.Count >= 1)
                 {
-                    if (listOfEnemies[i].needToDelete == true)
+                    #region MoveEnemies
+                    foreach (Model.Enemies.Enemy tempEnemy in listOfEnemies) tempEnemy.Move(loadedMap.Path);
+                    for (int i = 0; i < listOfEnemies.Count; i++)
                     {
-                        GameWindow.health -= listOfEnemies[i].damage;
-                        listOfEnemies.RemoveAt(i);
-                        i--;
+                        if (listOfEnemies[i].needToDelete == true)
+                        {
+                            GameWindow.health -= listOfEnemies[i].damage;
+                            listOfEnemies.RemoveAt(i);
+                            i--;
+                        }
                     }
-                }
-                #endregion
+                    #endregion
 
-                #region ManageTowers
-                foreach (TowerDefense.Model.Turrets.Base_Tower tower in listOfTowers)
-                {
+                    #region ManageTowers
+                    foreach (TowerDefense.Model.Turrets.Base_Tower tower in listOfTowers)
+                    {
+                        if (tower.timeSinceLastShot > 0)
+                        {
+                            tower.timeSinceLastShot -= timer.Interval;
+                            tower.LoadImage();
+                        }
+
+                        else if (tower.timeSinceLastShot <= 0)
+                        {
+                            tower.timeSinceLastShot = 0;
+
+                            try
+                            {
+                                tower.selectedEnemy = tower.selectTarget(listOfEnemies, loadedMap);
+
+                                if (tower.selectedEnemy != null)
+                                {
+                                    Model.Particles.BaseParticle particle = new Model.Particles.BaseParticle(tower, tower.selectedEnemy, loadedMap);
+                                    particles.Add(particle);
+
+                                    tower.timeSinceLastShot += tower.Firerate * 1000;
+                                }
+                            }
+
+                            catch { }
+                        }
+                    }
+                    #endregion
+
+                    #region ManageParticles
                     for (int i = 0; i < particles.Count; i++)
                     {
-                        particles[i].MoveParticle(loadedMap);
-
-                        if (Math.Abs(particles[i].posX - particles[i].Target.x) <= loadedMap.tileSize / 2 && Math.Abs(particles[i].posY - particles[i].Target.y) <= loadedMap.tileSize / 2)
-                        {
-                            particles[i].Target.Health -= particles[i].damage;
-                            particles.RemoveAt(i);
-                            i--;
-                        }
-
-                        else if (!listOfEnemies.Contains(particles[i].Target))
-                        {
-                            particles.Remove(particles[i]);
-                            i--;
-                        }
-                    }
-
-                    if (tower.timeSinceLastShot > 0)
-                    {
-                        tower.timeSinceLastShot -= timer.Interval;
-                        tower.LoadImage();
-                    }
-
-                    else if (tower.timeSinceLastShot <= 0)
-                    {
-                        tower.timeSinceLastShot = 0;
-
-                        //Model.Enemies.Enemy selectedEnemy = tower.selectTarget(listOfEnemies, loadedMap);
-                        try
-                        {
-                            Model.Enemies.Enemy selectedEnemy = listOfEnemies[0];
-
-                            if (selectedEnemy != null)
+                        var particle = particles[i];
+                        particle.MoveParticle(loadedMap);
+                            
+                            if (!listOfEnemies.Contains(particle.Target) && listOfEnemies.Count > 1)
                             {
-                                Model.Particles.BaseParticle particle = new Model.Particles.BaseParticle(tower, selectedEnemy, loadedMap);
-                                particles.Add(particle);
-                                if (selectedEnemy.Health <= 0)
+                                particle.Target = listOfEnemies[0];
+                            }
+
+                            else if (Math.Abs(particle.posX - particle.Target.x) <= loadedMap.tileSize / 4 && Math.Abs(particle.posY - particle.Target.y) <= loadedMap.tileSize / 4)
+                            {
+                                particle.Target.Health -= particle.damage;
+
+                                if (particle.Target.Health <= 0)
                                 {
-                                    listOfEnemies.Remove(selectedEnemy);
-                                    GameWindow.balance += selectedEnemy.Goldgiven;
+                                    GameWindow.balance += particle.Target.Goldgiven;
+                                    listOfEnemies.Remove(particle.Target);
+                                    tempParticles.Add(new Model.Particles.BaseParticle(particle, particle.Target.x, particle.Target.y));
                                 }
 
-                                tower.timeSinceLastShot += tower.Firerate * 1000;
+                                particles.RemoveAt(i);
+                                i--;
+                                break;
                             }
-                        }
-
-                        catch { }
                     }
+                    #endregion
                 }
-                #endregion
 
-                #region ManageRounds
-                if (enemyQueue.Count == 0 && listOfEnemies.Count == 0)
+                else if (listOfEnemies.Count == 0)
                 {
-                    roundNum++;
-                    enemyQueue = new Queue<Model.Enemies.Enemy>(TowerDefense.Model.Enemy.EnemyFactory.GenerateWave(roundNum, loadedMap.difficulty));
-                    timeUntilNextRoundMS = 2000;
+                    particles.Clear();
+
+                    #region ManageRounds
+                    if (enemyQueue.Count == 0)
+                    {
+                        roundNum++;
+                        enemyQueue = new Queue<Model.Enemies.Enemy>(TowerDefense.Model.Enemy.EnemyFactory.GenerateWave(roundNum, loadedMap.difficulty));
+                        timeUntilNextRoundMS = 2000;
+                        GameWindow._window.RoundTime.Visibility = System.Windows.Visibility.Visible;
+                    }
+                    #endregion
                 }
-                #endregion
 
                 timeElapsedSinceRoundStart += timer.Interval;
             }
@@ -159,6 +176,7 @@ namespace TowerDefense.Controls
             {
                 timeUntilNextRoundMS -= timer.Interval;
             }
+
             this.Invalidate();
         }
 
@@ -195,6 +213,10 @@ namespace TowerDefense.Controls
             foreach (Model.Turrets.Base_Tower tempTower in listOfTowers) screen.DrawImage(tempTower.towerImage, tempTower.PosX, tempTower.PosY, (int)loadedMap.tileSize, (int)loadedMap.tileSize);
 
             foreach (Model.Particles.BaseParticle particle in particles) screen.DrawImage(particle.Img, new Point(particle.posX, particle.posY));
+
+            foreach (Model.Particles.BaseParticle particle in tempParticles) screen.DrawImage(particle.Img, new Point(particle.posX, particle.posY));
+
+            tempParticles.Clear();
         }
 
         public Tile GetClickedTile(int x, int y)
