@@ -55,57 +55,27 @@
                 </TextBlock>
 
                 <Image x:Name="BasicTowerImage" MouseDown="Buy_Tower" Tag="basic" Width="64" Height="64" Grid.Row="1" Source="pack://application:,,,/Media/Tower/BasicTowers/Turret.bmp"/>
-                <TextBlock Margin="5, 0, 0, 0" Grid.Row="1" Grid.Column="1">
-            <Run FontWeight="Bold" FontSize="18">
-              Basic Tower:
-            </Run>
-            <LineBreak />
-            <Run FontSize="14">
-              Do later
-            </Run>
-                </TextBlock>
+                <TextBlock Margin="5, 0, 0, 0" Grid.Row="1" Grid.Column="1"><Run FontWeight="Bold" FontSize="18" Text="Basic Tower:"/><LineBreak/><Run FontSize="14" Text="Hotkey: 1 "/><LineBreak/><Run FontSize="14" Text="Cost: 100"/></TextBlock>
 
                 <Image x:Name="FreezeTowerImage" MouseDown="Buy_Tower" Tag="slow" Margin="0, 5, 0, 5" Width="64" Height="64" Grid.Row="2" Source="pack://application:,,,/Media/Tower/SlowTowers/Slow.bmp"/>
-                <TextBlock Margin="5, 0, 0, 0" Grid.Row="2" Grid.Column="1">
-            <Run FontWeight="Bold" FontSize="18">
-              Freeze Tower:
-            </Run>
-            <LineBreak />
-            <Run FontSize="14">
-              Do later
-            </Run>
-                </TextBlock>
+                <TextBlock Margin="5, 0, 0, 0" Grid.Row="2" Grid.Column="1"><Run FontWeight="Bold" FontSize="18" Text="Freeze Tower:"/><LineBreak/><Run FontSize="14" Text="Hotkey: 2 "/><LineBreak/><Run FontSize="14" Text="Cost: 100"/></TextBlock>
 
                 <Image x:Name="FlameTowerImage" MouseDown="Buy_Tower" Tag="dot" Margin="0, 0, 0, 5" Width="64" Height="64" Grid.Row="3" Source="pack://application:,,,/Media/Tower/DoTTowers/DoT.bmp"/>
-                <TextBlock Margin="5, 0, 0, 0" Grid.Row="3" Grid.Column="1">
-            <Run FontWeight="Bold" FontSize="18">
-              Flame Tower:
-            </Run>
-            <LineBreak />
-            <Run FontSize="14">
-              Do later
-            </Run>
-                </TextBlock>
+                <TextBlock Margin="5, 0, 0, 0" Grid.Row="3" Grid.Column="1"><Run FontWeight="Bold" FontSize="18" Text="Flame Tower:"/><LineBreak/><Run FontSize="14" Text="Hotkey: 3 "/><LineBreak/><Run FontSize="14" Text="Cost: 150"/></TextBlock>
 
                 <Image x:Name="MissileTowerImage" MouseDown="Buy_Tower" Tag="splash" Width="64" Height="64" Grid.Row="4" Source="pack://application:,,,/Media/Tower/SplashTowers/Splash1.bmp"/>
-                <TextBlock Margin="5, 0, 0, 0" Grid.Row="4" Grid.Column="1">
-            <Run FontWeight="Bold" FontSize="18">
-              Missile Tower:
-            </Run>
-            <LineBreak />
-            <Run FontSize="14">
-              Do later
-            </Run>
-                </TextBlock>
+                <TextBlock Margin="5, 0, 0, 0" Grid.Row="4" Grid.Column="1"><Run FontWeight="Bold" FontSize="18" Text="Missile Tower:"/><LineBreak/><Run FontSize="14" Text="Hotkey: 4"/><LineBreak/><Run FontSize="14" Text="Cost: 165"/></TextBlock>
             </Grid>
-            <TextBox x:Name="RoundTB" HorizontalAlignment="Right" Height="36" Margin="0,0,43,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72"/>
+            <Label x:Name="CoinsLbl" Content="Coins" HorizontalAlignment="Left" Margin="0,48,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.513,0.551" Height="40" Width="174" FontSize="20" Background="#FF137A13" Foreground="White"/>
+            <Label x:Name="LifeLbl" Content="Life Force" HorizontalAlignment="Left" Margin="0,93,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.513,0.551" Height="40" Width="174" FontSize="20" Background="Red"/>
+            <Label x:Name="RoundTime" Content="Next Round In:" HorizontalAlignment="Left" Margin="0,138,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.513,0.551" Height="40" Width="174" FontSize="15" Background="#FF1E1EAC"/>
         </Grid>
+        <TextBox x:Name="PauseAlert" HorizontalAlignment="Left" Height="144" TextWrapping="Wrap" Text="Game Paused" VerticalAlignment="Top" Width="215" FontSize="48" TextAlignment="Center" FontStyle="Italic" Grid.Column="1"/>
 
         <Grid Grid.Column="1" IsHitTestVisible="True" >
             <WindowsFormsHost Opacity="0" IsHitTestVisible="False" Background="Black" SizeChanged="Window_Resized" Name="winFormHost" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-            <Label x:Name="roundLabel" Content="Round #" HorizontalAlignment="Left" Margin="-203,14,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.513,0.551" Height="28" Width="61" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}"/>
+            <Label x:Name="RoundNumLbl" Content="Round" HorizontalAlignment="Left" Margin="-203,14,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.513,0.551" Height="40" Width="174" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" FontSize="20"/>
         </Grid>
-        <TextBox x:Name="PauseAlert" HorizontalAlignment="Left" Height="44" Margin="26,152,0,0" TextWrapping="Wrap" Text="Game Paused" VerticalAlignment="Top" Width="161" FontSize="24"/>
 
     </Grid>
 </metro:MetroWindow>

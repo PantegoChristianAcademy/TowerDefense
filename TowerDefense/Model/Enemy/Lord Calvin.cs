@@ -16,7 +16,7 @@ namespace TowerDefense.Model.Enemies
            Health = 650;
            Speed = 1;
            Goldgiven = 250;
-           LifeValue = 15;
+           damage = 15;
            //enemy not in use right now because this is the boss and the wave has not been set yet
        }
     }

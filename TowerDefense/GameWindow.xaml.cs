@@ -24,6 +24,7 @@ namespace TowerDefense
     {
         public Model.Turrets.Base_Tower ShopTower = null;
         public static int balance = 1000;
+        public static int health = 100;
 
         // ... { GLOBAL HOOK }
         [DllImport("user32.dll")]
@@ -84,11 +85,6 @@ namespace TowerDefense
         {
             InitializeComponent();
             _window = this;
-            PauseAlert.Visibility = Visibility.Hidden;
-
-            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 20);
-            dispatcherTimer.Start();
         }
 
         public void KeyPress(int code)
@@ -158,6 +154,13 @@ namespace TowerDefense
             int width = (int)(this.ActualWidth - uiPanelColumn.ActualWidth);
             int height = (int)(this.ActualHeight);
             winFormHost.Child = new Controls.GamePanel(width, height);
+
+            PauseAlert.Visibility = Visibility.Hidden;
+
+            Timer.Tick += new EventHandler(dispatcherTimer_Tick);
+            Timer.Interval = new TimeSpan(0, 0, 0, 0, 20);
+            Timer.Start();
+
             Game.TileClick += Game_TileClick;
         }
 
@@ -168,7 +171,7 @@ namespace TowerDefense
 
         void Game_TileClick(int x, int y)
         {
-            if (ShopTower != null && balance - ShopTower.Cost > 0)
+            if (ShopTower != null && balance - ShopTower.Cost >= 0)
             {
                 Tile clickedTile = Game.loadedMap.MapGrid[x, y];
                 if(clickedTile.identity == TileIdentity.Unoccupied)
@@ -192,8 +195,6 @@ namespace TowerDefense
             int width = (int)(winFormHost.ActualWidth);
             int height = (int)(winFormHost.ActualHeight);
             Game.Resize(width, height);
-
-
         }
        
         private void Buy_Tower(object sender, MouseEventArgs e)
@@ -221,10 +222,13 @@ namespace TowerDefense
             }
         }
 
-        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer(); 
+        System.Windows.Threading.DispatcherTimer Timer = new System.Windows.Threading.DispatcherTimer(); 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            
+            RoundNumLbl.Content = string.Format("Round: {0}", TowerDefense.Controls.GamePanel.roundNum);
+            CoinsLbl.Content = string.Format("Coins: {0}", balance);
+            LifeLbl.Content = string.Format("Life Force: {0}", health);
+            RoundTime.Content = string.Format("Next Round In: {0}", TowerDefense.Controls.GamePanel.timeUntilNextRoundMS);
         }
     }
 }

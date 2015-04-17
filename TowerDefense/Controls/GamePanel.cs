@@ -13,7 +13,8 @@ namespace TowerDefense.Controls
 {
     public class GamePanel : Panel
     {
-        static short roundNum = 0;
+        public static short roundNum = 0;
+        public static int timeUntilNextRoundMS = 0;
 
         public Map loadedMap;
         TileIdentity[,] loadedMapGrid;
@@ -62,31 +63,34 @@ namespace TowerDefense.Controls
 
         void timer_Tick(object sender, EventArgs e)
         {
-#region SpawnEnemy
-            if (timeElapsedSinceRoundStart >= spawnIntervalinMS && enemyQueue.Count >= 1)
+            if (timeUntilNextRoundMS == 0)
             {
-                timeElapsedSinceRoundStart = 0;
-                Model.Enemies.Enemy newEnemy = enemyQueue.Dequeue();
-                listOfEnemies.Add(newEnemy);
-                newEnemy.SetInitialSpawnLoc(loadedMap.Path);
-            }
-#endregion
-
-#region MoveEnemies
-            foreach (Model.Enemies.Enemy tempEnemy in listOfEnemies) tempEnemy.Move(loadedMap.Path);
-            for (int i = 0; i < listOfEnemies.Count; i++ )
-            {
-                if(listOfEnemies[i].needToDelete == true)
+                #region SpawnEnemy
+                if (timeElapsedSinceRoundStart >= spawnIntervalinMS && enemyQueue.Count >= 1)
                 {
-                    listOfEnemies.RemoveAt(i);
-                    i--;
+                    timeElapsedSinceRoundStart = 0;
+                    Model.Enemies.Enemy newEnemy = enemyQueue.Dequeue();
+                    listOfEnemies.Add(newEnemy);
+                    newEnemy.SetInitialSpawnLoc(loadedMap.Path);
                 }
-            }
-#endregion
+                #endregion
 
-#region ManageTowers
-            foreach (TowerDefense.Model.Turrets.Base_Tower tower in listOfTowers)
-            {
+                #region MoveEnemies
+                foreach (Model.Enemies.Enemy tempEnemy in listOfEnemies) tempEnemy.Move(loadedMap.Path);
+                for (int i = 0; i < listOfEnemies.Count; i++)
+                {
+                    if (listOfEnemies[i].needToDelete == true)
+                    {
+                        GameWindow.health -= listOfEnemies[i].damage;
+                        listOfEnemies.RemoveAt(i);
+                        i--;
+                    }
+                }
+                #endregion
+
+                #region ManageTowers
+                foreach (TowerDefense.Model.Turrets.Base_Tower tower in listOfTowers)
+                {
                     for (int i = 0; i < particles.Count; i++)
                     {
                         particles[i].MoveParticle(loadedMap);
@@ -105,49 +109,56 @@ namespace TowerDefense.Controls
                         }
                     }
 
-                if (tower.timeSinceLastShot > 0)
-                {
-                    tower.timeSinceLastShot -= 20;
-                    tower.LoadImage();
-                }
-
-                else if (tower.timeSinceLastShot <= 0)
-                {
-                    tower.timeSinceLastShot = 0;
-
-                    //Model.Enemies.Enemy selectedEnemy = tower.selectTarget(listOfEnemies, loadedMap);
-                    try
+                    if (tower.timeSinceLastShot > 0)
                     {
-                        Model.Enemies.Enemy selectedEnemy = listOfEnemies[0];
-
-                        if (selectedEnemy != null)
-                        {
-                            Model.Particles.BaseParticle particle = new Model.Particles.BaseParticle(tower, selectedEnemy, loadedMap);
-                            particles.Add(particle);
-                            if (selectedEnemy.Health <= 0)
-                            {
-                                listOfEnemies.Remove(selectedEnemy);
-                                GameWindow.balance += selectedEnemy.Goldgiven;
-                            }
-
-                            tower.timeSinceLastShot += tower.Firerate * 1000;
-                        }
+                        tower.timeSinceLastShot -= timer.Interval;
+                        tower.LoadImage();
                     }
 
-                    catch { }
+                    else if (tower.timeSinceLastShot <= 0)
+                    {
+                        tower.timeSinceLastShot = 0;
+
+                        //Model.Enemies.Enemy selectedEnemy = tower.selectTarget(listOfEnemies, loadedMap);
+                        try
+                        {
+                            Model.Enemies.Enemy selectedEnemy = listOfEnemies[0];
+
+                            if (selectedEnemy != null)
+                            {
+                                Model.Particles.BaseParticle particle = new Model.Particles.BaseParticle(tower, selectedEnemy, loadedMap);
+                                particles.Add(particle);
+                                if (selectedEnemy.Health <= 0)
+                                {
+                                    listOfEnemies.Remove(selectedEnemy);
+                                    GameWindow.balance += selectedEnemy.Goldgiven;
+                                }
+
+                                tower.timeSinceLastShot += tower.Firerate * 1000;
+                            }
+                        }
+
+                        catch { }
+                    }
                 }
-            }
-            #endregion
+                #endregion
 
-            #region ManageRounds
-            if(enemyQueue.Count == 0)
+                #region ManageRounds
+                if (enemyQueue.Count == 0 && listOfEnemies.Count == 0)
+                {
+                    roundNum++;
+                    enemyQueue = new Queue<Model.Enemies.Enemy>(TowerDefense.Model.Enemy.EnemyFactory.GenerateWave(roundNum, loadedMap.difficulty));
+                    timeUntilNextRoundMS = 2000;
+                }
+                #endregion
+
+                timeElapsedSinceRoundStart += timer.Interval;
+            }
+
+            else
             {
-                roundNum++;
-                enemyQueue = new Queue<Model.Enemies.Enemy>(TowerDefense.Model.Enemy.EnemyFactory.GenerateWave(roundNum, loadedMap.difficulty));
+                timeUntilNextRoundMS -= timer.Interval;
             }
-            #endregion
-
-            timeElapsedSinceRoundStart += timer.Interval;
             this.Invalidate();
         }
 
@@ -193,9 +204,8 @@ namespace TowerDefense.Controls
 
         public void AddTowerToListOfTowers(Model.Turrets.Base_Tower tower)
         {
-            tower.LoadImage();
-            listOfTowers.Add(tower);
-            GameWindow.balance -= tower.Cost;
+                tower.LoadImage();
+                listOfTowers.Add(tower);
         }
 
         public bool ManagePauseState()
