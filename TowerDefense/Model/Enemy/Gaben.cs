@@ -16,7 +16,7 @@ namespace TowerDefense.Model.Enemies
             Health = 120;
             Speed = 2;
             Goldgiven = 75;
-            LifeValue = 5;
+            damage = 5;
             //needs a split function for 50% and 75% enemies to be able to use them, but the enemy still works
         }
     }

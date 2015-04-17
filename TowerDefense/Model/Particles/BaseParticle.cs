@@ -61,24 +61,52 @@ namespace TowerDefense.Model.Particles
                 damage = new Splash_Tower().Damage;
             }
 
-            posX = (int)(Tower.PosX + Tile.tileSize / 2);
-            posY = (int)(Tower.PosY + Tile.tileSize / 2);
+            posX = (int)(Tower.PosX);
+            posY = (int)(Tower.PosY);
             int ty = (int)(Target.y + Tile.tileSize / 2);
             int tx = (int)(Target.x + Tile.tileSize / 2);
             angle = Math.Atan2(ty - posY, tx - posX);
             vX = speed * Math.Cos(angle);
             vY = speed * Math.Sign(angle);
         }
+        public BaseParticle(Model.Particles.BaseParticle parentParticle, int targetX, int targetY)
+        {
+            if (parentParticle.ToString().ToLower() != "freeze") file = "Media\\Particle\\Explosion.png";
+            //else file = "Media\\Particle\\FreezeExplosion.png"
+            posX = targetX;
+            posY = targetY;
+        }
 
         public void MoveParticle(Map Tile)
         {
-            int ty = (int)(Target.y + Tile.tileSize / 2);
-            int tx = (int)(Target.x + Tile.tileSize / 2);
+            int ty = (int)(Target.y);
+            int tx = (int)(Target.x);
             angle = Math.Atan2(ty - posY, tx - posX);
             vX = speed * Math.Cos(angle);
             vY = speed * Math.Sign(angle);
             posX += (int)vX;
             posY += (int)vY;
+        }
+
+        public override string ToString()
+        {
+            switch(this.file)
+            {
+                case "Media\\Particle\\Bullet.png":
+                    return "Bullet";
+
+                case "Media\\Particle\\Fire.png":
+                    return "Fire";
+
+                case "Media\\Particle\\Freeze.png":
+                    return "Freeze";
+
+                case "Media\\Particle\\Missile.png":
+                    return "Missile";
+
+                default:
+                    return null;
+            }
         }
     }
 }

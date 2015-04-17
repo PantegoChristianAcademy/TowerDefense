@@ -18,7 +18,7 @@ namespace TowerDefense.Model.Enemies
        public int y;
        public int Goldgiven;
        public int placeInPath = 0;
-       public byte LifeValue;
+       public byte damage;
        public bool needToDelete = false;
 
        public void SetInitialSpawnLoc(List<Tile> path)
@@ -95,7 +95,6 @@ namespace TowerDefense.Model.Enemies
        {
            if (placeInPath == path.Count - 1)
            {
-               //deal Damage to Player Health
                needToDelete = true;
            }
        }
