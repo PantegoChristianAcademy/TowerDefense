@@ -163,7 +163,7 @@ namespace TowerDefense.Controls
                     {
                         roundNum++;
                         enemyQueue = new Queue<Model.Enemies.Enemy>(TowerDefense.Model.Enemy.EnemyFactory.GenerateWave(roundNum, loadedMap.difficulty));
-                        timeUntilNextRoundMS = 2000;
+                        timeUntilNextRoundMS = 500;
                         GameWindow._window.RoundTime.Visibility = System.Windows.Visibility.Visible;
                     }
                     #endregion
