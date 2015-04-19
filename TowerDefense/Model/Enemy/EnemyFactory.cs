@@ -4,239 +4,69 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 using System.Threading.Tasks;
+using TowerDefense.Model.Enemies;
 
 namespace TowerDefense.Model.Enemy
 {
     public static class EnemyFactory
     {
-        public static List<Enemies.Enemy> GenerateWave(short WaveNumb, string difficulty)
+        public static List<Enemies.Enemy> GenerateWave(short round, string difficulty)
         {
-            int baseWave = WaveNumb % 10 + 1;
-            List<Enemies.Enemy> enemies = GenerateNormWave(baseWave);
-            int iterationNumber = WaveNumb / 10;
+            List<Enemies.Enemy> enemyLS = GenerateDynamicWave(round);
 
-            for (int x = 0; x < iterationNumber; x++)
+            foreach (Enemies.Enemy temp in enemyLS)
             {
-                foreach (Enemies.Enemy temp in enemies)
+                if (difficulty == "Easy")
                 {
-                    temp.Health = (int)(temp.Health *1.1);
-                    temp.Goldgiven = (int)(temp.Goldgiven * 1.1);
+                    temp.Health = (int)(temp.Health * 0.8);
+                    temp.Speed = (int)(temp.Speed * 0.8);
+                }
+            
+                if (difficulty == "Hard")
+                {
+                    temp.Health = (int)(temp.Health * 1.2);
+                    temp.Speed = (int)(temp.Speed * 1.2);
                 }
             }
 
-                foreach (Enemies.Enemy temp in enemies)
-                {
-                    if (difficulty == "Easy")
-                    {
-                        temp.Health = (int)(temp.Health * 0.9);
-                        temp.Speed = (int)(temp.Speed * 0.9);
-
-                    }
-                    if (difficulty == "Hard")
-                    {
-                        temp.Health = (int)(temp.Health * 1.1);
-                        temp.Speed = (int)(temp.Speed * 1.1);
-                    }
-                }
-
-
+            //double Num Of Enemies
             if (difficulty == "Hard")
             {
-                List<Enemies.Enemy> secondHalf = new List<Enemies.Enemy>();
-                foreach (var enemy in enemies)
+                foreach(Enemies.Enemy tempEnemy in GenerateDynamicWave(round))
                 {
-                    secondHalf.Add((Enemies.Enemy)Activator.CreateInstance(enemy.GetType()));
+                    enemyLS.Add(tempEnemy);
                 }
-                enemies = enemies.Concat(secondHalf).ToList();
             }
-            return enemies;
-        }
 
-     
+            return enemyLS;
+        }    
         
-        
-        
-        public static List<Enemies.Enemy> GenerateNormWave(int WaveNumb)
+        public static List<Enemies.Enemy> GenerateDynamicWave(int round)
         {
-            switch (WaveNumb)
+            List<Enemies.Enemy> enemyReferenceList = new List<Enemies.Enemy>();
+            List<Enemies.Enemy> enemyRandomList = new List<Enemies.Enemy>();
+            Random rnd = new Random();
+
+            //Generate Sanics
+            for (int i = 0; i < round; i++) enemyReferenceList.Add(new Sanic()); 
+            //Generate Mr. Krabs
+            for (int i = 0; i < round / 2; i++) enemyReferenceList.Add(new Mr_Krabs()); 
+            //Generate Gaben
+            for (int i = 0; i < round / 4; i++) enemyReferenceList.Add(new Gaben()); 
+            //Generate Kalvin Every 6 Rounds
+            if(round % 6 == 0)
             {
-                case 1:
-                    return CreateWave1();
-                case 2:
-                    return CreateWave2();
-                case 3:
-                    return CreateWave3();
-                case 4:
-                    return CreateWave4();
-                case 5:
-                    return CreateWave5();
-                case 6:
-                    return CreateWave6();
-                case 7:
-                    return CreateWave7();
-                case 8:
-                    return CreateWave8();
-                case 9:
-                    return CreateWave9();
-                case 10:
-                    return CreateWave10();
-            
+                for (int i = 0; i < round / 6; i++) enemyReferenceList.Add(new Lord_Calvin()); 
+
             }
 
-            return new List<Enemies.Enemy>();
+            while(enemyReferenceList.Count > 0)
+            {
+                int randomNum = rnd.Next(0, enemyReferenceList.Count);
+                enemyRandomList.Add(enemyReferenceList[randomNum]);
+                enemyReferenceList.RemoveAt(randomNum);
+            }
+                return enemyRandomList;
         }
-
-        public static List<Enemies.Enemy> CreateWave1()
-        {
-          List<Enemies.Enemy> enemies = new List<Enemies.Enemy>();
-            for (int x = 0; x <8; x++)
-            {
-                enemies.Add(new Enemies.Sanic());
-            }
-           
-                return enemies;
-        }
-
-        public static List<Enemies.Enemy> CreateWave2()
-        {
-            List<Enemies.Enemy> enemies = new List<Enemies.Enemy>();
-            for (int x = 0; x < 12; x++)
-            {
-                enemies.Add(new Enemies.Sanic());       
-            }
-            return enemies;
-        }
-
-        public static List<Enemies.Enemy> CreateWave3()
-        {
-            List<Enemies.Enemy> enemies = new List<Enemies.Enemy>();
-            for (int x = 0; x < 11; x++)
-            {
-                enemies.Add(new Enemies.Sanic());
-            }
-            enemies.Add(new Enemies.Mr_Krabs());
-            enemies.Add(new Enemies.Mr_Krabs());
-            return enemies;
-        }
-
-        public static List<Enemies.Enemy> CreateWave4()
-        {
-            List<Enemies.Enemy> enemies = new List<Enemies.Enemy>();
-            for (int x = 0; x < 15; x++)
-            {
-                enemies.Add(new Enemies.Sanic());
-            }
-            for (int x = 0; x < 4; x++)
-            {
-                enemies.Add(new Enemies.Mr_Krabs());
-            }
-            return enemies;
-            }
-        public static List<Enemies.Enemy> CreateWave5()
-        {
-            List<Enemies.Enemy> enemies = new List<Enemies.Enemy>();
-            for (int x = 0; x < 18; x++)
-            {
-                enemies.Add(new Enemies.Sanic());
-            }
-            for (int x = 0; x < 6; x++)
-            {
-                enemies.Add(new Enemies.Mr_Krabs());
-            }
-            return enemies;
-        }
-
-        public static List<Enemies.Enemy> CreateWave6()
-        {
-            List<Enemies.Enemy> enemies = new List<Enemies.Enemy>();
-            for (int x = 0; x < 20; x++)
-            {
-                enemies.Add(new Enemies.Sanic());
-            }
-            for (int x = 0; x < 9; x++)
-            {
-                enemies.Add(new Enemies.Mr_Krabs());
-            }
-            return enemies;
-        }
-
-        public static List<Enemies.Enemy> CreateWave7()
-        {
-            List<Enemies.Enemy> enemies = new List<Enemies.Enemy>();
-            for (int x = 0; x < 24; x++)
-            {
-                enemies.Add(new Enemies.Sanic());
-            }
-            for (int x = 0; x < 13; x++)
-            {
-                enemies.Add(new Enemies.Mr_Krabs());
-            }
-            for (int x = 0; x < 1; x++)
-            {
-                enemies.Add(new Enemies.Gaben());
-               
-            }
-                return enemies;
-        }
-        public static List<Enemies.Enemy> CreateWave8()
-        {
-            List<Enemies.Enemy> enemies = new List<Enemies.Enemy>();
-            for (int x = 0; x < 27; x++)
-            {
-                enemies.Add(new Enemies.Sanic());
-            }
-            for (int x = 0; x < 17; x++)
-            {
-                enemies.Add(new Enemies.Mr_Krabs());
-            }
-            for (int x = 0; x < 3; x++)
-            {
-                enemies.Add(new Enemies.Gaben());
-               
-            }
-            return enemies;
-        }
-
-        public static List<Enemies.Enemy> CreateWave9()
-        {
-            List<Enemies.Enemy> enemies = new List<Enemies.Enemy>();
-            for (int x = 0; x < 30; x++)
-            {
-                enemies.Add(new Enemies.Sanic());
-            }
-            for (int x = 0; x < 20; x++)
-            {
-                enemies.Add(new Enemies.Mr_Krabs());
-            }
-            for (int x = 0; x < 6; x++)
-            {
-                enemies.Add(new Enemies.Gaben());
-               
-            }
-            return enemies;
-        }
-        public static List<Enemies.Enemy> CreateWave10()
-        {
-            List<Enemies.Enemy> enemies = new List<Enemies.Enemy>();
-            for (int x = 0; x < 34; x++)
-            {
-                enemies.Add(new Enemies.Sanic());
-            }
-            for (int x = 0; x < 22; x++)
-            {
-                enemies.Add(new Enemies.Mr_Krabs());
-            }
-            for (int x = 0; x < 7; x++)
-            {
-                enemies.Add(new Enemies.Gaben());
-               
-            }
-            
-            return enemies;
-        }
-       
-       
-        
-
     }
 }

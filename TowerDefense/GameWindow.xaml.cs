@@ -23,8 +23,8 @@ namespace TowerDefense
     public partial class GameWindow : MahApps.Metro.Controls.MetroWindow
     {
         public Model.Turrets.Base_Tower ShopTower = null;
-        public static int balance = 1000;
-        public static int health = 100;
+        public static int balance = 3000;
+        public static int health = 3000;
 
         // ... { GLOBAL HOOK }
         [DllImport("user32.dll")]
@@ -111,19 +111,19 @@ namespace TowerDefense
                //     break;
                 case 38:
                     //highlight object w/ up arrow
-                  Game.selectedY--;
+                    if(Game.selectedY - 1 >- 0) Game.selectedY--;
                     break;
                 case 37:
                    //highlight object w/ left arrow
-                   Game.selectedX--; 
+                   if(Game.selectedX - 1 >= 0) Game.selectedX--; 
                     break;
                 case 39:
                   //highlight object w/ right arrow
-                 Game.selectedX++;   
+                 if(Game.selectedX + 1 <= TowerDefense.Controls.GamePanel.loadedMap.numOfHorizontalTiles - 1) Game.selectedX++;   
                     break;
                 case 40:
                //highlight object w/ down arrow
-                  Game.selectedY++;
+                    if (Game.selectedY + 1 <= TowerDefense.Controls.GamePanel.loadedMap.numOfVerticalTiles - 1) Game.selectedY++;
                     break;
                 case 13:
                     //confirm highlighted object w/ enter
@@ -173,7 +173,7 @@ namespace TowerDefense
         {
             if (ShopTower != null && balance - ShopTower.Cost >= 0)
             {
-                Tile clickedTile = Game.loadedMap.MapGrid[x, y];
+                Tile clickedTile = TowerDefense.Controls.GamePanel.loadedMap.MapGrid[x, y];
                 if(clickedTile.identity == TileIdentity.Unoccupied)
                 {
                     ShopTower.PosX = clickedTile.location.X;
@@ -228,7 +228,7 @@ namespace TowerDefense
             RoundNumLbl.Content = string.Format("Round: {0}", TowerDefense.Controls.GamePanel.roundNum);
             CoinsLbl.Content = string.Format("Coins: {0}", balance);
             LifeLbl.Content = string.Format("Life Force: {0}", health);
-            RoundTime.Content = string.Format("Next Round In: {0}", TowerDefense.Controls.GamePanel.timeUntilNextRoundMS);
+            RoundTime.Content = string.Format("Round Starts in: {0}", TowerDefense.Controls.GamePanel.timeUntilNextRoundMS);
         }
     }
 }

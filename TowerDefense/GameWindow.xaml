@@ -68,9 +68,9 @@
             </Grid>
             <Label x:Name="CoinsLbl" Content="Coins" HorizontalAlignment="Left" Margin="0,48,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.513,0.551" Height="40" Width="174" FontSize="20" Background="#FF137A13" Foreground="White"/>
             <Label x:Name="LifeLbl" Content="Life Force" HorizontalAlignment="Left" Margin="0,93,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.513,0.551" Height="40" Width="174" FontSize="20" Background="Red"/>
-            <Label x:Name="RoundTime" Content="Next Round In:" HorizontalAlignment="Left" Margin="0,138,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.513,0.551" Height="40" Width="174" FontSize="15" Background="#FF1E1EAC"/>
+            <Label x:Name="RoundTime" Content="Next Round In:" HorizontalAlignment="Left" Margin="0,138,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.513,0.551" Height="35" Width="174" FontSize="15" Background="#FF1E1EAC"/>
         </Grid>
-        <TextBox x:Name="PauseAlert" HorizontalAlignment="Left" Height="144" TextWrapping="Wrap" Text="Game Paused" VerticalAlignment="Top" Width="215" FontSize="48" TextAlignment="Center" FontStyle="Italic" Grid.Column="1"/>
+        <TextBox x:Name="PauseAlert" HorizontalAlignment="Left" Height="144" TextWrapping="Wrap" Text="Game Paused" VerticalAlignment="Top" Width="215" FontSize="48" TextAlignment="Center" FontStyle="Italic" Margin="0,58,0,0"/>
 
         <Grid Grid.Column="1" IsHitTestVisible="True" >
             <WindowsFormsHost Opacity="0" IsHitTestVisible="False" Background="Black" SizeChanged="Window_Resized" Name="winFormHost" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>

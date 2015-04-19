@@ -10,37 +10,21 @@ namespace TowerDefense.Model.Turrets
     public abstract class Base_Tower
     {
         public Bitmap towerImage;
+        public Model.Enemies.Enemy selectedEnemy;
 
-        public Enemies.Enemy selectTarget(List<Enemies.Enemy> LS, Map map)
+        public Enemies.Enemy selectTarget(List<Enemies.Enemy> enemyLS, Map map)
         {
-            Dictionary<Point, Enemies.Enemy> Dict = new Dictionary<Point, Enemies.Enemy>();
-           foreach (Enemies.Enemy Temp in LS)
-           {
-               Point pos = new Point(Temp.x, Temp.y);
-               if(!Dict.ContainsKey(pos)) Dict.Add(pos, Temp);
-           }
-           List<Point> points = new List<Point>();
-
-
-            for (int x = PosX - Range; x < PosX + Range; x++)
+            Enemies.Enemy chosenEnemy = null;
+            enemyLS.Reverse();
+            foreach (Enemies.Enemy Temp in enemyLS)
             {
-                for (int y = PosY - Range; y < PosY + Range; y++)
+                if(Math.Abs(PosX - Temp.x) <= Range * map.tileSize && Math.Abs(PosY - Temp.y) <= Range * map.tileSize)
                 {
-                    if (Dict.ContainsKey(new Point(x, y)))
-                    {
-                        points.Add(new Point(x, y));
-
-                    }
+                    chosenEnemy = Temp;
                 }
             }
 
-            var ls = new List<Tile>(map.Path);
-            ls.Reverse();
-           foreach (Tile temp in ls)
-           {
-               if (points.Contains(temp.location)) return Dict[temp.location];
-           }
-           return null;
+            return chosenEnemy;
         }
 
         public void LoadImage()
