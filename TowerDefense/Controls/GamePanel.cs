@@ -112,8 +112,17 @@ namespace TowerDefense.Controls
 
                                 if (tower.selectedEnemy != null)
                                 {
-                                    Model.Particles.BaseParticle particle = new Model.Particles.BaseParticle(tower, tower.selectedEnemy, loadedMap);
-                                    particles.Add(particle);
+                                    if (!(tower is TowerDefense.Model.Turrets.Slowing_tower))
+                                    {
+                                        Model.Particles.BaseParticle particle = new Model.Particles.BaseParticle(tower, tower.selectedEnemy, loadedMap);
+                                        particles.Add(particle);
+                                    }
+
+                                    else if (tower is TowerDefense.Model.Turrets.Slowing_tower && tower.selectedEnemy.Speed >= 1)
+                                    {
+                                        Model.Particles.BaseParticle particle = new Model.Particles.BaseParticle(tower, tower.selectedEnemy, loadedMap);
+                                        particles.Add(particle);
+                                    }
 
                                     tower.timeSinceLastShot += tower.Firerate * 1000;
                                 }
@@ -132,14 +141,21 @@ namespace TowerDefense.Controls
                             
                             if (!listOfEnemies.Contains(particle.Target) && listOfEnemies.Count > 1)
                             {
-                                particle.Target = listOfEnemies[0];
+                                particles.RemoveAt(i);
+                                i--;
                             }
 
                             else if (Math.Abs(particle.posX - particle.Target.x) <= loadedMap.tileSize / 4 && Math.Abs(particle.posY - particle.Target.y) <= loadedMap.tileSize / 4)
                             {
-                                particle.Target.Health -= particle.damage;
+                                if(particle.ToString().ToLower() == "freeze")
+                                {
+                                    particle.Target.Speed -= particle.damage;
+                                    if (particle.Target.Speed <= 0) particle.Target.Speed = 1;
+                                }
 
-                                if (particle.Target.Health <= 0)
+                                else particle.Target.Health -= particle.damage;
+
+                                if (particle.Target.Health <= 0 && particle.ToString().ToLower() != "freeze")
                                 {
                                     GameWindow.balance += particle.Target.Goldgiven;
                                     listOfEnemies.Remove(particle.Target);
