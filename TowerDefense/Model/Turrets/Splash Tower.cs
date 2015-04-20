@@ -9,9 +9,11 @@ namespace TowerDefense.Model.Turrets
 {
     public class Splash_Tower : Base_Tower
     {
-        public Splash_Tower()
+        public Splash_Tower(int selectedXGrid, int selectedYGrid)
         {
             towerImage = (Bitmap)Image.FromFile("Media\\Tower\\SplashTowers\\Splash1.bmp");
+            GridX = selectedXGrid;
+            GridY = selectedYGrid;
             Damage = 25;
             Firerate = 1;
             Range = 15;
@@ -33,6 +35,8 @@ namespace TowerDefense.Model.Turrets
                     ResellPercentage = 65;
                     additionaleffect = null;
                     BlastRadius = 50;
+                    towerImage = (Bitmap)Image.FromFile("Media\\Tower\\SplashTowers\\Splash2.bmp");
+                    this.LoadImage();
                     break;
                 case 3:
                     Damage = 75;
@@ -42,6 +46,8 @@ namespace TowerDefense.Model.Turrets
                     ResellPercentage = 70;
                     additionaleffect = null;
                     BlastRadius = 60;
+                    towerImage = (Bitmap)Image.FromFile("Media\\Tower\\SplashTowers\\Splash3.bmp");
+                    this.LoadImage();
                     break;
             }
             TotalCost = TotalCost + Cost;

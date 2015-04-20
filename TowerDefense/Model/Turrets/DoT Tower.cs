@@ -9,9 +9,11 @@ namespace TowerDefense.Model.Turrets
 {
     public class DoT_Tower : Base_Tower
     {
-        public DoT_Tower()
+        public DoT_Tower(int selectedXGrid, int selectedYGrid)
         {
             towerImage = (Bitmap)Image.FromFile("Media\\Tower\\DoTTowers\\DoT.bmp");
+            GridX = selectedXGrid;
+            GridY = selectedYGrid;
             Damage = 10;
             Firerate = 2;
             Range = 6;
@@ -31,6 +33,8 @@ namespace TowerDefense.Model.Turrets
                         Range=9;
                         Cost=125;
                         ResellPercentage=65;
+                        towerImage = (Bitmap)Image.FromFile("Media\\Tower\\DoTTowers\\DoT2.bmp");
+                        this.LoadImage();
                         break;
                     case 3:
                         Damage=20;
@@ -38,6 +42,8 @@ namespace TowerDefense.Model.Turrets
                         Range=12;
                         Cost=150;
                         ResellPercentage=70;
+                        towerImage = (Bitmap)Image.FromFile("Media\\Tower\\DoTTowers\\DoT3.bmp");
+                        this.LoadImage();
                         break;
                 }
 

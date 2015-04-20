@@ -40,25 +40,25 @@ namespace TowerDefense.Model.Particles
             {
                 speed = 10;
                 file = "Media\\Particle\\Bullet.png";
-                damage = new Basic_Tower().Damage;
+                damage = new Basic_Tower(0,0).Damage;
             }
             else if (Tower is DoT_Tower)
             {
                 speed = 8;
                 file = "Media\\Particle\\Fire.png";
-                damage = new DoT_Tower().Damage;
+                damage = new DoT_Tower(0,0).Damage;
             }
             else if (Tower is Slowing_tower)
             {
                 speed = 8;
                 file = "Media\\Particle\\Freeze.png";
-                damage = new Slowing_tower().Damage;
+                damage = new Slowing_tower(0,0).Damage;
             }
             else if (Tower is Splash_Tower)
             {
                 speed = 5; 
                 file = "Media\\Particle\\Missile.png";
-                damage = new Splash_Tower().Damage;
+                damage = new Splash_Tower(0,0).Damage;
             }
 
             posX = (int)(Tower.PosX);

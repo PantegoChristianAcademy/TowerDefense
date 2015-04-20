@@ -106,9 +106,7 @@ namespace TowerDefense
                         this.IsEnabled = true;
                     }
                     break;
-             //   case 27:
-                 //Pause Game w/esc
-               //     break;
+
                 case 38:
                     //highlight object w/ up arrow
                     if(Game.selectedY - 1 >- 0) Game.selectedY--;
@@ -126,25 +124,25 @@ namespace TowerDefense
                     if (Game.selectedY + 1 <= TowerDefense.Controls.GamePanel.loadedMap.numOfVerticalTiles - 1) Game.selectedY++;
                     break;
                 case 13:
-                    //confirm highlighted object w/ enter
+                    Game.UpgradeTower();
                     break;
                 case 49:
-                    ShopTower = new Model.Turrets.Basic_Tower();
+                    ShopTower = new Model.Turrets.Basic_Tower(Game.selectedX, Game.selectedY);
                     Game_TileClick(Game.selectedX, Game.selectedY);
                     break;
                 case 50:
-                  ShopTower = new Model.Turrets.Slowing_tower();  //tower hotkey with 2
+                  ShopTower = new Model.Turrets.Slowing_tower(Game.selectedX, Game.selectedY);  //tower hotkey with 2
                   Game_TileClick(Game.selectedX, Game.selectedY);
                     break;
                 case 51:
-               ShopTower = new Model.Turrets.DoT_Tower();  //tower hotkey with 3
+               ShopTower = new Model.Turrets.DoT_Tower(Game.selectedX, Game.selectedY);  //tower hotkey with 3
                Game_TileClick(Game.selectedX, Game.selectedY);
                     break;
                 case 52:
-                ShopTower = new Model.Turrets.Splash_Tower();   //tower hotkey with 4
+                ShopTower = new Model.Turrets.Splash_Tower(Game.selectedX, Game.selectedY);   //tower hotkey with 4
                 Game_TileClick(Game.selectedX, Game.selectedY);
                     break;
-        }
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -188,6 +186,11 @@ namespace TowerDefense
             }
         }
 
+        void Game_TowerUpgrade(TowerDefense.Model.Turrets.Base_Tower tower)
+        {
+            tower.Upgrade();
+        }
+
         private void Window_Resized(object sender, SizeChangedEventArgs e)
         {
             if (Game == null) return;
@@ -208,16 +211,16 @@ namespace TowerDefense
             switch(tag)
             {
                 case "basic":
-                    ShopTower = new Model.Turrets.Basic_Tower();
+                    ShopTower = new Model.Turrets.Basic_Tower(Game.selectedX, Game.selectedY);
                     break;
                 case "slow":
-                    ShopTower = new Model.Turrets.Slowing_tower();
+                    ShopTower = new Model.Turrets.Slowing_tower(Game.selectedX, Game.selectedY);
                     break;
                 case "dot":
-                    ShopTower = new Model.Turrets.DoT_Tower();
+                    ShopTower = new Model.Turrets.DoT_Tower(Game.selectedX, Game.selectedY);
                     break;
                 case "splash":
-                    ShopTower = new Model.Turrets.Splash_Tower();
+                    ShopTower = new Model.Turrets.Splash_Tower(Game.selectedX, Game.selectedY);
                     break;
             }
         }

@@ -259,5 +259,17 @@ namespace TowerDefense.Controls
                 return false;
             }
         }
+
+        public void UpgradeTower()
+        {
+            for(
+                int i = 0; i < listOfTowers.Count; i++)
+            {
+                if(listOfTowers[i].GridX == selectedX && listOfTowers[i].GridY == selectedY)
+                {
+                    listOfTowers[i].Upgrade();
+                }
+            }
+        }
     }
 }

@@ -9,14 +9,17 @@ namespace TowerDefense.Model.Turrets
 {
     public class Basic_Tower : Base_Tower
     {
-        public Basic_Tower()
+        public Basic_Tower(int selectedXGrid, int selectedYGrid)
         {
-            towerImage = (Bitmap)Image.FromFile("Media\\Tower\\BasicTowers\\Turret.bmp");
+           towerImage = (Bitmap)Image.FromFile("Media\\Tower\\BasicTowers\\Turret.bmp");
+           GridX = selectedXGrid;
+           GridY = selectedYGrid;
            Damage = 5;
-           Firerate = .1F;
+           Firerate = 1F;
            Range = 2;
            Cost = 100;
            ResellPercentage = 60;
+           
            additionaleffect = null;
            TotalCost = Cost;
         }
@@ -29,20 +32,24 @@ namespace TowerDefense.Model.Turrets
            {
                case 2:
                     Damage = 20;
-                    Firerate = 2.5f;
+                    Firerate = .1f;
                     Range = 9;
                     Cost = 75;
                     ResellPercentage = 65;
+                    towerImage = (Bitmap)Image.FromFile("Media\\Tower\\BasicTowers\\Turret2.bmp");
+                    this.LoadImage();
                     additionaleffect = null;
                     break;
                case 3:
                     Damage = 30;
-            Firerate = 3;
-            Range = 12;
-            Cost = 95;
-            ResellPercentage = 70;
-            additionaleffect = null;
-            break;
+                    Firerate = 3;
+                    Range = 12;
+                    Cost = 95;
+                    ResellPercentage = 70;
+                    towerImage = (Bitmap)Image.FromFile("Media\\Tower\\BasicTowers\\Turret3.bmp");
+                    this.LoadImage();
+                    additionaleffect = null;
+                break;
            }
 
            TotalCost = TotalCost + Cost;

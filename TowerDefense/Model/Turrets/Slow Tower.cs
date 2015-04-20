@@ -10,9 +10,11 @@ namespace TowerDefense.Model.Turrets
 {
     public class Slowing_tower : Base_Tower
     {
-        public Slowing_tower()
+        public Slowing_tower(int selectedXGrid, int selectedYGrid)
         {
             towerImage = (Bitmap)Image.FromFile("Media\\Tower\\SlowTowers\\Slow.bmp");
+            GridX = selectedXGrid;
+            GridY = selectedYGrid;
             Damage = 2;
             Firerate = .1f;
             Range = 1;
@@ -32,6 +34,8 @@ namespace TowerDefense.Model.Turrets
                     Range = 12;
                     Cost = 100;
                     ResellPercentage = 65;
+                    towerImage = (Bitmap)Image.FromFile("Media\\Tower\\SlowTowers\\slow2.bmp");
+                    this.LoadImage();
                     break;
 
                 case 3:
@@ -40,6 +44,8 @@ namespace TowerDefense.Model.Turrets
                     Range = 15;
                     Cost = 120;
                     ResellPercentage = 70;
+                    towerImage = (Bitmap)Image.FromFile("Media\\Tower\\SlowTowers\\slow3.bmp");
+                    this.LoadImage();
                     break;
 
             }

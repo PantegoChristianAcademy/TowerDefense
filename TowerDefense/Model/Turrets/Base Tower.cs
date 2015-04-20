@@ -83,6 +83,8 @@ namespace TowerDefense.Model.Turrets
         public int BlastRadius;
         public int PosX;
         public int PosY;
+        public int GridX;
+        public int GridY;
         // How much % damage each shot does spread from the 
         public int Resell
         {
@@ -96,7 +98,4 @@ namespace TowerDefense.Model.Turrets
         public int upgradelevel = 1;
         public abstract void Upgrade();
     }
-    
-  
-
 }
