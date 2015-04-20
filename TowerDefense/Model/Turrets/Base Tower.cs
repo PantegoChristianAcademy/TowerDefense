@@ -14,13 +14,47 @@ namespace TowerDefense.Model.Turrets
 
         public Enemies.Enemy selectTarget(List<Enemies.Enemy> enemyLS, Map map)
         {
+            List<Enemies.Enemy> tempEnemyLS = new List<Enemies.Enemy>();
+
             Enemies.Enemy chosenEnemy = null;
-            enemyLS.Reverse();
+
+            //Calculate in range
             foreach (Enemies.Enemy Temp in enemyLS)
             {
-                if(Math.Abs(PosX - Temp.x) <= Range * map.tileSize && Math.Abs(PosY - Temp.y) <= Range * map.tileSize)
+                Point midTower = new Point((int)(PosX + map.tileSize / 2), (int)(PosY + map.tileSize / 2));
+                Point midEnemy = new Point((int)(Temp.x + map.tileSize / 2), (int)(Temp.y + map.tileSize / 2));
+
+                if(Math.Abs(midTower.X - midEnemy.X) <= Range * map.tileSize && Math.Abs(midTower.Y - midEnemy.Y) <= Range * map.tileSize)
                 {
-                    chosenEnemy = Temp;
+                    tempEnemyLS.Add(Temp);
+                }
+            }
+
+            //Calculate farthest one
+            int farthestPlaceInPath = 0;
+            int fastestEnemySpeed = 0;
+            foreach(var Temp in tempEnemyLS)
+            {
+                if (this is Slowing_tower)
+                {
+                    if (Temp.Speed > fastestEnemySpeed) chosenEnemy = Temp;
+                    if (Temp.Speed == fastestEnemySpeed && chosenEnemy != null)
+                    {
+                        if (Temp.Speed > chosenEnemy.Speed) chosenEnemy = Temp;
+                    }
+
+                    fastestEnemySpeed = chosenEnemy.Speed;
+                }
+
+                else
+                {
+                    if (Temp.placeInPath > farthestPlaceInPath) chosenEnemy = Temp;
+                    if (Temp.placeInPath == farthestPlaceInPath && chosenEnemy != null)
+                    {
+                        if (Temp.Health > chosenEnemy.Health) chosenEnemy = Temp;
+                    }
+
+                    farthestPlaceInPath = chosenEnemy.placeInPath;
                 }
             }
 

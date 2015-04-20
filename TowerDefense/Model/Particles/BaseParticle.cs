@@ -10,7 +10,7 @@ namespace TowerDefense.Model.Particles
 {
     public  class BaseParticle
     {
-        private System.Drawing.Bitmap img;
+        public System.Drawing.Bitmap img;
         public System.Drawing.Bitmap Img
         {
             get
@@ -71,8 +71,7 @@ namespace TowerDefense.Model.Particles
         }
         public BaseParticle(Model.Particles.BaseParticle parentParticle, int targetX, int targetY)
         {
-            if (parentParticle.ToString().ToLower() != "freeze") file = "Media\\Particle\\Explosion.png";
-            //else file = "Media\\Particle\\FreezeExplosion.png"
+            file = "Media\\Particle\\Explosion.png";
             posX = targetX;
             posY = targetY;
         }
