@@ -215,6 +215,7 @@
     <Content Include="Media\Enemies\LordCalvin.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Media\Enemies\TreyFlag.bmp" />
     <Content Include="Media\Icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
