@@ -44,7 +44,7 @@ namespace TowerDefense
             UpdateTileContent();
         }
 
-        #region DeterminingSelectedTile
+        #region DeterminingClickedTile
         public static bool IsClickWithinMap(int mouseX, int mouseY, Map map)
         {
             Tile topLeft = map.MapGrid[0,0];
@@ -84,6 +84,18 @@ namespace TowerDefense
             return map.MapGrid[0,0];
         }
         #endregion
+
+        public static Tile DetermineSelectedTile(int selectedX, int selectedY, Map loadedMap)
+        {
+            foreach (Tile temp in loadedMap.MapGrid)
+            {
+                if (temp.GridXLoc == selectedX && temp.GridYLoc == selectedY)
+                {
+                    return temp;
+                }
+            }
+            return null;
+        }
 
         public static bool IsClickedTileAdjacent(double tileSize, List<Tile> Path, Tile selectedTile)
         {

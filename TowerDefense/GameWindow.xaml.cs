@@ -24,7 +24,7 @@ namespace TowerDefense
     {
         public Model.Turrets.Base_Tower ShopTower = null;
         public static int balance = 3000;
-        public static int health = 3000;
+        public static int health = 1;
 
         // ... { GLOBAL HOOK }
         [DllImport("user32.dll")]
@@ -106,11 +106,17 @@ namespace TowerDefense
                         this.IsEnabled = true;
                     }
                     break;
+                    //help button w/ ?
+                case 48:
+                    System.Diagnostics.Process.Start("chrome.exe", "http://gamedev.pantego.com/?page_id=71");
+                    break;
                     //destroy water w/ enter
                 case 32:
                     Game.ConvertWater();
                     break;
+                case 8:
 
+                    break;
                 case 38:
                     //highlight object w/ up arrow
                     if(Game.selectedY - 1 >= 0) Game.selectedY--;

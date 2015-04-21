@@ -33,6 +33,7 @@
             this.CreateMapButton = new System.Windows.Forms.Button();
             this.LoadMapButton = new System.Windows.Forms.Button();
             this.DeleteMapBtn = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Refresh
@@ -77,18 +78,33 @@
             this.DeleteMapBtn.Font = new System.Drawing.Font("Microsoft Uighur", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DeleteMapBtn.Location = new System.Drawing.Point(12, 168);
             this.DeleteMapBtn.Name = "DeleteMapBtn";
-            this.DeleteMapBtn.Size = new System.Drawing.Size(505, 49);
+            this.DeleteMapBtn.Size = new System.Drawing.Size(443, 49);
             this.DeleteMapBtn.TabIndex = 2;
             this.DeleteMapBtn.Text = "Destroy Your Own Map";
             this.DeleteMapBtn.UseVisualStyleBackColor = false;
             this.DeleteMapBtn.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DeleteMapBtn_MouseClick);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Orange;
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Microsoft Uighur", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(461, 168);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(56, 49);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "?";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.button1_MouseClick);
             // 
             // LaunchWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(529, 229);
+            this.ClientSize = new System.Drawing.Size(529, 226);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.DeleteMapBtn);
             this.Controls.Add(this.LoadMapButton);
             this.Controls.Add(this.CreateMapButton);
@@ -106,6 +122,7 @@
         private System.Windows.Forms.Button CreateMapButton;
         private System.Windows.Forms.Button LoadMapButton;
         private System.Windows.Forms.Button DeleteMapBtn;
+        private System.Windows.Forms.Button button1;
     }
 }
 

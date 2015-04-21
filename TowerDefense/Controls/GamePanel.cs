@@ -65,81 +65,89 @@ namespace TowerDefense.Controls
 
         void timer_Tick(object sender, EventArgs e)
         {
-            if (timeUntilNextRoundMS == 0)
+            if (GameWindow.health <= 0)
             {
-                GameWindow._window.RoundTime.Visibility = System.Windows.Visibility.Hidden;
+                timer.Enabled = false;
+                MessageBox.Show("You Died");
+            }
 
-                #region SpawnEnemy
-                if (timeElapsedSinceRoundStart >= spawnIntervalinMS && enemyQueue.Count >= 1)
+            else
+            {
+                if (timeUntilNextRoundMS == 0)
                 {
-                    timeElapsedSinceRoundStart = 0;
-                    Model.Enemies.Enemy newEnemy = enemyQueue.Dequeue();
-                    listOfEnemies.Add(newEnemy);
-                    newEnemy.SetInitialSpawnLoc(loadedMap.Path);
-                }
-                #endregion
+                    GameWindow._window.RoundTime.Visibility = System.Windows.Visibility.Hidden;
 
-                if (listOfEnemies.Count >= 1)
-                {
-                    #region MoveEnemies
-                    foreach (Model.Enemies.Enemy tempEnemy in listOfEnemies) tempEnemy.Move(loadedMap.Path);
-                    for (int i = 0; i < listOfEnemies.Count; i++)
+                    #region SpawnEnemy
+                    if (timeElapsedSinceRoundStart >= spawnIntervalinMS && enemyQueue.Count >= 1)
                     {
-                        if (listOfEnemies[i].needToDelete == true)
-                        {
-                            GameWindow.health -= listOfEnemies[i].damage;
-                            listOfEnemies.RemoveAt(i);
-                            i--;
-                        }
+                        timeElapsedSinceRoundStart = 0;
+                        Model.Enemies.Enemy newEnemy = enemyQueue.Dequeue();
+                        listOfEnemies.Add(newEnemy);
+                        newEnemy.SetInitialSpawnLoc(loadedMap.Path);
                     }
                     #endregion
 
-                    #region ManageTowers
-                    foreach (TowerDefense.Model.Turrets.Base_Tower tower in listOfTowers)
+                    if (listOfEnemies.Count >= 1)
                     {
-                        if (tower.timeSinceLastShot > 0)
+                        #region MoveEnemies
+                        foreach (Model.Enemies.Enemy tempEnemy in listOfEnemies) tempEnemy.Move(loadedMap.Path);
+                        for (int i = 0; i < listOfEnemies.Count; i++)
                         {
-                            tower.timeSinceLastShot -= timer.Interval;
-                            tower.LoadImage();
-                        }
-
-                        else if (tower.timeSinceLastShot <= 0)
-                        {
-                            tower.timeSinceLastShot = 0;
-
-                            try
+                            if (listOfEnemies[i].needToDelete == true)
                             {
-                                tower.selectedEnemy = tower.selectTarget(listOfEnemies, loadedMap);
+                                GameWindow.health -= listOfEnemies[i].damage;
+                                listOfEnemies.RemoveAt(i);
+                                i--;
+                            }
+                        }
+                        #endregion
 
-                                if (tower.selectedEnemy != null)
-                                {
-                                    if (!(tower is TowerDefense.Model.Turrets.Slowing_tower))
-                                    {
-                                        Model.Particles.BaseParticle particle = new Model.Particles.BaseParticle(tower, tower.selectedEnemy, loadedMap);
-                                        particles.Add(particle);
-                                    }
-
-                                    else if (tower is TowerDefense.Model.Turrets.Slowing_tower && tower.selectedEnemy.Speed >= 1)
-                                    {
-                                        Model.Particles.BaseParticle particle = new Model.Particles.BaseParticle(tower, tower.selectedEnemy, loadedMap);
-                                        particles.Add(particle);
-                                    }
-
-                                    tower.timeSinceLastShot += tower.Firerate * 1000;
-                                }
+                        #region ManageTowers
+                        foreach (TowerDefense.Model.Turrets.Base_Tower tower in listOfTowers)
+                        {
+                            if (tower.timeSinceLastShot > 0)
+                            {
+                                tower.timeSinceLastShot -= timer.Interval;
+                                tower.LoadImage();
                             }
 
-                            catch { }
-                        }
-                    }
-                    #endregion
+                            else if (tower.timeSinceLastShot <= 0)
+                            {
+                                tower.timeSinceLastShot = 0;
 
-                    #region ManageParticles
-                    for (int i = 0; i < particles.Count; i++)
-                    {
-                        var particle = particles[i];
-                        particle.MoveParticle(loadedMap);
-                            
+                                try
+                                {
+                                    tower.selectedEnemy = tower.selectTarget(listOfEnemies, loadedMap);
+
+                                    if (tower.selectedEnemy != null)
+                                    {
+                                        if (!(tower is TowerDefense.Model.Turrets.Slowing_tower))
+                                        {
+                                            Model.Particles.BaseParticle particle = new Model.Particles.BaseParticle(tower, tower.selectedEnemy, loadedMap);
+                                            particles.Add(particle);
+                                        }
+
+                                        else if (tower is TowerDefense.Model.Turrets.Slowing_tower && tower.selectedEnemy.Speed >= 1)
+                                        {
+                                            Model.Particles.BaseParticle particle = new Model.Particles.BaseParticle(tower, tower.selectedEnemy, loadedMap);
+                                            particles.Add(particle);
+                                        }
+
+                                        tower.timeSinceLastShot += tower.Firerate * 1000;
+                                    }
+                                }
+
+                                catch { }
+                            }
+                        }
+                        #endregion
+
+                        #region ManageParticles
+                        for (int i = 0; i < particles.Count; i++)
+                        {
+                            var particle = particles[i];
+                            particle.MoveParticle(loadedMap);
+
                             if (!listOfEnemies.Contains(particle.Target) && listOfEnemies.Count > 1)
                             {
                                 particles.RemoveAt(i);
@@ -148,7 +156,7 @@ namespace TowerDefense.Controls
 
                             else if (Math.Abs(particle.posX - particle.Target.x) <= loadedMap.tileSize / 4 && Math.Abs(particle.posY - particle.Target.y) <= loadedMap.tileSize / 4)
                             {
-                                if(particle.ToString().ToLower() == "freeze")
+                                if (particle.ToString().ToLower() == "freeze")
                                 {
                                     particle.Target.Speed -= particle.damage;
                                     if (particle.Target.Speed <= 0) particle.Target.Speed = 1;
@@ -167,34 +175,35 @@ namespace TowerDefense.Controls
                                 i--;
                                 break;
                             }
+                        }
+                        #endregion
                     }
-                    #endregion
-                }
 
-                else if (listOfEnemies.Count == 0)
-                {
-                    particles.Clear();
-
-                    #region ManageRounds
-                    if (enemyQueue.Count == 0)
+                    else if (listOfEnemies.Count == 0)
                     {
-                        roundNum++;
-                        enemyQueue = new Queue<Model.Enemies.Enemy>(TowerDefense.Model.Enemy.EnemyFactory.GenerateWave(roundNum, loadedMap.difficulty));
-                        timeUntilNextRoundMS = 500;
-                        GameWindow._window.RoundTime.Visibility = System.Windows.Visibility.Visible;
+                        particles.Clear();
+
+                        #region ManageRounds
+                        if (enemyQueue.Count == 0)
+                        {
+                            roundNum++;
+                            enemyQueue = new Queue<Model.Enemies.Enemy>(TowerDefense.Model.Enemy.EnemyFactory.GenerateWave(roundNum, loadedMap.difficulty));
+                            timeUntilNextRoundMS = 500;
+                            GameWindow._window.RoundTime.Visibility = System.Windows.Visibility.Visible;
+                        }
+                        #endregion
                     }
-                    #endregion
+
+                    timeElapsedSinceRoundStart += timer.Interval;
                 }
 
-                timeElapsedSinceRoundStart += timer.Interval;
-            }
+                else
+                {
+                    timeUntilNextRoundMS -= timer.Interval;
+                }
 
-            else
-            {
-                timeUntilNextRoundMS -= timer.Interval;
+                this.Invalidate();
             }
-
-            this.Invalidate();
         }
 
         public new void Resize(int width, int height)
@@ -289,14 +298,12 @@ namespace TowerDefense.Controls
 
         public void ConvertWater()
         {
-            foreach(Tile temp in loadedMap.MapGrid)
+            Tile temp = Tile.DetermineSelectedTile(selectedX, selectedY, loadedMap);
+            if (temp.identity == TileIdentity.Water && GameWindow.balance - costToRemoveWater >= 0)
             {
-                if (temp.identity == TileIdentity.Water && temp.GridXLoc == selectedX && temp.GridYLoc == selectedY && GameWindow.balance - costToRemoveWater >= 0)
-                {
-                    temp.ChangeTileIdentity(TileIdentity.Unoccupied);
-                    temp.UpdateTileContent();
-                    GameWindow.balance -= costToRemoveWater;
-                }
+                temp.ChangeTileIdentity(TileIdentity.Unoccupied);
+                temp.UpdateTileContent();
+                GameWindow.balance -= costToRemoveWater;
             }
         }
     }

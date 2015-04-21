@@ -52,5 +52,10 @@ namespace TowerDefense
             mapLoader.ShowDialog();
         }
         #endregion
+
+        private void button1_MouseClick(object sender, MouseEventArgs e)
+        {
+            System.Diagnostics.Process.Start("chrome.exe", "http://gamedev.pantego.com/?page_id=71");
+        }
     }
 }
