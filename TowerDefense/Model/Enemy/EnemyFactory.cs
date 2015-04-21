@@ -12,8 +12,9 @@ namespace TowerDefense.Model.Enemy
     {
         public static List<Enemies.Enemy> GenerateWave(short round, string difficulty)
         {
-            List<Enemies.Enemy> enemyLS = GenerateDynamicWave(round);
-
+            //List<Enemies.Enemy> enemyLS = GenerateDynamicWave(round);
+            List<Enemies.Enemy> enemyLS = new List<Enemies.Enemy>();
+            enemyLS.Add(new Enemies.Lord_Calvin());
             foreach (Enemies.Enemy temp in enemyLS)
             {
                 if (difficulty == "Easy")
@@ -22,7 +23,7 @@ namespace TowerDefense.Model.Enemy
                     temp.Speed = (int)(temp.Speed * 0.8);
                 }
             
-                if (difficulty == "Hard")
+                if (difficulty == "Normal")
                 {
                     temp.Health = (int)(temp.Health * 1.2);
                     temp.Speed = (int)(temp.Speed * 1.2);
@@ -30,7 +31,7 @@ namespace TowerDefense.Model.Enemy
             }
 
             //double Num Of Enemies
-            if (difficulty == "Hard")
+            if (difficulty == "Normal")
             {
                 foreach(Enemies.Enemy tempEnemy in GenerateDynamicWave(round))
                 {

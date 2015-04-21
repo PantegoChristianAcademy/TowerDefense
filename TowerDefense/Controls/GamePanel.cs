@@ -279,21 +279,28 @@ namespace TowerDefense.Controls
 
         public void UpgradeTower()
         {
-            foreach(TowerDefense.Model.Turrets.Base_Tower tower in listOfTowers)
+            var tower = TowerDefense.Model.Turrets.Base_Tower.DetermineSelectedTower(selectedX, selectedY, listOfTowers);
+            if (tower != null)
             {
-                if(tower.GridX == selectedX && tower.GridY == selectedY)
+                if (tower.upgradelevel < 3)
                 {
-                    
-                    if (tower.upgradelevel < 3)
+                    if (GameWindow.balance - tower.Costs[tower.upgradelevel] >= 0)
                     {
-                        if (GameWindow.balance - tower.Costs[tower.upgradelevel] >= 0)
-                        {
-                            tower.Upgrade();
-                            GameWindow.balance -= tower.Costs[tower.upgradelevel - 1];
-                        }
+                        tower.Upgrade();
+                        GameWindow.balance -= tower.Costs[tower.upgradelevel - 1];
                     }
                 }
             }
+        }
+
+        public void SellTower()
+        {
+            var tower = TowerDefense.Model.Turrets.Base_Tower.DetermineSelectedTower(selectedX, selectedY, listOfTowers);
+            GameWindow.balance += (int)(tower.TotalCost * tower.ResellPercentage);
+            listOfTowers.Remove(tower);
+            Tile temp = Tile.DetermineSelectedTile(selectedX, selectedY, loadedMap);
+            temp.identity = TileIdentity.Unoccupied;
+            temp.UpdateTileContent();
         }
 
         public void ConvertWater()

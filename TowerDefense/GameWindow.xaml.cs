@@ -114,8 +114,9 @@ namespace TowerDefense
                 case 32:
                     Game.ConvertWater();
                     break;
+                    //Sell Tower
                 case 8:
-
+                    Game.SellTower();
                     break;
                 case 38:
                     //highlight object w/ up arrow
