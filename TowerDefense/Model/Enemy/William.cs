@@ -16,6 +16,7 @@ namespace TowerDefense.Model.Enemy
             Speed = 3;
             Goldgiven = 420;
             damage = 42;
+            //#420
         }
     }
     
