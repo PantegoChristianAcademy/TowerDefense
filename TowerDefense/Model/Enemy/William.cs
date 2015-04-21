@@ -17,6 +17,6 @@ namespace TowerDefense.Model.Enemy
             Goldgiven = 420;
             damage = 42;
         }
-        
+    }
     
 }
