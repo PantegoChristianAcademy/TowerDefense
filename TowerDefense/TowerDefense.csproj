@@ -73,6 +73,7 @@
     <Compile Include="Model\Enemy\Plane.cs" />
     <Compile Include="Model\Enemy\Sanic.cs" />
     <Compile Include="Model\Enemy\Trey.cs" />
+    <Compile Include="Model\Enemy\William.cs" />
     <Compile Include="Model\Maps\FileCommands.cs" />
     <Compile Include="Model\Maps\Game Windows\CreateMapWindow.cs">
       <SubType>Form</SubType>
