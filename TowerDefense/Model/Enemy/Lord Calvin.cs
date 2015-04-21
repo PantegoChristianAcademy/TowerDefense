@@ -15,8 +15,8 @@ namespace TowerDefense.Model.Enemies
            LoadImage();
            Health = 650;
            Speed = 2;
-           Goldgiven = 250;
-           damage = 15;
+           Goldgiven = 500;
+           damage = 50;
            //enemy not in use right now because this is the boss and the wave has not been set yet
        }
     }
