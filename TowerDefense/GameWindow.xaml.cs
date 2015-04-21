@@ -24,7 +24,7 @@ namespace TowerDefense
     {
         public Model.Turrets.Base_Tower ShopTower = null;
         public static int balance = 3000;
-        public static int health = 1;
+        public static int health = 1000000;
 
         // ... { GLOBAL HOOK }
         [DllImport("user32.dll")]

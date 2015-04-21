@@ -296,6 +296,7 @@ namespace TowerDefense.Controls
         public void SellTower()
         {
             var tower = TowerDefense.Model.Turrets.Base_Tower.DetermineSelectedTower(selectedX, selectedY, listOfTowers);
+            if(tower != null)
             GameWindow.balance += (int)(tower.TotalCost * tower.ResellPercentage);
             listOfTowers.Remove(tower);
             Tile temp = Tile.DetermineSelectedTile(selectedX, selectedY, loadedMap);
