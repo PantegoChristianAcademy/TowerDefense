@@ -70,11 +70,12 @@ namespace TowerDefense.Model.Turrets
         // How much damage the turret does
         public float Firerate;
         // how many shots per second
-        public float timeSinceLastShot = 0;
+        public float timeSinceLastShot = 0f;
         public int Range;
         // radius from turret in 
-        public int Cost;
-        public int TotalCost;
+        public int[] Costs = new int[3];
+        public int currentCost = 0;
+        public int TotalCost = 0;
         // How much gold/money/whatever a turret costs
         public int SlowPercent;
         // How much each shot slows an enemy up to a cap
@@ -90,7 +91,7 @@ namespace TowerDefense.Model.Turrets
         {
             get
             {
-                return ResellPercentage * Cost;
+                return ResellPercentage * Costs[upgradelevel - 1];
             }
         }
         public int ResellPercentage;

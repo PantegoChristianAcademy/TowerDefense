@@ -17,9 +17,12 @@ namespace TowerDefense.Model.Turrets
             Damage = 10;
             Firerate = 2;
             Range = 6;
-            Cost = 100;
+            Costs[0] = 100;
+            Costs[1] = 125;
+            Costs[2] = 150;
             ResellPercentage = 60;
-            TotalCost = Cost;
+            currentCost = Costs[0];
+            TotalCost += Costs[0];
         }
 
         public override void Upgrade()
@@ -29,25 +32,25 @@ namespace TowerDefense.Model.Turrets
                 {
                     case 2:
                         Damage=15;
-                        Firerate=2.5f;
+                        Firerate=1.5f;
                         Range=9;
-                        Cost=125;
                         ResellPercentage=65;
+                        TotalCost += Costs[1];
+                        currentCost = Costs[1];
                         towerImage = (Bitmap)Image.FromFile("Media\\Tower\\DoTTowers\\DoT2.bmp");
                         this.LoadImage();
                         break;
                     case 3:
                         Damage=20;
-                        Firerate=3;
+                        Firerate=1f;
                         Range=12;
-                        Cost=150;
                         ResellPercentage=70;
+                        TotalCost += Costs[2];
+                        currentCost = Costs[2];
                         towerImage = (Bitmap)Image.FromFile("Media\\Tower\\DoTTowers\\DoT3.bmp");
                         this.LoadImage();
                         break;
                 }
-
-            TotalCost= TotalCost+ Cost;
         }
 
     }

@@ -106,10 +106,14 @@ namespace TowerDefense
                         this.IsEnabled = true;
                     }
                     break;
+                    //destroy water w/ enter
+                case 32:
+                    Game.ConvertWater();
+                    break;
 
                 case 38:
                     //highlight object w/ up arrow
-                    if(Game.selectedY - 1 >- 0) Game.selectedY--;
+                    if(Game.selectedY - 1 >= 0) Game.selectedY--;
                     break;
                 case 37:
                    //highlight object w/ left arrow
@@ -169,7 +173,7 @@ namespace TowerDefense
 
         void Game_TileClick(int x, int y)
         {
-            if (ShopTower != null && balance - ShopTower.Cost >= 0)
+            if (ShopTower != null && balance - ShopTower.currentCost >= 0)
             {
                 Tile clickedTile = TowerDefense.Controls.GamePanel.loadedMap.MapGrid[x, y];
                 if(clickedTile.identity == TileIdentity.Unoccupied)
@@ -180,7 +184,7 @@ namespace TowerDefense
 
                     clickedTile.identity = TileIdentity.Tower;
                     clickedTile.occupiedTower = ShopTower;
-                    balance -= ShopTower.Cost;
+                    balance -= ShopTower.currentCost;
                     ShopTower = null;
                 }
             }

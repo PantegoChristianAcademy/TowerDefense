@@ -17,11 +17,13 @@ namespace TowerDefense.Model.Turrets
            Damage = 5;
            Firerate = 1F;
            Range = 2;
-           Cost = 100;
+            Costs[0] = 100;
+            Costs[1] = 75;
+            Costs[2] = 95;
            ResellPercentage = 60;
-           
+           currentCost = Costs[0];
+           TotalCost += Costs[0];
            additionaleffect = null;
-           TotalCost = Cost;
         }
 
 
@@ -32,27 +34,27 @@ namespace TowerDefense.Model.Turrets
            {
                case 2:
                     Damage = 20;
-                    Firerate = .1f;
+                    Firerate = .5f;
                     Range = 9;
-                    Cost = 75;
                     ResellPercentage = 65;
+                    currentCost = Costs[1];
+                    TotalCost += Costs[1];
                     towerImage = (Bitmap)Image.FromFile("Media\\Tower\\BasicTowers\\Turret2.bmp");
                     this.LoadImage();
                     additionaleffect = null;
                     break;
                case 3:
                     Damage = 30;
-                    Firerate = 3;
+                    Firerate = .1f;
                     Range = 12;
-                    Cost = 95;
                     ResellPercentage = 70;
+                    currentCost = Costs[2];
+                    TotalCost += Costs[2];
                     towerImage = (Bitmap)Image.FromFile("Media\\Tower\\BasicTowers\\Turret3.bmp");
                     this.LoadImage();
                     additionaleffect = null;
                 break;
            }
-
-           TotalCost = TotalCost + Cost;
        }
     }
 

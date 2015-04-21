@@ -32,6 +32,7 @@ namespace TowerDefense.Model.Particles
         public int speed;
         public int damage;
         public Model.Enemies.Enemy Target;
+        public int ticksLeft = 2;
 
         public BaseParticle (Model.Turrets.Base_Tower Tower, Model.Enemies.Enemy target, Map Tile)
         {

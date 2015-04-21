@@ -21,11 +21,12 @@ namespace TowerDefense.Controls
         Timer timer;
         List<Model.Enemies.Enemy> listOfEnemies = new List<Model.Enemies.Enemy>();
         List<Model.Particles.BaseParticle> particles = new List<Model.Particles.BaseParticle>();
-        List<Model.Particles.BaseParticle> tempParticles = new List<Model.Particles.BaseParticle>();
+        List<Model.Particles.BaseParticle> explosionParticles = new List<Model.Particles.BaseParticle>();
         Queue<Model.Enemies.Enemy> enemyQueue = new Queue<Model.Enemies.Enemy>();
         List<Model.Turrets.Base_Tower> listOfTowers = new List<Model.Turrets.Base_Tower>();
         int timeElapsedSinceRoundStart = 0;
         int spawnIntervalinMS = 400;
+        int costToRemoveWater = 100;
 
         public int selectedX = 0;
         public int selectedY = 0;
@@ -159,7 +160,7 @@ namespace TowerDefense.Controls
                                 {
                                     GameWindow.balance += particle.Target.Goldgiven;
                                     listOfEnemies.Remove(particle.Target);
-                                    tempParticles.Add(new Model.Particles.BaseParticle(particle, particle.Target.x, particle.Target.y));
+                                    explosionParticles.Add(new Model.Particles.BaseParticle(particle, particle.Target.x, particle.Target.y));
                                 }
 
                                 particles.RemoveAt(i);
@@ -230,9 +231,16 @@ namespace TowerDefense.Controls
 
             foreach (Model.Particles.BaseParticle particle in particles) screen.DrawImage(particle.Img, new Point(particle.posX, particle.posY));
 
-            foreach (Model.Particles.BaseParticle particle in tempParticles) screen.DrawImage(particle.Img, new Point(particle.posX, particle.posY));
-
-            tempParticles.Clear();
+            for (int i = 0; i < explosionParticles.Count; i++ )
+            {
+                screen.DrawImage(explosionParticles[i].Img, new Point(explosionParticles[i].posX, explosionParticles[i].posY));
+                explosionParticles[i].ticksLeft--;
+                if (explosionParticles[i].ticksLeft == 0)
+                {
+                    explosionParticles.RemoveAt(i);
+                    i--;
+                }
+            }
         }
 
         public Tile GetClickedTile(int x, int y)
@@ -262,12 +270,32 @@ namespace TowerDefense.Controls
 
         public void UpgradeTower()
         {
-            for(
-                int i = 0; i < listOfTowers.Count; i++)
+            foreach(TowerDefense.Model.Turrets.Base_Tower tower in listOfTowers)
             {
-                if(listOfTowers[i].GridX == selectedX && listOfTowers[i].GridY == selectedY)
+                if(tower.GridX == selectedX && tower.GridY == selectedY)
                 {
-                    listOfTowers[i].Upgrade();
+                    
+                    if (tower.upgradelevel < 3)
+                    {
+                        if (GameWindow.balance - tower.Costs[tower.upgradelevel] >= 0)
+                        {
+                            tower.Upgrade();
+                            GameWindow.balance -= tower.Costs[tower.upgradelevel - 1];
+                        }
+                    }
+                }
+            }
+        }
+
+        public void ConvertWater()
+        {
+            foreach(Tile temp in loadedMap.MapGrid)
+            {
+                if (temp.identity == TileIdentity.Water && temp.GridXLoc == selectedX && temp.GridYLoc == selectedY && GameWindow.balance - costToRemoveWater >= 0)
+                {
+                    temp.ChangeTileIdentity(TileIdentity.Unoccupied);
+                    temp.UpdateTileContent();
+                    GameWindow.balance -= costToRemoveWater;
                 }
             }
         }

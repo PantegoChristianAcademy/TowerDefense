@@ -15,12 +15,16 @@ namespace TowerDefense.Model.Turrets
             GridX = selectedXGrid;
             GridY = selectedYGrid;
             Damage = 25;
-            Firerate = 1;
+            Firerate = 3f;
             Range = 15;
-            Cost = 165;
+            Costs[0] = 165;
+            Costs[1] = 120;
+            Costs[2] = 145;
             ResellPercentage = 60;
             additionaleffect = null;
             BlastRadius = 40;
+            TotalCost += Costs[0];
+            currentCost = Costs[0];
         }
         public override void Upgrade()
         {
@@ -29,28 +33,29 @@ namespace TowerDefense.Model.Turrets
             {
                 case 2:
                     Damage = 50;
-                    Firerate = 1;
+                    Firerate = 2f;
                     Range = 18;
-                    Cost = 120;
                     ResellPercentage = 65;
                     additionaleffect = null;
                     BlastRadius = 50;
+                    TotalCost += Costs[1];
+                    currentCost = Costs[1];
                     towerImage = (Bitmap)Image.FromFile("Media\\Tower\\SplashTowers\\Splash2.bmp");
                     this.LoadImage();
                     break;
                 case 3:
                     Damage = 75;
-                    Firerate = 1;
+                    Firerate = 1.5f;
                     Range = 21;
-                    Cost = 145;
                     ResellPercentage = 70;
                     additionaleffect = null;
                     BlastRadius = 60;
+                    TotalCost += Costs[2];
+                    currentCost = Costs[2];
                     towerImage = (Bitmap)Image.FromFile("Media\\Tower\\SplashTowers\\Splash3.bmp");
                     this.LoadImage();
                     break;
             }
-            TotalCost = TotalCost + Cost;
         }
     }
  }
