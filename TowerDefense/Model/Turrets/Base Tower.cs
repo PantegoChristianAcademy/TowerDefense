@@ -38,6 +38,7 @@ namespace TowerDefense.Model.Turrets
             int fastestEnemySpeed = 0;
             if (tempEnemyLS.Count > 1)
             {
+                chosenEnemy = tempEnemyLS[0];
                 foreach (var Temp in tempEnemyLS)
                 {
                     if (this is Slowing_tower)

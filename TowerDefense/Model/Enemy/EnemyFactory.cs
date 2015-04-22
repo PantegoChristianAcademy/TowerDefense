@@ -60,7 +60,7 @@ namespace TowerDefense.Model.Enemy
             else
             {
                 //Generate Sanics
-                for (int i = 0; i < round; i++) enemyReferenceList.Add(new Sanic());
+                for (int i = 0; i < round; i++) enemyReferenceList.Add(new William());
                 //Generate Mr. Krabs
                 for (int i = 0; i < round / 3; i++) enemyReferenceList.Add(new Mr_Krabs());
                 //Generate Gaben
