@@ -231,6 +231,9 @@
     <Content Include="Media\Particle\Fire.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Media\Particle\Flame.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Media\Particle\Freeze.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

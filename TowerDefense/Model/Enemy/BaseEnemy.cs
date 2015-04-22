@@ -12,7 +12,7 @@ namespace TowerDefense.Model.Enemies
        public string Imagefile;
        public Bitmap enemyImage;
        
-       public int Health;
+       public float Health;
        public int Speed;
        public int x;
        public int y;
@@ -20,6 +20,9 @@ namespace TowerDefense.Model.Enemies
        public int placeInPath = 0;
        public byte damage;
        public bool needToDelete = false;
+       public bool isOnFire = false;
+       public int burnDuration = 0;
+       public float fireDamage = 0;
 
        public void SetInitialSpawnLoc(List<Tile> path)
        {

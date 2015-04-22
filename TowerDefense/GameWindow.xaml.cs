@@ -176,6 +176,7 @@ namespace TowerDefense
         private void Window_Exit (object sender, System.ComponentModel.CancelEventArgs e)
         {
             UnHook();
+            Environment.Exit(1);
         }
 
         void Game_TileClick(int x, int y)

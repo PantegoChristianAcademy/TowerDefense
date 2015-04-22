@@ -13,13 +13,14 @@ namespace TowerDefense.Controls
 {
     public class GamePanel : Panel
     {
-        public static short roundNum = 0;
-        public static int timeUntilNextRoundMS = 0;
+        public static short roundNum;
+        public static int timeUntilNextRoundMS;
 
         public static Map loadedMap;
         TileIdentity[,] loadedMapGrid;
         Timer timer;
         List<Model.Enemies.Enemy> listOfEnemies = new List<Model.Enemies.Enemy>();
+        List<Model.Enemies.Enemy> listOfEnemiesRemove = new List<Model.Enemies.Enemy>();
         List<Model.Particles.BaseParticle> particles = new List<Model.Particles.BaseParticle>();
         List<Model.Particles.BaseParticle> explosionParticles = new List<Model.Particles.BaseParticle>();
         Queue<Model.Enemies.Enemy> enemyQueue = new Queue<Model.Enemies.Enemy>();
@@ -96,7 +97,7 @@ namespace TowerDefense.Controls
                             if (listOfEnemies[i].needToDelete == true)
                             {
                                 GameWindow.health -= listOfEnemies[i].damage;
-                                listOfEnemies.RemoveAt(i);
+                                listOfEnemies.RemoveAt(i);       
                                 i--;
                             }
                         }
@@ -114,30 +115,30 @@ namespace TowerDefense.Controls
                             else if (tower.timeSinceLastShot <= 0)
                             {
                                 tower.timeSinceLastShot = 0;
-
-                                try
+                                tower.selectedEnemy = tower.selectTarget(listOfEnemies, loadedMap);
+                                if(tower.selectedEnemy != null)
                                 {
-                                    tower.selectedEnemy = tower.selectTarget(listOfEnemies, loadedMap);
-
-                                    if (tower.selectedEnemy != null)
+                                    if (!(tower is TowerDefense.Model.Turrets.Slowing_tower) && !(tower is TowerDefense.Model.Turrets.DoT_Tower))
                                     {
-                                        if (!(tower is TowerDefense.Model.Turrets.Slowing_tower))
-                                        {
-                                            Model.Particles.BaseParticle particle = new Model.Particles.BaseParticle(tower, tower.selectedEnemy, loadedMap);
-                                            particles.Add(particle);
-                                        }
-
-                                        else if (tower is TowerDefense.Model.Turrets.Slowing_tower && tower.selectedEnemy.Speed >= 1)
-                                        {
-                                            Model.Particles.BaseParticle particle = new Model.Particles.BaseParticle(tower, tower.selectedEnemy, loadedMap);
-                                            particles.Add(particle);
-                                        }
-
-                                        tower.timeSinceLastShot += tower.Firerate * 1000;
+                                        Model.Particles.BaseParticle particle = new Model.Particles.BaseParticle(tower, tower.selectedEnemy, loadedMap);
+                                        particles.Add(particle);
                                     }
-                                }
 
-                                catch { }
+                                    else if (tower is TowerDefense.Model.Turrets.Slowing_tower)
+                                    {
+                                        Model.Particles.BaseParticle particle = new Model.Particles.BaseParticle(tower, tower.selectedEnemy, loadedMap);
+                                        particles.Add(particle);
+                                    }
+
+                                    else if (tower is TowerDefense.Model.Turrets.DoT_Tower)
+                                    {
+                                        Model.Particles.BaseParticle particle = new Model.Particles.BaseParticle(tower, tower.selectedEnemy, loadedMap);
+                                        particle.BurnDuration = tower.burnDuration;
+                                        particles.Add(particle);
+                                    }
+
+                                    tower.timeSinceLastShot += tower.Firerate * 1000;
+                                }
                             }
                         }
                         #endregion
@@ -148,7 +149,7 @@ namespace TowerDefense.Controls
                             var particle = particles[i];
                             particle.MoveParticle(loadedMap);
 
-                            if (!listOfEnemies.Contains(particle.Target) && listOfEnemies.Count > 1)
+                            if (listOfEnemiesRemove.Contains(particle.Target))
                             {
                                 particles.RemoveAt(i);
                                 i--;
@@ -158,17 +159,26 @@ namespace TowerDefense.Controls
                             {
                                 if (particle.ToString().ToLower() == "freeze")
                                 {
-                                    particle.Target.Speed -= particle.damage;
+                                    particle.Target.Speed -= (int)particle.damage;
                                     if (particle.Target.Speed <= 0) particle.Target.Speed = 1;
+                                }
+
+                                else if (particle.ToString().ToLower() == "fire")
+                                {
+                                    particle.Target.isOnFire = true;
+                                    particle.Target.fireDamage = particle.damage;
+                                    particle.Target.burnDuration = (int)(particle.BurnDuration * 1000);
                                 }
 
                                 else particle.Target.Health -= particle.damage;
 
-                                if (particle.Target.Health <= 0 && particle.ToString().ToLower() != "freeze")
+                                if (particle.Target.Health <= 0)
                                 {
-                                    GameWindow.balance += particle.Target.Goldgiven;
-                                    listOfEnemies.Remove(particle.Target);
-                                    explosionParticles.Add(new Model.Particles.BaseParticle(particle, particle.Target.x, particle.Target.y));
+                                    listOfEnemiesRemove.Add(particle.Target);
+                                    if(particle.ToString() != "freeze")
+                                    {
+                                        explosionParticles.Add(new TowerDefense.Model.Particles.BaseParticle(particle.Target.x, particle.Target.y));
+                                    }
                                 }
 
                                 particles.RemoveAt(i);
@@ -176,6 +186,40 @@ namespace TowerDefense.Controls
                                 break;
                             }
                         }
+                        #endregion
+
+                        #region ManageFlames
+                        foreach(var enemy in listOfEnemies)
+                        {
+                            if (enemy.isOnFire == true)
+                            {
+                                enemy.burnDuration -= timer.Interval;
+                                if (enemy.burnDuration > 0)
+                                {
+                                    enemy.Health -= enemy.fireDamage;
+                                    if (enemy.Health <= 0)
+                                    {
+                                        explosionParticles.Add(new TowerDefense.Model.Particles.BaseParticle(enemy.x, enemy.y));
+                                        listOfEnemiesRemove.Add(enemy);
+                                    }
+                                }
+
+                                else
+                                {
+                                    enemy.isOnFire = false;
+                                }
+                            }
+                        }
+                        #endregion
+
+                        #region ManageEnemies
+                        foreach (var enemy in listOfEnemiesRemove)
+                        {
+                            GameWindow.balance += enemy.Goldgiven;
+                            listOfEnemies.Remove(enemy);
+                        }
+
+                        listOfEnemiesRemove.Clear();
                         #endregion
                     }
 
@@ -214,6 +258,8 @@ namespace TowerDefense.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
+            Bitmap flame = (Bitmap)Image.FromFile("Media\\Particle\\Flame.png");
+            flame.MakeTransparent(Color.FromArgb(255, 255, 255));
             var screen = e.Graphics;
 
             foreach (Tile tempTile in loadedMap.MapGrid)
@@ -235,6 +281,7 @@ namespace TowerDefense.Controls
             foreach (Model.Enemies.Enemy tempEnemy in listOfEnemies)
             {
                 screen.DrawImage(tempEnemy.enemyImage, tempEnemy.x, tempEnemy.y, (int)loadedMap.tileSize, (int)loadedMap.tileSize);
+                if (tempEnemy.isOnFire == true) screen.DrawImage(flame, tempEnemy.x, tempEnemy.y);
             }
 
             foreach (Model.Turrets.Base_Tower tempTower in listOfTowers) screen.DrawImage(tempTower.towerImage, tempTower.PosX, tempTower.PosY, (int)loadedMap.tileSize, (int)loadedMap.tileSize);
@@ -298,7 +345,7 @@ namespace TowerDefense.Controls
         {
             var tower = TowerDefense.Model.Turrets.Base_Tower.DetermineSelectedTower(selectedX, selectedY, listOfTowers);
             if(tower != null)
-            GameWindow.balance += (int)(tower.TotalCost * tower.ResellPercentage);
+            GameWindow.balance += (int)(tower.TotalCost * tower.ResellPercentage / 100);
             listOfTowers.Remove(tower);
             Tile temp = Tile.DetermineSelectedTile(selectedX, selectedY, loadedMap);
             temp.identity = TileIdentity.Unoccupied;

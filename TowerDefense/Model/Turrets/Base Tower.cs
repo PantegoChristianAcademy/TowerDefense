@@ -11,6 +11,7 @@ namespace TowerDefense.Model.Turrets
     {
         public Bitmap towerImage;
         public Model.Enemies.Enemy selectedEnemy;
+        public int burnDuration = 0;
 
         public Enemies.Enemy selectTarget(List<Enemies.Enemy> enemyLS, Map map)
         {
@@ -26,37 +27,44 @@ namespace TowerDefense.Model.Turrets
 
                 if(Math.Abs(midTower.X - midEnemy.X) <= Range * map.tileSize && Math.Abs(midTower.Y - midEnemy.Y) <= Range * map.tileSize)
                 {
-                    tempEnemyLS.Add(Temp);
+                    if (!(this is Slowing_tower) && !(this is DoT_Tower)) tempEnemyLS.Add(Temp);
+                    else if (this is Slowing_tower && Temp.Speed > 1) tempEnemyLS.Add(Temp);
+                    else if (this is DoT_Tower && Temp.isOnFire == false) tempEnemyLS.Add(Temp);
                 }
             }
 
             //Calculate farthest one
             int farthestPlaceInPath = 0;
             int fastestEnemySpeed = 0;
-            foreach(var Temp in tempEnemyLS)
+            if (tempEnemyLS.Count > 1)
             {
-                if (this is Slowing_tower)
+                foreach (var Temp in tempEnemyLS)
                 {
-                    if (Temp.Speed > fastestEnemySpeed) chosenEnemy = Temp;
-                    if (Temp.Speed == fastestEnemySpeed && chosenEnemy != null)
+                    if (this is Slowing_tower)
                     {
-                        if (Temp.Speed > chosenEnemy.Speed) chosenEnemy = Temp;
+                        if (Temp.Speed > fastestEnemySpeed) chosenEnemy = Temp;
+                        if (Temp.Speed == fastestEnemySpeed && chosenEnemy != null)
+                        {
+                            if (Temp.Speed > chosenEnemy.Speed) chosenEnemy = Temp;
+                        }
+
+                        fastestEnemySpeed = chosenEnemy.Speed;
                     }
 
-                    fastestEnemySpeed = chosenEnemy.Speed;
-                }
-
-                else
-                {
-                    if (Temp.placeInPath > farthestPlaceInPath) chosenEnemy = Temp;
-                    if (Temp.placeInPath == farthestPlaceInPath && chosenEnemy != null)
+                    else
                     {
-                        if (Temp.Health > chosenEnemy.Health) chosenEnemy = Temp;
-                    }
+                        if (Temp.placeInPath > farthestPlaceInPath) chosenEnemy = Temp;
+                        if (Temp.placeInPath == farthestPlaceInPath && chosenEnemy != null)
+                        {
+                            if (Temp.Health > chosenEnemy.Health) chosenEnemy = Temp;
+                        }
 
-                    farthestPlaceInPath = chosenEnemy.placeInPath;
+                        farthestPlaceInPath = chosenEnemy.placeInPath;
+                    }
                 }
             }
+
+            else if(tempEnemyLS.Count == 1) chosenEnemy = tempEnemyLS[0];
 
             return chosenEnemy;
         }
@@ -66,7 +74,7 @@ namespace TowerDefense.Model.Turrets
             towerImage.MakeTransparent(Color.FromArgb(255, 174, 201));
         }
 
-        public int Damage;
+        public float Damage;
         // How much damage the turret does
         public float Firerate;
         // how many shots per second
