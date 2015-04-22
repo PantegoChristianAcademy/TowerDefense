@@ -24,7 +24,7 @@ namespace TowerDefense
     {
         public Model.Turrets.Base_Tower ShopTower = null;
         public static int balance = 3000;
-        public static int health = 1;
+        public static int health = 1000000;
 
         // ... { GLOBAL HOOK }
         [DllImport("user32.dll")]
@@ -114,8 +114,9 @@ namespace TowerDefense
                 case 32:
                     Game.ConvertWater();
                     break;
+                    //Sell Tower
                 case 8:
-
+                    Game.SellTower();
                     break;
                 case 38:
                     //highlight object w/ up arrow

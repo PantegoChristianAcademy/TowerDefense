@@ -94,6 +94,17 @@ namespace TowerDefense.Model.Turrets
                 return ResellPercentage * Costs[upgradelevel - 1];
             }
         }
+
+        public static Base_Tower DetermineSelectedTower(int selectedX, int selectedY, List<Base_Tower> listOfTowers)
+        {
+            foreach (TowerDefense.Model.Turrets.Base_Tower tower in listOfTowers)
+            {
+                if (tower.GridX == selectedX && tower.GridY == selectedY) return tower;
+            }
+
+            return null;
+        }
+
         public int ResellPercentage;
         public string additionaleffect;
         public int upgradelevel = 1;

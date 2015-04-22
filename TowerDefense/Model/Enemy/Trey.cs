@@ -10,7 +10,7 @@ namespace TowerDefense.Model.Enemy
     {
        public Trey()
        {
-           Imagefile = "Media\\Enemies\\Trey.bmp";
+           Imagefile = "Media\\Enemies\\TreyFlag.bmp";
            LoadImage();
            Health = 230;
            Speed = 1;

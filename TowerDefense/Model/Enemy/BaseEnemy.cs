@@ -105,6 +105,7 @@ namespace TowerDefense.Model.Enemies
            enemyImage.MakeTransparent(Color.FromArgb(253, 36, 215));
            enemyImage.MakeTransparent(Color.FromArgb(237, 28, 36));
            enemyImage.MakeTransparent(Color.FromArgb(34, 177, 76));
+           enemyImage.MakeTransparent(Color.FromArgb(238, 0, 232));
        }
     }
 }

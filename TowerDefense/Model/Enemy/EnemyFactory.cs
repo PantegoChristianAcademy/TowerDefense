@@ -13,7 +13,6 @@ namespace TowerDefense.Model.Enemy
         public static List<Enemies.Enemy> GenerateWave(short round, string difficulty)
         {
             List<Enemies.Enemy> enemyLS = GenerateDynamicWave(round);
-
             foreach (Enemies.Enemy temp in enemyLS)
             {
                 if (difficulty == "Easy")
@@ -22,7 +21,7 @@ namespace TowerDefense.Model.Enemy
                     temp.Speed = (int)(temp.Speed * 0.8);
                 }
             
-                if (difficulty == "Hard")
+                if (difficulty == "Normal")
                 {
                     temp.Health = (int)(temp.Health * 1.2);
                     temp.Speed = (int)(temp.Speed * 1.2);
@@ -30,7 +29,7 @@ namespace TowerDefense.Model.Enemy
             }
 
             //double Num Of Enemies
-            if (difficulty == "Hard")
+            if (difficulty == "Hard" && round != 23)
             {
                 foreach(Enemies.Enemy tempEnemy in GenerateDynamicWave(round))
                 {
@@ -47,17 +46,30 @@ namespace TowerDefense.Model.Enemy
             List<Enemies.Enemy> enemyRandomList = new List<Enemies.Enemy>();
             Random rnd = new Random();
 
-            //Generate Sanics
-            for (int i = 0; i < round; i++) enemyReferenceList.Add(new Sanic()); 
-            //Generate Mr. Krabs
-            for (int i = 0; i < round / 2; i++) enemyReferenceList.Add(new Mr_Krabs()); 
-            //Generate Gaben
-            for (int i = 0; i < round / 4; i++) enemyReferenceList.Add(new Gaben()); 
-            //Generate Kalvin Every 6 Rounds
-            if(round % 6 == 0)
+            if (round == 23)
             {
-                for (int i = 0; i < round / 6; i++) enemyReferenceList.Add(new Lord_Calvin()); 
+                enemyRandomList.Add(new Trey());
+                for (int i = 1; i <= 23; i++)
+                {
+                    enemyRandomList.Add(new Sanic());
+                    enemyRandomList[i].Speed *= 2;
+                    enemyRandomList[i].Health /= 2;
+                }
+            }
 
+            else
+            {
+                //Generate Sanics
+                for (int i = 0; i < round; i++) enemyReferenceList.Add(new Sanic());
+                //Generate Mr. Krabs
+                for (int i = 0; i < round / 3; i++) enemyReferenceList.Add(new Mr_Krabs());
+                //Generate Gaben
+                for (int i = 0; i < round / 4; i++) enemyReferenceList.Add(new Gaben());
+                //Generate Kalvin Every 6 Rounds
+                if (round % 6 == 0)
+                {
+                    for (int i = 0; i < round / 6; i++) enemyReferenceList.Add(new Lord_Calvin());
+                }
             }
 
             while(enemyReferenceList.Count > 0)
