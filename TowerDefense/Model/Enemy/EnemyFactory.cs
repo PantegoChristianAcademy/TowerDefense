@@ -53,6 +53,7 @@ namespace TowerDefense.Model.Enemy
                 {
                     enemyRandomList.Add(new Sanic());
                     enemyRandomList[i].Speed *= 2;
+                    enemyRandomList[i].Health /= 2;
                 }
             }
 
