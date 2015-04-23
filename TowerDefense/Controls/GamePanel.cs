@@ -344,12 +344,14 @@ namespace TowerDefense.Controls
         public void SellTower()
         {
             var tower = TowerDefense.Model.Turrets.Base_Tower.DetermineSelectedTower(selectedX, selectedY, listOfTowers);
-            if(tower != null)
-            GameWindow.balance += (int)(tower.TotalCost * tower.ResellPercentage / 100);
-            listOfTowers.Remove(tower);
-            Tile temp = Tile.DetermineSelectedTile(selectedX, selectedY, loadedMap);
-            temp.identity = TileIdentity.Unoccupied;
-            temp.UpdateTileContent();
+            if (tower != null)
+            {
+                GameWindow.balance += (int)(tower.TotalCost * tower.ResellPercentage / 100);
+                listOfTowers.Remove(tower);
+                Tile temp = Tile.DetermineSelectedTile(selectedX, selectedY, loadedMap);
+                temp.identity = TileIdentity.Unoccupied;
+                temp.UpdateTileContent();
+            }
         }
 
         public void ConvertWater()

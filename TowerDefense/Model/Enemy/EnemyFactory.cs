@@ -60,15 +60,20 @@ namespace TowerDefense.Model.Enemy
             else
             {
                 //Generate Sanics
-                for (int i = 0; i < round; i++) enemyReferenceList.Add(new William());
+                for (int i = 0; i < round; i++) enemyReferenceList.Add(new Sanic());
                 //Generate Mr. Krabs
                 for (int i = 0; i < round / 3; i++) enemyReferenceList.Add(new Mr_Krabs());
                 //Generate Gaben
                 for (int i = 0; i < round / 4; i++) enemyReferenceList.Add(new Gaben());
-                //Generate Kalvin Every 6 Rounds
+                //Generate Kalvin 
                 if (round % 6 == 0)
                 {
                     for (int i = 0; i < round / 6; i++) enemyReferenceList.Add(new Lord_Calvin());
+                }
+                //Generate William
+                if (round % 5 == 0)
+                {
+                    for (int i = 0; i < round / 5; i++) enemyReferenceList.Add(new William());
                 }
             }
 
