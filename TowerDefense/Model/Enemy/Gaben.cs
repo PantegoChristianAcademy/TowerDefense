@@ -13,10 +13,10 @@ namespace TowerDefense.Model.Enemies
         {
             Imagefile = "Media\\Enemies\\GabenIsGod.bmp";
             LoadImage();
-            Health = 120;
-            Speed = 2;
-            Goldgiven = 75;
-            damage = 5;
+            Health = 75;
+            Speed = 3;
+            Goldgiven = 15;
+            damage = 1;
             //needs a split function for 50% and 75% enemies to be able to use them, but the enemy still works
         }
     }

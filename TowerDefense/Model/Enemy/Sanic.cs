@@ -13,9 +13,9 @@ namespace TowerDefense.Model.Enemies
        {
            Imagefile = "Media\\Enemies\\sanicfortower.bmp";
            LoadImage();
-           Health = 45;
-           Speed = 4;
-           Goldgiven = 30;
+           Health = 50;
+           Speed = 5;
+           Goldgiven = 25;
            damage = 1;
        }
     }

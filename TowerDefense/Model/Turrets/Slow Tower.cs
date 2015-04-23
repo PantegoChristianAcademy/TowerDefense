@@ -15,8 +15,8 @@ namespace TowerDefense.Model.Turrets
             towerImage = (Bitmap)Image.FromFile("Media\\Tower\\SlowTowers\\Slow.bmp");
             GridX = selectedXGrid;
             GridY = selectedYGrid;
-            Damage = 2;
-            Firerate = 2f;
+            Damage = 3;
+            Firerate = 3f;
             Range = 1;
             Costs[0] = 150;
             Costs[1] = 100;
