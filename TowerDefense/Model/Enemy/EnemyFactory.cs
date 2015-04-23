@@ -13,18 +13,45 @@ namespace TowerDefense.Model.Enemy
         public static List<Enemies.Enemy> GenerateWave(short round, string difficulty)
         {
             List<Enemies.Enemy> enemyLS = GenerateDynamicWave(round);
-            foreach (Enemies.Enemy temp in enemyLS)
+            if (round < 30)
             {
-                if (difficulty == "Easy")
+                foreach (Enemies.Enemy temp in enemyLS)
                 {
-                    temp.Health = (int)(temp.Health * 0.8);
-                    temp.Speed = (int)(temp.Speed * 0.8);
+                    if (difficulty == "Easy")
+                    {
+                        temp.Health = (int)(temp.Health * 0.8);
+                        temp.Speed = (int)(temp.Speed * 0.8);
+                    }
+
+                    if (difficulty == "Hard")
+                    {
+                        temp.Health = (int)(temp.Health * 1.2);
+                        temp.Speed = (int)(temp.Speed * 1.2);
+                    }
                 }
-            
-                if (difficulty == "Normal")
+            }
+
+            else
+            {
+                foreach (Enemies.Enemy temp in enemyLS)
                 {
-                    temp.Health = (int)(temp.Health * 1.2);
-                    temp.Speed = (int)(temp.Speed * 1.2);
+                    if (difficulty == "Easy")
+                    {
+                        temp.Health = (int)(temp.Health * 1);
+                        temp.Speed = (int)(temp.Speed * 1);
+                    }
+
+                    if (difficulty == "Normal")
+                    {
+                        temp.Health = (int)(temp.Health * 1.2);
+                        temp.Speed = (int)(temp.Speed * 1.2);
+                    }
+
+                    if (difficulty == "Hard")
+                    {
+                        temp.Health = (int)(temp.Health * 1.4);
+                        temp.Speed = (int)(temp.Speed * 1.4);
+                    }
                 }
             }
 
@@ -59,12 +86,12 @@ namespace TowerDefense.Model.Enemy
 
             else
             {
+                //Generate Gaben
+                for (int i = 0; i < round; i++) enemyReferenceList.Add(new Gaben());
                 //Generate Sanics
-                for (int i = 0; i < round; i++) enemyReferenceList.Add(new Sanic());
+                for (int i = 0; i < round / 2; i++) enemyReferenceList.Add(new Sanic());
                 //Generate Mr. Krabs
                 for (int i = 0; i < round / 3; i++) enemyReferenceList.Add(new Mr_Krabs());
-                //Generate Gaben
-                for (int i = 0; i < round / 4; i++) enemyReferenceList.Add(new Gaben());
                 //Generate Kalvin 
                 if (round % 6 == 0)
                 {
