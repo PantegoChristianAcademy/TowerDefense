@@ -13,9 +13,9 @@ namespace TowerDefense.Model.Enemy
             Imagefile = "Media\\Enemies\\William.bmp";
             LoadImage();
             Health = 420;
-            Speed = 3;
+            Speed = 2;
             Goldgiven = 420;
-            damage = 42;
+            damage = 10;
             //#420
             //#420
         }

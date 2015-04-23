@@ -14,7 +14,7 @@ namespace TowerDefense.Model.Turrets
             towerImage = (Bitmap)Image.FromFile("Media\\Tower\\SplashTowers\\Splash1.bmp");
             GridX = selectedXGrid;
             GridY = selectedYGrid;
-            Damage = 25;
+            Damage = 75;
             Firerate = 3f;
             Range = 15;
             Costs[0] = 165;
@@ -32,7 +32,7 @@ namespace TowerDefense.Model.Turrets
             switch(upgradelevel)
             {
                 case 2:
-                    Damage = 50;
+                    Damage = 125;
                     Firerate = 2f;
                     Range = 18;
                     ResellPercentage = 65;
@@ -44,7 +44,7 @@ namespace TowerDefense.Model.Turrets
                     this.LoadImage();
                     break;
                 case 3:
-                    Damage = 75;
+                    Damage = 200;
                     Firerate = 1.5f;
                     Range = 21;
                     ResellPercentage = 70;

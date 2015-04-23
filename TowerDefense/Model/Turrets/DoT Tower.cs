@@ -11,12 +11,12 @@ namespace TowerDefense.Model.Turrets
     {
         public DoT_Tower(int selectedXGrid, int selectedYGrid)
         {
-            burnDuration = 3;
+            burnDuration = 1;
             
             towerImage = (Bitmap)Image.FromFile("Media\\Tower\\DoTTowers\\DoT.bmp");
             GridX = selectedXGrid;
             GridY = selectedYGrid;
-            Damage = .001f;
+            Damage = 1.5f;
             Firerate = 2;
             Range = 6;
             Costs[0] = 100;
@@ -33,7 +33,8 @@ namespace TowerDefense.Model.Turrets
                 switch(upgradelevel)
                 {
                     case 2:
-                        Damage = .001f;
+                        burnDuration++;
+                        Damage = 5f;
                         Firerate=1.5f;
                         Range=9;
                         ResellPercentage=65;
@@ -43,7 +44,8 @@ namespace TowerDefense.Model.Turrets
                         this.LoadImage();
                         break;
                     case 3:
-                        Damage = .001f;
+                        burnDuration++;
+                        Damage = 10f;
                         Firerate=1f;
                         Range=12;
                         ResellPercentage=70;
