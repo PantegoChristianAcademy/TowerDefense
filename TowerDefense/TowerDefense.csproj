@@ -68,11 +68,11 @@
     <Compile Include="Model\Enemy\Difficulty.cs" />
     <Compile Include="Model\Enemy\EnemyFactory.cs" />
     <Compile Include="Model\Enemy\Gaben.cs" />
-    <Compile Include="Model\Enemy\Lord Calvin.cs" />
+    <Compile Include="Model\Enemy\Bosses\Lord Calvin.cs" />
     <Compile Include="Model\Enemy\Mr Krabs.cs" />
     <Compile Include="Model\Enemy\Plane.cs" />
     <Compile Include="Model\Enemy\Sanic.cs" />
-    <Compile Include="Model\Enemy\Trey.cs" />
+    <Compile Include="Model\Enemy\Bosses\Trey.cs" />
     <Compile Include="Model\Enemy\William.cs" />
     <Compile Include="Model\Maps\FileCommands.cs" />
     <Compile Include="Model\Maps\Game Windows\CreateMapWindow.cs">
@@ -218,7 +218,9 @@
     <Content Include="Media\Enemies\TreyFlag.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Media\Enemies\Williambmp.bmp" />
+    <Content Include="Media\Enemies\William.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Media\Icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
