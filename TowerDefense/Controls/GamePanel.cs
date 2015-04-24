@@ -40,7 +40,7 @@ namespace TowerDefense.Controls
             MouseDown += GamePanel_MouseDown;
             DoubleBuffered = true;
             timer = new Timer();
-            timer.Interval = 10;
+            timer.Interval = 20;
             timer.Tick += timer_Tick;
             timer.Start();
 
