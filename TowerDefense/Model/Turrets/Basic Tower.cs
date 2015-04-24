@@ -16,7 +16,7 @@ namespace TowerDefense.Model.Turrets
            GridY = selectedYGrid;
            Damage = 20;
            Firerate = 1F;
-           Range = 2;
+           Range = 5;
             Costs[0] = 100;
             Costs[1] = 75;
             Costs[2] = 95;
@@ -35,7 +35,7 @@ namespace TowerDefense.Model.Turrets
                case 2:
                     Damage = 35;
                     Firerate = .75f;
-                    Range = 9;
+                    Range = 7;
                     ResellPercentage = 65;
                     currentCost = Costs[1];
                     TotalCost += Costs[1];
@@ -46,7 +46,7 @@ namespace TowerDefense.Model.Turrets
                case 3:
                     Damage = 50;
                     Firerate = .5f;
-                    Range = 12;
+                    Range = 10;
                     ResellPercentage = 70;
                     currentCost = Costs[2];
                     TotalCost += Costs[2];

@@ -33,7 +33,7 @@ namespace TowerDefense.Model.Turrets
                 case 2:
                     Damage = 5;
                     Firerate = 1.5f;
-                    Range = 12;
+                    Range = 3;
                     ResellPercentage = 65;
                     TotalCost += Costs[1];
                     currentCost = Costs[1];
@@ -44,7 +44,7 @@ namespace TowerDefense.Model.Turrets
                 case 3:
                     Damage = 10;
                     Firerate = 1f;
-                    Range = 15;
+                    Range = 5;
                     ResellPercentage = 70;
                     TotalCost += Costs[2];
                     currentCost = Costs[2];
