@@ -41,8 +41,8 @@ namespace TowerDefense
 
         private delegate IntPtr LowLevelKeyboardProc(int nCode, IntPtr wParam, IntPtr lParam);
 
-        const int WH_KEYBOARD_LL = 13; // Номер глобального LowLevel-хука на клавиатуру
-        const int WM_KEYDOWN = 0x100; // Сообщения нажатия клавиши
+        const int WH_KEYBOARD_LL = 13; 
+        const int WM_KEYDOWN = 0x100; 
 
         private LowLevelKeyboardProc _proc = hookProc;
 
