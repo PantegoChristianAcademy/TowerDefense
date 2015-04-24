@@ -13,7 +13,7 @@ namespace TowerDefense.Model.Enemies
        {
            Imagefile = "Media\\Enemies\\LordCalvin.bmp";
            LoadImage();
-           Health = 700;
+           Health = 800;
            Speed = 1;
            Goldgiven = 500;
            damage = 20;

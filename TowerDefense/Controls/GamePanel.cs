@@ -40,7 +40,7 @@ namespace TowerDefense.Controls
             MouseDown += GamePanel_MouseDown;
             DoubleBuffered = true;
             timer = new Timer();
-            timer.Interval = 10;
+            timer.Interval = 20;
             timer.Tick += timer_Tick;
             timer.Start();
 
@@ -232,7 +232,7 @@ namespace TowerDefense.Controls
                         {
                             roundNum++;
                             enemyQueue = new Queue<Model.Enemies.Enemy>(TowerDefense.Model.Enemy.EnemyFactory.GenerateWave(roundNum, loadedMap.difficulty));
-                            timeUntilNextRoundMS = 500;
+                            timeUntilNextRoundMS = 4000;
                             GameWindow._window.RoundTime.Visibility = System.Windows.Visibility.Visible;
                             if (roundNum == 23) MessageBox.Show("Run, Trey, Run!");
                         }

@@ -76,7 +76,7 @@ namespace TowerDefense.Model.Turrets
         }
 
         public float Damage;
-        // How much damage the turret does
+        // How much damage the turret does / if Dot this is damage per second
         public float Firerate;
         // how many shots per second
         public float timeSinceLastShot = 0f;

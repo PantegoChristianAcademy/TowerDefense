@@ -47,7 +47,7 @@ namespace TowerDefense.Model.Turrets
                         burnDuration++;
                         Damage = 10f;
                         Firerate=1f;
-                        Range=10;
+                        Range=9;
                         ResellPercentage=70;
                         TotalCost += Costs[2];
                         currentCost = Costs[2];

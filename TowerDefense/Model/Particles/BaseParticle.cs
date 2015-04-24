@@ -50,7 +50,7 @@ namespace TowerDefense.Model.Particles
                 speed = 8;
                 file = "Media\\Particle\\Fire.png";
                 ticksLeft = (int)((fireDurationS * 1000) / 20); 
-                damage = Tower.Damage;
+                damage = Tower.Damage / 50;
             }
             else if (Tower is Slowing_tower)
             {
