@@ -20,7 +20,7 @@ namespace TowerDefense.Model.Enemy
                     if (difficulty == "Easy")
                     {
                         temp.Health = (int)(temp.Health * 0.8);
-                        temp.Speed = (int)(temp.Speed * 0.8);
+                        if(temp.Speed > 1) temp.Speed = (int)(temp.Speed * 0.8);
                     }
 
                     if (difficulty == "Hard")

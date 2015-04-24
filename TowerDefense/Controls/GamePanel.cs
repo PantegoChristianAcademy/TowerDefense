@@ -27,7 +27,7 @@ namespace TowerDefense.Controls
         List<Model.Turrets.Base_Tower> listOfTowers = new List<Model.Turrets.Base_Tower>();
         int timeElapsedSinceRoundStart = 0;
         int spawnIntervalinMS = 400;
-        int costToRemoveWater = 100;
+        int costToRemoveWater = 500;
 
         public int selectedX = 0;
         public int selectedY = 0;

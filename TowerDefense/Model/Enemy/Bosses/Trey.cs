@@ -12,7 +12,7 @@ namespace TowerDefense.Model.Enemy
        {
            Imagefile = "Media\\Enemies\\TreyFlag.bmp";
            LoadImage();
-           Health = 550;
+           Health = 5500;
            Speed = 1;
            Goldgiven = 230;
            damage = 23;

@@ -23,8 +23,8 @@ namespace TowerDefense
     public partial class GameWindow : MahApps.Metro.Controls.MetroWindow
     {
         public Model.Turrets.Base_Tower ShopTower = null;
-        public static int balance = 3000;
-        public static int health = 1000000;
+        public static int balance = 200;
+        public static int health = 50;
 
         // ... { GLOBAL HOOK }
         [DllImport("user32.dll")]

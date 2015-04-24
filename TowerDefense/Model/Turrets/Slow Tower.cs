@@ -18,9 +18,9 @@ namespace TowerDefense.Model.Turrets
             Damage = 3;
             Firerate = 3f;
             Range = 3;
-            Costs[0] = 150;
-            Costs[1] = 100;
-            Costs[2] = 120;
+            Costs[0] = 100;
+            Costs[1] = 120;
+            Costs[2] = 150;
             ResellPercentage = 60;
             TotalCost += Costs[0];
             currentCost = Costs[0];
